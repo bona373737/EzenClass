@@ -1,7 +1,9 @@
 # EzenClass
+- 운영체제설치,cmd명령어(개발자환경구축방법)
+- git,사용자인증방식, (개발환경지원)
 - html,css,js (웹페이지 작성방법)
 - nodejs 기초, database (백엔드 기초)
-- reactjs (프론트엔드)
+- vanilajs,reactjs (프론트엔드)
 - nodejs 심화 (백엔드 심화)
 - linux (배포)
 
