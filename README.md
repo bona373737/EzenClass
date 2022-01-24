@@ -27,3 +27,16 @@
 - github 접근을 위한 사용자인증방법 3가지(이 중 SSH방식은 AWS연결과 관련됨)
 - 프로토콜 종류
 - 네트워크 기본구조(TCP/IP 5계층)
+
+## 01-컴퓨터기본
+
+## 02-javascript
+
+  1. helloWorld 출력
+
+  2. 변수와 데이터타입
+  - 변수 
+  - 상수
+  - 데이터타입
+  - null과 undefined의 차이
+  - console객체 log()메서드 서식문자열
