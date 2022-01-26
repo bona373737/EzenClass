@@ -8,7 +8,7 @@ const myNum2 = 4;
 console.log(myNum1 + myNum2);
 console.log(myNum1 - myNum2);
 console.log(myNum1 / myNum2);
-console.log(myNum1 % myNum2); //나머지
+console.log(myNum1 % myNum2);  //나머지
 console.log(myNum1 * myNum2);
 console.log(myNum1 ** myNum2);  //제곱
 

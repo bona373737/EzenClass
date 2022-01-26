@@ -73,3 +73,28 @@ if(!(y1 && y2)){
     console.log("!(y1 && y2) 조건은 true입니다.")
 }
 console.groupEnd();
+console.log("==========================================")
+
+
+console.group("\n else if로 조건 여러개 설정하기");
+const point = 72;
+if(point > 90){
+    console.log("A학점입니다.");
+}else if(point >80){
+    console.log("B학점입니다.");
+}else if(point >70){
+    console.log("C학점입니다.");
+}else if(point >60){
+    console.log("D학점입니다");
+}else {
+    console.log("F학점");
+}
+/*
+if문은 위에서 부터 차례대로 실행결과가 누적되어 내려오므로 
+학점 범위 설정시 아래처럼 설정 하지 않아도 됨! (switch문과의 차이점)
+A학점 : point > 90
+B학점 : point <=90 && point>80
+C학점 : point <=80 && point>70
+D학점 : point <=70 && point>60
+*/
+console.groupEnd();
