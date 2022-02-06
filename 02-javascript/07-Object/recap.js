@@ -65,3 +65,28 @@ const fruit1 = {color:'red'};
 const fruit2 = {color:'blue', size: 'big'};
 const mixedFruit = Object.assign({},fruit1,fruit2);
 console.log(mixedFruit);
+
+
+
+//최신문법 Object destructuring
+const person = {
+    name : 'ruru',
+    age : 20,
+    phone : '010-9999-9999'
+};
+//최신문법 사용 안한 경우_Bad Code
+function displayPerson(person){
+    const name = person.name;
+    const age = person.age;
+    displayAvatar(name);
+    displayName(name);
+    displayProfile(name,age);
+};
+//최신문법 사용한 경우 _Good Code
+function displayPerson1(person){
+    const {name,age} = person;
+    displayAvatar(name);
+    displayName(name);
+    displayProfile(name,age);
+};
+
