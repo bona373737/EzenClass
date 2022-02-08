@@ -10,8 +10,6 @@ function doSomething(x,y,youFunction){
     const result = yourFuntion(x,y);
     
 }
-
-
 */
 
 // 콜백함수를 파라미터로 요구하는 함수 정의하기 
