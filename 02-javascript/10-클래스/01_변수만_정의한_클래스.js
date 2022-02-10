@@ -2,7 +2,7 @@
 //생성자함수 안에서 this키워드를 통해 객체 안에 탑제될 변수들을 초기화 한다. 
 
 class MemberClass {
-    constructor(){
+    constructor() {
         this.userName = null;
         this.email = null;
     };
