@@ -12,8 +12,7 @@ NaN은 같음연산 (==, ===)을 사용해 판별할수 없다.
 //숫자로 변환할수 없다고 판단하는 경우 
 console.log(isNaN(NaN));
 console.log(isNaN(undefined));
-console.log(isNaN({}
-}));
+console.log(isNaN({}));
 console.log(isNaN('blabla'));
 console.log(isNaN('123ABC'));
 
