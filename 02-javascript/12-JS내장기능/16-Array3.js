@@ -85,12 +85,6 @@ console.log(hello3);
 
 
 
-
-
-
-
-
-
 //forEach()
 //some()
 //map()

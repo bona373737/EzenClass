@@ -40,3 +40,8 @@ const b = [3, 4, 5];
 const c = [6, 7, 8, 9];
 const e = a.concat(b, c);
 console.log("concat():" + e);
+
+
+const nums = [1, 2, 3];
+nums.splice(0, 0, 9, 9, 9);
+console.log(nums);
