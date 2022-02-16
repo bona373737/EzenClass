@@ -51,7 +51,7 @@ arr.some((value, index) => {
 
 
 console.log("\n콜백함수에서 리턴하는 값들을 하나의 배열로 묶기------------------");
-//전통적인 방법
+//전통적인 방법--------------------------
 const d1 = [];
 for (let i = 0; i < arr.length; i++) {
     if (arr[i] % 4 == 0) {
@@ -60,7 +60,7 @@ for (let i = 0; i < arr.length; i++) {
 }
 console.log(d1);
 
-//forEach()를 사용하는 방법 
+//forEach()를 사용하는 방법---------------
 const d2 = [];
 arr.forEach((v, i) => {
     if (v % 4 == 0) {
@@ -69,7 +69,7 @@ arr.forEach((v, i) => {
 });
 console.log(d2);
 
-//map()을 사용하는 방법
+//map()을 사용하는 방법--------------------
 const hello = arr.map(function (v, i) { //콜백함수
     return v + 1;
 });
