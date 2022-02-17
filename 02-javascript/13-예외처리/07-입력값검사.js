@@ -18,5 +18,6 @@ try {
     console.error(err.name);
     console.error(err.statusCode);
     console.error(err.message);
+    
 }
 console.log('검사완료!!')
