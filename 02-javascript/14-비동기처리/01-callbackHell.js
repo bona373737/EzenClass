@@ -7,6 +7,7 @@
 
 
 */
+console.log("콜백지옥 ver1 --------------------------");
 
 function random(n1, n2) {
     return parseInt(Math.random() * (n2 - n1 + 1)) + n1;
@@ -21,3 +22,47 @@ setTimeout(() => {
 }, 1000);
 
 console.log("추첨중----");
+
+
+
+console.log("콜백지옥 ver2 --------------------------");
+class UserStorage {
+    loginUser(id, password, onSuccess, onError) {
+        setTimeout(() => {
+            if ((id === 'nana' && password === 'papa') || (id === 'gugu' && password === 'lala')) {
+                onSuccess(id);
+            } else {
+                onError(new Error('not found'));
+            }
+        }, 2000);
+    };
+
+    getRoles(user, onSuccess, onError) {
+        setTimeout(() => {
+            if (user === 'nana') {
+                onSuccess({
+                    name: "nana",
+                    role: 'admin'
+                });
+            } else {
+                onError(new Error('no access'));
+            }
+        }, 1000);
+    };
+};
+
+//1.사용자에게 id와 password를 받아오기 
+const userStorage = new UserStorage();
+const id = prompt('enter your id');
+const password = prompt('enter your passord');
+userStorage.loginUser(
+    id,
+    password,
+    user => {
+        userStorage.getRoles(user,
+            userWithRole => {
+
+            }
+        );
+    }
+)

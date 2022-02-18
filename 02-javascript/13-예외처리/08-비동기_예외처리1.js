@@ -10,3 +10,67 @@ promise에는 try-catch문 사용 못함
 async,await에는 try-catch문 사용가능  즉.. 개발자가 좀더 능동적으로 예외상황에 대응할수 있게 됬다.
 
 */
+
+function firstFunction() {
+    console.log(1);
+}
+
+function secondFunction() {
+    console.log(2);
+}
+
+function ThirdFunction() {
+    console.log(3);
+}
+
+//함수를 순차적으로 실행시키는 방법1 
+console.log("\n함수를 순차적으로 실행시키기-------------")
+firstFunction();
+secondFunction();
+ThirdFunction();
+
+//함수를 순차적으로 실행시키는 방법1 
+console.log("\n함수를 순차적으로 실행시키기-------------")
+ThirdFunction(secondFunction(firstFunction()));
+
+
+console.log("\n함수를 콜백함수로 실행시키기-------------")
+
+function first(callback) {
+    console.log(1);
+    callback();
+}
+
+function second() {
+    console.log(2);
+}
+
+function third() {
+    console.log(3);
+}
+
+
+first(second);
+
+
+
+
+//동기식 콜백 예시
+function greeting(name) {
+    alert('Hello ' + name);
+}
+
+function processUserInput(callback) {
+    var name = prompt('Please enter your name.');
+    callback(name);
+}
+// processUserInput(greeting);
+
+
+function delay(callback) {
+    setTimeout(callback, 1000)
+};
+
+delay(() => {
+    console.log(1)
+});
