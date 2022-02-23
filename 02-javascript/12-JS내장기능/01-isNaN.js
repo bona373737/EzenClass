@@ -25,3 +25,6 @@ console.log(isNaN('37')); // '37' -> 숫자37으로 변환된다.
 console.log(isNaN('37.33')); // '37.33' -> 숫자37.33으로 변환된다.
 console.log(isNaN('')); // 빈문자열은 숫자0과 동일하다
 console.log(isNaN(' ')); // 공백만 있는 문자열은 숫자0과 동일하다
+
+console.log("------");
+console.log(isNaN(false));

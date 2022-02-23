@@ -29,11 +29,12 @@ firstFunction();
 secondFunction();
 ThirdFunction();
 
-//함수를 순차적으로 실행시키는 방법1 
+//함수를 순차적으로 실행시키는 방법2
 console.log("\n함수를 순차적으로 실행시키기-------------")
 ThirdFunction(secondFunction(firstFunction()));
 
 
+//함수를 순차적으로 실행시니는 방법3: 콜백함수!!
 console.log("\n함수를 콜백함수로 실행시키기-------------")
 
 function first(callback) {
@@ -45,16 +46,11 @@ function second() {
     console.log(2);
 }
 
-function third() {
-    console.log(3);
-}
-
-
 first(second);
 
 
 
-
+console.log("\n동기실 콜백함수------------")
 //동기식 콜백 예시
 function greeting(name) {
     alert('Hello ' + name);
@@ -67,10 +63,20 @@ function processUserInput(callback) {
 // processUserInput(greeting);
 
 
-function delay(callback) {
-    setTimeout(callback, 1000)
-};
+console.log("\n함수를 콜백함수로 실행시키기-------------")
 
-delay(() => {
-    console.log(1)
-});
+function first1(callback1, callback2) {
+    console.log(1);
+    callback1();
+    callback2();
+}
+
+function second() {
+    console.log(2);
+}
+
+function third() {
+    console.log(3);
+}
+
+first1(second, third);
