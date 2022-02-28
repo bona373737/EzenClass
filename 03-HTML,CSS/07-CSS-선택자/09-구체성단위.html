@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*tag 1점 -> 총계 : 1점*/
+        div{
+            color: purple;
+        }
+
+        /*tag 1점, id 100점  -> 총계 101점*/
+        div>h1#title{
+            color: blue;
+        }
+
+        /*tag 1점, id 100점, class 10점 -> 총계 111점 */
+        div#container div.box{ 
+            color: orange;
+        }
+
+        /*tag 1점, id 100점, class 10점 -> 총계 111점 */
+        div#contatiner .item{
+            color: green;
+        }
+
+        /* id 100점 --> 총계 100점 */
+        #containder #active{
+            color: red;
+        }
+
+        /*tag 1점, id 100점  -->  101점 */
+        div#containder>ul>li{
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1 id="title">구체성 단위</h1>
+        구체성단위를 알아 봅시다
+        <div class="box">
+            css 표현기법에 따라서 점수가 부여됩니다
+        </div>
+        <ul>
+            <li class="item" id="active">id:100점</li>
+            <li class="item">class:10점</li>
+            <li>tag : 1점</li>
+        </ul>
+    </div>
+</body>
+</html>

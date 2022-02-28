@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <form>
+        <h1>회원가입</h1>
+        <fieldset>
+            <legend>기본정보</legend>
+            <div>
+                <label class="title" for="user_id" >아이디</label>
+                <input type="text" name="user_id" id="user_id">
+            </div>
+            <div>
+                <label class="title" for="user_pw">비밀번호</label>
+                <input type="password" name="user_pw" id="user_pw">
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>성별</legend>
+            <div>
+                <input type="radio" name="gender" value="M" id="gender_m">
+                <label for="gender_m">남자</label>
+                <label>
+                <input type="radio" name="gender" value="F" id="gender_f">
+                여자
+                </label>
+            </div>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>취미</legend>
+            <div>
+                <label>
+                    <input type="checkbox" name="hobby" value="축구" id="hobby1">
+                    축구
+                </label>
+                <label>
+                    <input type="checkbox" name="hobby" value="농구" id="hobby2">
+                    농구
+                </label>
+                <label>
+                    <input type="checkbox" name="hobby" value="야구" id="hobby3">
+                    야구
+                </label>
+            </div>
+            <div>
+                <label>아이디
+                    <input type="text">
+                </label>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>
