@@ -29,7 +29,6 @@
 - 프로토콜 종류
 - 네트워크 기본구조(TCP/IP 5계층)
 
-
 ---
 
 ## 01-컴퓨터기본
@@ -66,9 +65,59 @@
   - 가변배열
   - 실습문제 12개 필수
   
-  
   6. Object
   - Object(객체) 개념설명
+  - object 생성 방법
+    - object literal
+    - object created with prototype (ES5)
+    - object created with a class (ES6)
+  - 얕은복사, 깊은복사
+  - 구조분해
+  
+  7. prototype
+
+  8. Class
+  - constructor
+  - getter,setter
+  - extends
+  - override
+  - this,super
+  - static variable, static method
+  - 
+  9. js 내장객체와 메서드
+  - inNaN()
+  - parseInt(), parseFloat()
+  - encodeURI(),encodeURIComponent()
+  - setTimeout(), setInterval()
+  - String Object
+  - Math object
+  - Date object
+  - Number object
+  - Array object
+  
+  10. 예외처리
+  - try-catch
+  - errorObject
+  - 사용자 정의 error객체 생성
+  - 비동식코드의 예외처리
+   
+  11. 비동기처리
+  - callback함수
+  - promise 객체
+  - async, await
+
+
+## HTML
+  1. sementic tag
+  2. 글문서 작성관련태그 + 글자꾸미기 태그
+  3. a_link태그
+  4. table태그
+  5. img태그
+  6. video,audio태그
+  7. input태그
+  8. 기타_textarea,select
+
+## CSS
 
 
 
