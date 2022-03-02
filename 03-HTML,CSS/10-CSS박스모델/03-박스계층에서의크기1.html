@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent{
+            background-color: pink;
+            border: 10px dotted #0000ff;
+            width: 500px;
+            height: 300px;
+        }
+        .child{
+            background-color: green;
+            width: 500px;
+            height: 300px;
+            /* 부모 elements의 크기를 벗어나는.. */
+            padding: 10px 20px;
+            border : 15px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child">HTML &nbsp; CSS</div>
+    </div>
+    부모요소의 크기 범위를 벗어나는 영역의 주변 요소를 침범하게 된다
+</body>
+</html>
