@@ -6,33 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /*tag 1점 -> 총계 : 1점*/
+        /*tag 1점 -> 총계1점*/
         div{
             color: purple;
         }
 
-        /*tag 1점, id 100점  -> 총계 101점*/
+        /*tag 1점, id 100점  -> */
         div>h1#title{
             color: blue;
         }
 
-        /*tag 1점, id 100점, class 10점 -> 총계 111점 */
+        /*tag 1점, id 100점, class 10점 -> 112점 */
         div#container div.box{ 
             color: orange;
         }
 
-        /*tag 1점, id 100점, class 10점 -> 총계 111점 */
-        div#contatiner .item{
+        /*tag 1점, id 100점, class 10점,  -> 111점 */
+        div#container .item{
             color: green;
         }
 
-        /* id 100점 --> 총계 100점 */
-        #containder #active{
+        /* id 100점 *2 --> 총계200점 */
+        #container #active{
             color: red;
         }
 
-        /*tag 1점, id 100점  -->  101점 */
-        div#containder>ul>li{
+        /*tag 1점, id 100점  --> 총계103점  */
+        /* ???? >이거는 바로 밑의 자식셀렉터를 가져오지 않나??? */
+        div#container>ul>li{
             color: black;
         }
 
