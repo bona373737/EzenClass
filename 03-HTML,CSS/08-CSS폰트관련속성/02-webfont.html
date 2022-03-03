@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 서버에 폰트 파일을 올려놓고 다운받아 사용하게 하기. */
+        @font-face {
+            /* 폰트 이름 정의하기 */
+            font-family : Myfont;
+            /* 사용자컴 local에 해당 폰트가 없는 경우, url경로에서 가져다가 적용 */
+            src : local('NanumBrush'), url('font/NaumBrush.ttf') format('truetype');
+        }
+        .normal_text{
+            color: 900#;
+            font-size:24px;
+        }
+        .text1{
+            font-family: Myfont;
+            color:#006;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="normal_text">이 부분은 일반폰트로 나타납니다</div>
+    <div class="text1">이 부분은 웹 폰트로 나타납니다.</div>
+    
+</body>
+</html>
