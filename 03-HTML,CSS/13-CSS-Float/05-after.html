@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.parent{
+            width: 250px;
+            border: 5px solid #f00;
+            background: #ffff00;
+            margin: auto;
+        }
+        div.child{
+            width: 200px;
+            height: 100px;
+            border: 5px solid #00f;
+            background: #f60;
+            margin: auto;
+        }
+        .parent::before{
+            content: 'parent의 before';
+            display: block;
+            color: red;
+        }
+        .parent::after{
+            content: 'parent의 after';
+            display: block;
+            color: red;
+        }
+        .child::before{
+            content: 'child의 before';
+            display: block;
+            color:green;
+        }
+        .child::after{
+            content: 'child의 after';
+            display: block;
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child">
+            박스1
+        </div>
+    </div>
+</body>
+</html>

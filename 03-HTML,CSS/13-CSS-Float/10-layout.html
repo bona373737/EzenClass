@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+        }
+        div#container{
+            width: 800px;
+            margin: auto;
+        }
+        div#container div#header{
+            background-color: #ff00ff;
+            width: auto;
+            height: 100px;
+        }
+        div#container div#content{
+            background-color: #00ff00;
+            width: auto;
+            min-height: 300px;
+        }
+        div#container div#footer{
+            background-color: #ff6600;
+            width: auto;
+            height: 80px;
+        }
+        div#content div#body{
+            width: 640px;
+            background-color: #ffff00;
+            float: left;
+            min-height: 300px;
+        }
+        div#content div#sidebar{
+            width: 160px;
+            background-color: #0000ff;
+            float: left;
+            min-height: 300px;
+        }
+
+        .clear::after{
+            content: '';
+            display: block;
+            clear: both;
+            float: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="header">상단 영역</div>
+        <div id="content" class="clear">
+            <div id="body">본문영역</div>
+            <div id="sidebar">사이드바</div>
+        </div>
+        <div id="footer">하단영역</div>
+    </div>
+</body>
+</html>

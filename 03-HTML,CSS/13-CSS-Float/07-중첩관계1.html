@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    div#parent{
+        border: 5px dotted #000000;
+        padding: 10px;
+    }
+    div#parent div#box1{
+        width: 300px;
+        padding: 10px;
+        border: 1px solid #eee;
+        margin: 0 0 10px 10px;
+        float: right;
+    }
+    div#parent div#box1 img{
+        width: 100%;
+    }
+
+    /* float가 적용된 자식block은 부모태그가 감싸지 못한다. */
+    /* 부모요소의 마지막 라인에 clear 처리 필요함 */
+    div.clear{
+        clear: both;
+        float: none;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="parent" >
+        <div id="box1">
+            <img src="./img/title.jpg" alt="">
+        </div>
+        <p>웹 혹은 플랫폼에 따라 달리 구현되는 기술을 동일하게 구현함과 동시에 어느 한쪽에 최적화되어 치우치지 않도록 공통요소를 사용하여 웹 페이지를 제작하는 기법을 의미한다.</p>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#container{
+            width: 800px;
+            border: 5px dotted #cccccc;
+            padding: 10px;
+            margin: auto;
+        }
+        div#container div{
+            width: 200px;
+            height: 200px;
+            float: left;
+        }
+        div#container div#box1{
+            background-color: #ff00ff;
+        }
+        div#container div#box2{
+            background-color: #0000ff;
+        
+        }
+        div#container div#box3{
+            background-color: #00ff00;
+            
+        }
+        div#container div#box4{
+            background-color: #ff6600;
+            
+        }
+        div#container div#box5{
+            background-color: #ffff00;
+        }
+
+        .clear::after{
+            content: '';
+            display: block;
+            float: none;
+            clear: both;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="container" class="clear">
+        <div id="box1">박스1</div>
+        <div id="box2">박스2</div>
+        <div id="box3">박스3</div>
+        <div id="box4">박스4</div>
+        <div id="box5">박스5</div>
+    </div>
+</body>
+</html>

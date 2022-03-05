@@ -1,0 +1,55 @@
+/* 고적적인 방법인 Float으로 gallary 레이아웃을 만들때 
+일단 속의 내용물이 높이가 다 같아야 한다는 전제를 갖는다. */
+
+/* 이번에 제공된 이미지의 사이즈는 140*140으로 모두 같 */
+
+*{
+    margin : 0;
+    padding : 0;
+    color: #222;
+    font-size: 12px;
+}
+a{
+    text-decoration: none;
+}
+ul,ol{
+    list-style: none;
+}
+ul#gallery{
+    width: 640px;
+    margin:auto;
+}
+ul#gallery li{
+    /* 전체길이 640px -> 25%적용 : 한줄에 4개씩 가로배치 */
+    width: 25%;
+    float: left;
+}
+ul#gallery li a{
+    display: block;
+    width: auto;
+    padding: 10px;
+}
+ul#gallery li a span{
+    display: block;
+    width: auto;
+}
+
+/* 이미지는 가득채움 */
+ul#gallery li a span.thumb img{
+    width: 100%;
+    /* container에 맞게 resized하는 속성 */
+    object-fit: cover;
+}
+
+ul#gallery li a span.text{
+    width: 95%;
+    height: 30px;
+    margin: auto;
+    text-align: center;
+    padding-right: 5px;
+    padding-bottom: 10px;
+}
+
+ul#gallery li a:hover{
+    background-color: #eee;
+}
