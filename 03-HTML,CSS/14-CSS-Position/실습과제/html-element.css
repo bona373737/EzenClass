@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/******* case1.모두 왼쪽정렬 ********/
+/* .container .logo{
+    position: relative;
+    left: 700px;
+}
+
+.container .side1{
+    position: relative;
+    left: 920px;
+}
+
+.container .side2{
+    position: relative;
+    left: 920px;
+} */
+
+
+/* ******case2.로고는 왼쪽, 메뉴 요소들은 오른쪽******** */
+/* .container .logo{
+    position: relative;
+    left: 700px;
+} */
+
+
+
+/* ******case3.로고는 중앙, 메뉴요소들은 양끝을 기준으로 간격조절******** */
+/* .container .logo{
+    margin: auto;
+}
+.container .side1{
+    position: relative;
+    left: 920px;
+}
+.container .side2{
+    position: relative;
+    left: 0px;
+} */
+
+
+
+
