@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border: 5px solid red;
+            margin: 20px auto;
+            width: 90%;
+            height: 135px;
+            color: black;
+            text-shadow: 0 1px 1px red;
+            font-size: 25px;
+            text-align: center;
+            padding-top: 10px;
+            background-image: url(./img/main_content_bg.png);
+        }
+        div#box1{
+            /* 아무런 설정을 하지 않으면 해당 box사이즈내에 
+            img가 들어가고 위치는 left top이 기본값 */
+        }
+
+        div#box2{
+            background-size: 100% 100%;
+        }
+        div#box3{
+            background-size: 50px 50px;
+        }
+        div#box4{
+            background-size: cover;
+            /* img의 가로길이만 맞춰서 보여지기 때문에 
+            위아래가 잘려지는데 이때 기본값으로는 이미지의 상단이
+            보여진다. 이것을 이미지의 중간부분이 보이게 할때는 
+            position을 조정해 준다. */
+            /* 기본값은 "left top" */
+            background-position: center center;
+        }
+        div#box5{
+            /* img가 들어갈 box사이즈내에 사진의 모든부분이 들어가게 
+            사이즈가 자동으로 조절되어 들어가고, 빈부분은 img를 반복시켜 채워넣는다. */
+            background-size: contain;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box1">
+        <h2>Default</h2>
+    </div>
+    <div id="box2">
+        <h2>backgournd-size : 100% 100%</h2>
+    </div>
+    <div id="box3">
+        <h2>backgournd-size : 50px 50px</h2>
+    </div>
+    <div id="box4">
+        <h2>background-size : cover </h2>
+    </div>
+    <div id="box5">
+        <h2>background-size : contain</h2>
+    </div>
+</body>
+</html>

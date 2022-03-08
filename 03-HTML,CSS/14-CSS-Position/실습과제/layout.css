@@ -108,23 +108,23 @@ ul{
     margin-bottom: none;
  }
 
-.gallery-list > a {
-    text-decoration: none;
+.gallery-list > a  {
+    text-decoration-line: none;
     color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
-
+.gallery-list > a > div#text > p:first-child{
+    font-weight: bold;
+    font-size: 20px;
+}
 
 .gallery-list a img{
     width: auto;
     height: 55px;
-    display: float-left;
-    /* vertical-align: middle; */
+    margin: 5px 5px;
 }
 
-#hahaha{
-    display: flex;
-    flex-direction: column;
-
-}
 
 

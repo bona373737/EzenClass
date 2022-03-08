@@ -1,0 +1,26 @@
+*{
+    font-family: 'Sansita Swashed', cursive;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    padding: 80px;
+    text-align: center;
+    background: #1abc9c;;
+    color: white;
+}
+.header h1{
+    font-size: 40px;
+}
+.navbar{
+    overflow: hidden;
+    background: #333;
+    position: sticky;
+    position: -webkit-sticky;
+    top : 0;
+}
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }   
+        ul{
+            list-style: none;
+        }
+        #icon_list li{
+            width: 25%;
+            height: 96px;
+            cursor: pointer;
+            float: left;
+        }
+        #icon_list li a{
+            display: block;
+            width: 75px;
+            height: 81px;
+            margin: auto;
+            padding-top: 15px;
+            /* 링크 글자에 밑줄 없애기*/
+            text-decoration: none;
+        }
+        #icon_list li a .icon{
+            display: block;
+            width: 56px;
+            height: 56px;
+            background: url(./img/icon.png) no-repeat;
+            margin: auto;
+        }
+        #icon_list li a .txt{
+            display: block;
+            width: auto;
+            text-align: center;
+            /* 글자위에 위치할 아이콘이미지와의 사이여백 */
+            padding-top: 5px;
+            font : 12px '굴림';
+            color: #222;
+        }
+
+        /* 한개 img파일에서 특정 icon부분만 보여지게 위치조정 
+        포토샵으로 해당 img파일에내에서 특정 icon이 위치한 좌표 px값으로 확인 필요*/
+        #icon_list li a #icon1{
+            background-position:0 0 ;
+        }
+        #icon_list li a #icon2{
+            /* 57에 +1 */
+            background-position: -58px 0 ;
+        }
+        #icon_list li a #icon3{
+            /* 57*2값에 +1 */
+            background-position: -115px 0;
+        }
+        #icon_list li a #icon4{
+            background-position: -172px 0;
+        }
+        #icon_list li a #icon5{
+            background-position: 0 -57 ;
+        }
+        #icon_list li a #icon6{
+            background-position: -58px -57px;
+        }
+        #icon_list li a #icon7{
+            background-position: -115px -57px;
+        }
+        #icon_list li a #icon8{
+            background-position: -172px -57px;
+        }
+
+    </style>
+</head>
+<body>
+    <ul id="icon_list">
+        <li><a href="">
+            <span class="icon" id="icon1"></span>
+            <span class="txt">전화걸기</span>
+        </a>
+        </li>
+        <li><a href=""><span class="icon" id="icon2"></span><span class="txt">트위터</span></a></li>
+        <li><a href=""><span class="icon" id="icon3"></span><span class="txt">페이스북</span></a></li>
+        <li><a href=""><span class="icon" id="icon4"></span><span class="txt">메일</span></a></li>
+        <li><a href=""><span class="icon" id="icon5"></span><span class="txt">RSS</span></a></li>
+        <li><a href=""><span class="icon" id="icon6"></span><span class="txt">음악</span></a></li>
+        <li><a href=""><span class="icon" id="icon7"></span><span class="txt">검색</span></a></li>
+        <li><a href=""><span class="icon" id="icon8"></span><span class="txt">홉</span></a></li>
+    </ul>
+</body>
+</html>

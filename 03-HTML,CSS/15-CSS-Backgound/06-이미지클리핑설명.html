@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 이미지클리핑이란?
+        backgound-img가 들어갈 box사이즈 내에서 
+        이미지의 특정 부분만 보여지도록 위치를 조정하는 것
+
+        실사를 제외한 아이콘,화살표,버튼 등 자잘자잘한 이미지들은 
+        img태그를 사용하는 것이 아닌, 한개 img파일에 모든 아이콘들을 추가해 놓고 
+        필요한 부분만 background로 보여지게 조정한 것임!!! 
+        */
+        div{
+            border: 5px solid red;
+            width: 480px;
+            height: 150px;
+            margin: 5px auto;
+            background: url(./img/main_content_bg.png) no-repeat;
+        }
+        div#box1{
+            /* 기본값 left top으로 그림이 배치됨 */
+        }
+        div#box2{
+            background-position: 70px 50px;
+        }
+        div#box3{
+            background-position: -70px -50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <div id="box3"></div>
+</body>
+</html>

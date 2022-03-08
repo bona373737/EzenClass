@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* backgound-img가 적용된 block 세개를 중첩시키기 */
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .navi{
+            background: url(./img/list_bg.png) repeat;
+            width: auto;
+            height: 184px;
+        }
+        .navi ul{
+            background: url(./img//menu.png) no-repeat left top;
+            width: auto;
+            height: 184px;
+        }
+        .navi li{
+            /* 화살표 모양 추가 */
+            background: url(./img/list_right.png) no-repeat right center;
+            width: auto;
+            /* navi 전체 높이 184/4 = 46 */
+            height: 46px;
+        }
+        .navi li >a{
+            display: block;
+            width: auto;
+            height: 45px;
+            cursor: pointer;
+            /* 웹표준을 위해 text로 입력한 부분을 화면에서 안보이게 처리 */
+            text-indent: -10000px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navi">
+        <ul>
+            <li><a href="#">웹표준/웹디자인</a></li>
+            <li><a href="#">소셜미디어마케팅</a></li>   
+            <li><a href="#">IT/모바일</a></li>
+            <li><a href="#">QA</a></li>
+        </ul>
+    </div>
+</body>
+</html>
