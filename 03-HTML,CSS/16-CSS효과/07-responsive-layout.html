@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .menu{
+            float: left;
+            width: 20%;
+            text-align: center;
+            margin-top: 7px;
+            background-color: yellow;
+        }
+        .menu a{
+            background-color: yellow;
+            padding: 8px;
+            margin-top: 7px;
+            display: block;
+            width: 100%;
+            color: black;
+        }
+        .main{
+            float: left;
+            width: 60%;
+            padding: 0 20px;
+            margin-top: 7px;
+            background-color: green;
+        }
+        .right{
+            background-color: blue;
+            float: left;
+            width: 20%;
+            padding: 15px;
+            margin-top: 7px;
+            text-align: center;
+        }
+        @media only screen and (max-width:800px){
+            .menu,
+            .main,
+            .right{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: #e5e5e5; padding: 15px; text-align: center;">
+        <h1>Hello Wold</h1>
+    </div>
+
+    <div>
+        <div class="menu">
+            <a href="">Link 1</a>
+            <a href="">Link 2</a>
+            <a href="">Link 3</a>
+            <a href="">Link 4</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <h2>Lorum Ipsum</h2>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error animi sint at veritatis? Provident voluptatem necessitatibus soluta nesciunt dolorem sint dolor repellat! Rem fuga doloremque qui, ipsum perspiciatis ex exercitationem.</p>
+    </div>
+
+    <div class="right">
+        <h2>About</h2>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium quis minus aliquam, sequi maiores laudantium rerum ad dignissimos doloribus, libero fugit blanditiis inventore iure aut, aperiam dolor suscipit in qui?</p>
+    </div>
+
+    <div style="background-color: purple; text-align: center;  margin-top: 7px;">
+        @ copyright
+    </div>
+    
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+
+</body>
+</html>

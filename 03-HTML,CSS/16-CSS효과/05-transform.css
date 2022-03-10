@@ -1,0 +1,88 @@
+.imageList{
+    /* contents 전체 영역 설정 */
+    width: 1000px;
+    margin: auto;
+}
+
+.imageList::after{
+    /* float흐름 끊어 주기 */
+    content: '';
+    display: block;
+    float: none;
+    clear: both;
+}
+
+.imageItem{
+    display: block;
+    /* contents영역 한줄에 4개씩 배치 */
+    width: 25%;
+    float: left;
+}
+
+.imageItem a{
+    display: block;
+    width: auto;
+    height: 280px;
+    border: 1px solid #eee;
+    margin: 10px 15px;
+    /* 링크에 밑줄,글자파란색 기본효과 제거 */
+    color: #000;
+    text-decoration: none;
+    /* effect */
+    transition: all 0.5s;
+}
+
+.imageItem a .imgArea{
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+
+.imageItem a .imgArea img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s;
+}
+
+.imageItem a .textArea{
+    padding: 5px 15px 10px 15px;
+}
+
+.imageItem a .textArea h4{
+    padding: 0;
+    margin : 5px 0;
+    font-size: 14px
+    white-space : nowrap;
+    overflow :hidden;
+    text-overflow : ellipse;
+}
+
+.imageItem a .textArea p{
+    padding: 0;
+    margin: 5px 0;
+    font-size: 12px;
+    /* text 두줄까지 보여지고 그 이후로 말줄임표설정 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.imageItem a .textArea ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.imageItem a .textArea ul li{
+    font-size: 11px;
+    margin: 3px 0;
+    padding:0 0;
+}
+
+.imageItem:hover img{
+    /* imageItem에 마우스가 올려졌을때 img를 1.1배 크게 효과주기 */
+    transform: scale(1.1, 1.1)
+}
