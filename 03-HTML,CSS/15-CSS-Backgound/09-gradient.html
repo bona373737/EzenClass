@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grad1{
+            width: 150px;
+            height: 150px;
+            /* css 3를 지원하지 않는 브라우저인 경우 */
+            background: #06f;
+            /* 웹킷 브라우저 인경우 */
+            background: -webkit-linear-gradient(top, #06f, #fff);
+            /* 파이어폭스 브라우저인 경우 */
+            background: -moz-linear-gradient(top, #06f, #fff);
+        }
+
+        .grad2{
+            width: 150px;
+            height: 150;
+             /* css 3를 지원하지 않는 브라우저인 경우 */
+             background: #06f;
+            /* 웹킷 브라우저 인경우 */
+            background: -webkit-linear-gradient(linear, left bottom, right top, from(#06f), to(#fff);
+            /* 파이어폭스 브라우저인 경우 */
+            background: -moz-linear-gradient(bottom 45deg, #06f, #fff);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>선형 그라데이션</h1>
+    <p>색상만 지정했을때</p>
+    <div class="grad1"></div>
+
+    <p>방향을 지정했을때</p>
+    <div class="grad2"></div>
+    
+</body>
+</html>

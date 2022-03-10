@@ -6,23 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        p.box{
-            background: #6bb2ff;
+        html,
+        body{
+            width: 100%;
+            height: 100%;
         }
-        p.corner1{
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: #eee;
+        }
+        .titlebar{
+            /* 타이틀바 영역의 배경색상 그라데이션 처리 */
+            width: 100%;
+            height: 45px;
+            border-bottom: 1px solid #555;
+            /* 웹킷 브라우저의 경우 그라데이션 */
+            background-image: -webkit-linear-gradient(top, rgb(89,189,212)) 8%, rgb(40,142,168) 74%;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.7);
+            /* 위치고정 */
+            position: fixed;
+            top: 0;
+            left : 0;
+            z-index: 10000;
+        }
 
+        .titlebar .titlebar-text{
+            /* 타이틀바 영역의 제목 텍스트 */
+            color: #fff;
+            font: 20px 'Helvetica';
+            text-shadow: 0 1px 1px #000;
+            text-align: center;
+            position: relative;
+            top: 12px;
+        }
+
+        .content{
+            /* fixed된 titlebar의 높이만큼 아래로 내려주기 */
+            padding-top: 46px;
+        }
+
+        #navi{
+            background : url(./img/list_right.png) repeat-y right top, url(./img/menu.png) no-repeat left top, url(./img/list_bg.png) repeat;
+        }
+
+        #navi a{
+            display: block;
+            width: auto;
+            height: 45px;
+            cursor: pointer;
+            text-indent: -10000px;
         }
 
 
-        
     </style>
 </head>
 <body>
-    <section>
-        <p class="box corner1">박스1</p>
-        <p class="box corner2">박스2</p>
-        <p class="box corner3">박스3</p>
+    <div id="container">
+        <header id="titlebar">
+            <h1 id="titlebar-text">과목을 선택하세요</h1>
+        </header>
 
-    </section>
+        <section id="content">
+            <nav id="navi">
+                <a href="#">웹표준/웹디자인</a>
+                <a href="#">소셜미디어마케팅</a>
+                <a href="#">IT/모바일</a>
+                <a href="#">QA</a>
+            </nav>
+        </section>
+
+    </div>
 </body>
 </html>
