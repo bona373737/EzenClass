@@ -113,11 +113,22 @@
   3. a_link태그
   4. table태그
   5. img태그
-  6. video,audio태그
+  6. video,audio
   7. input태그
   8. 기타_textarea,select
 
 ## CSS
+  1. 선택자 
+  2. text관련 속성(font, 정렬, 공백처리)
+  3. inline level elements / block level elements
+  4. block의 중첩 + 영역이탈의 경우 처리방법
+  5. margin : 
+  6. display : block, inline, inline-block, flex, grid
+  7. float
+  8. position : static, relative, absolute, fiexd, sticky
+  9. background, 이미지클리핑
+  10. css효과_transition,transform
+  11. 반응형웹_media query
 
 
 
