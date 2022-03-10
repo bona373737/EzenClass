@@ -1,0 +1,66 @@
+body{
+    background: #46464D url(../img/sub_bg.png) repeat-x;
+}
+
+#content{
+    width: 318px;
+    margin: auto;
+    position: relative;
+}
+
+#content h2{
+    color: #ff6600;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#content .button{
+    position: absolute;
+    top: 5px;
+    right: 2px;
+}
+#content li{
+    padding: 10px;
+    width: 290px;
+    margin: auto;
+    border: 1px solid #000000;
+    background: #ffffff;
+    margin-bottom: 10px;
+}
+
+#content li:last-child{
+    margin-bottom: 0px;
+}
+
+#content li a {
+    display: block;
+    width:  auto;
+}
+
+#content li a .thumb{
+    display: block;
+    float: left;
+}
+
+#content li a .desc{
+    display: block;
+    width:  190px;
+    float: right;
+    font-size: 0.8em;
+    line-height: 125%;
+
+}
+
+#content li::after{
+    content: '';
+    display: block;
+    clear: both;
+    float: none;
+}
+
+#content li .orange{
+    color: #ff6600;
+}

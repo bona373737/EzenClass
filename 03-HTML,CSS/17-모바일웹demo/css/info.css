@@ -1,0 +1,40 @@
+body{
+    background: #46464D url(../img/sub_bg.png) repeat-x;
+}
+#header{
+    width: 318px;
+    height: 45px;
+    margin: auto;
+    position: relative;
+}
+#header h1{
+    width: 318px;
+    height: 45px;
+    background: url(../img/sub_logo.png) center center no-repeat;
+    text-indent: -10000px;
+}
+
+#header span{
+    position: absolute;
+    top:10px;
+    right: 5px;
+}
+
+#content{
+    background:  #ffffff url(../img/info_bg.png) repeat-x;
+}
+
+#content h2{
+    width: 318px;
+    height: 120px;
+    margin: auto;
+    background: url(../img/center.jpg) no-repeat;
+    text-indent: -10000px;
+}
+#content p{
+    width: 298px;
+    margin: auto;
+    padding: 0 10px 10px 10px;
+    font-size: 0.8em;
+    line-height: 150%;
+}

@@ -1,0 +1,31 @@
+*{
+    font-family: 'Fredoka', '맑은고딕', '굴림', 'Helvetica', sans-serif;
+}
+
+a{
+    color: #222222;
+    text-decoration: none;
+}
+
+#footer{
+    width: 318px;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 30px;
+    position: relative;
+}
+#footer address{
+    width: auto;
+    height: 59px;
+    background :url(../img/bottom_bg.png) center center no-repeat;
+    text-indent: -10000px;
+}
+#footer span{
+    position: absolute;
+    left: 12px;
+    top: 20px;
+}
+#footer li{
+    display: inline;
+    padding: 0 3px;
+}
