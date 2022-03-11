@@ -1,0 +1,37 @@
+#tab ul{
+    width: auto;
+    height: 40px;
+    padding: 0 20px;
+    background: url(../../demo02/img/bg_tab.gif) repeat-x;
+}
+
+#tab ul li{
+    width: 50%;
+    height: 40px;
+    text-align: center;
+    color: #000;
+    float: left;
+}
+#tab > ul::after{
+    content: '';
+    display: block;
+    float: none;
+    clear: both;
+}
+
+#tab > ul > li > a{
+    display: block;
+    width: auto;
+    height: 23px;
+    padding-top: 17px;
+    color: #fff;
+}
+
+#tab > ul > li.active{
+    background: url(../../demo02/img/bg_tab_left.gif) left 10px no-repeat;
+}
+
+#tab > ul > li.active > a{
+    background: url(../../demo02/img/bg_tab_right.gif) right 10px no-repeat;
+    color: #000;
+}

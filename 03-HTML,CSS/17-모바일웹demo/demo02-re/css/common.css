@@ -1,0 +1,59 @@
+*{
+    font-family: '나눔고딕', '맑은고딕', '굴림', 'Helvetica';
+}
+a{
+    color: #222222;
+    text-decoration: none;
+}
+hr{
+    display: none;
+}
+
+#header{
+    background: url(../../demo02/img/bg_header.gif)repeat-x;
+    height: 49px;
+    border-bottom: 1px solid #000;
+}
+
+#header h1{
+    /* 좌측 상단에 로고 배치 */
+    /* img사이즈 측정한 값으로 가로,세로 설정 */
+    width: 71px;
+    height: 24px;
+    position: absolute;
+    left: 10px;
+    top:13px;
+}
+
+#header span{
+    /* 좌측 상단에 HOME 버튼 배치*/
+    display: block;
+    /* img 사이즈 측정한값으로 가로세로 설정 */
+    width: 48px;
+    height: 26px;
+    position: absolute;
+    right: 10px;
+    top: 12px
+}
+
+#footer{
+    /* 분양상담전화,찾아오시는길 img버튼이 위치할 전체영역의 크기는 따로 정해주지 않아도 되는것...???? */
+    width: auto;
+    text-align: center;
+}
+#footer ul{
+    margin: 5px auto;
+}
+#footer ul li{
+    display: inline;
+    padding: 0 2px;
+}
+#footer address{
+    width: auto;
+    height: 35px;
+    background: #ccc;
+    /* 부모태그가 기준값 1으로 잡힘.. 부모태그가 어디지???? */
+    font-size: 0.8em;
+    line-height: 35px;
+    color: #666;
+}

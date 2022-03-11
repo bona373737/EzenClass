@@ -1,0 +1,49 @@
+@charset 'utf-8';
+
+#header span{
+    /* index페이지에서는 상단 Home버튼 안보이게 처리 */
+    display: none;
+}
+
+#content{
+    background: url(../../demo02/img/bg_body.gif) repeat-x;
+}
+
+#content h2{
+    width: auto;
+    height: 270px;
+    background: url(../../demo02/img/bg_visual.jpg) center center no-repeat;
+    /* 단지 웹접근성 때문에 명시한 내용은 화면에 안보이게 처리 */
+    text-indent: -10000px;
+}
+#content ul{
+    text-align: center;
+}
+#content ul li{
+    display: inline-block;
+    padding: 20px 2px 0px 2px;
+}
+#content ul li a{
+    display: block;
+    width: 65px;
+    height: 90px;
+    margin: auto;
+    text-indent: -10000px;
+    cursor: pointer;
+    /*이미지클리핑 :
+    a태그에 설정한 크기만큼만 img의 특정 영역만 보여지게 처리 */
+    overflow: hidden;
+    background: url(../../demo02/img/lnb.png) no-repeat;
+}
+#content ul li a#icon1{
+    background-position: 0px 0;
+}
+#content ul li a#icon2{
+    background-position: -66px 0;
+}
+#content ul li a#icon3{
+    background-position: -136px 0;
+}
+#content ul li a#icon4{
+    background-position: -206px 0;
+}
