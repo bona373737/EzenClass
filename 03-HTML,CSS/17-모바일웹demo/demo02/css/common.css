@@ -1,0 +1,76 @@
+*{
+    font-family: '나눔고딕', '맑은고딕', '굴림', 'Helvetica';
+}
+a{
+    color: #222222;
+    text-decoration: none;
+}
+hr{
+    display: none;
+}
+
+body,html{
+    width: auto;
+    height: 100vh;
+}
+
+#header{
+    background: url(../img/bg_header.gif) repeat-x;
+    height: 7vh;
+    border-bottom: 1px solid black;
+    
+    /* header안의 요소들을 수직선상에 중앙정렬하려고 했는데 적용이 안되네...  */
+    /* vertical-align: middle; */
+
+    /* position:absolute로 위치 지정하지 않고 flex사용하여 
+    header안의 요소들을 수직선상에 중앙정렬, 수평선상에 양쪽 끝단에 위치하게 하기  */
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+}
+
+#header h1{
+    /* absolute는 다른 요소들에 영향을 준다:요소를 이동시킨 빈공간에 다른 요소들이 딸려들어간다. */
+    
+    /*h1 block 태그안에 a,img의 inline태그만 있을때 width,height 설정해주지 않으면 
+    우측에 element들이 다 겹쳐져서 위치해 있다..... 왜지????*/
+    width: 71px;
+    height: 24px;
+    /* 위치의기준이 되는 부모태그는:*/
+    position: absolute;
+    left: 10px;
+    top:12px;
+}
+
+
+#header>a{
+    display: block;
+    width: 48px;
+    height: 26px;
+    /* 위치의 기준이 되는 부모태그는:  */
+    position: absolute;
+    right: 10px;
+    top: 12px
+}
+
+
+#footer{
+    height: 10vh;
+    text-align: center;
+    /* 버튼을 가운데 정렬 하고 싶은데....margin이 아니라 text-align이었음!!!!  */
+    /* #footer ul{
+        margin: auto;
+    } */
+}
+
+#footer ul{
+    margin: 5px 0;
+}
+
+#footer ul li{
+    display: inline;
+}
+#footer address{
+    line-height: 1.8em;
+    background-color: #ccc;
+}

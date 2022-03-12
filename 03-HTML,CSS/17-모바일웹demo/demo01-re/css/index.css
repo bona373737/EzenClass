@@ -1,0 +1,9 @@
+body{
+    /* 백그라운드colo보다 background img가 위에 위치한다. */
+    background: #46464d url(../../img/top_bg2.png) repeat-x;
+}
+
+#header {
+    width: 318px;
+    margin: auto;
+}
