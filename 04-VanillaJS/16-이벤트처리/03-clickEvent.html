@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .event-box{
+            border: 5px solid #007;
+            background: #d5d5d5;
+            color: #009;
+            font-size: 32px;
+            padding: 50px 0;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="listener" class="event-box">
+        Mouse Here~!!!
+    </div>
+
+    <script>
+        const eventBox = document.querySelector('#listener');
+
+        eventBox.addEventListener('click', function(e){
+            e.currentTarget.innerHTML = 'Click Event';
+
+            //마우스 클릭 좌표값
+            console.log('문서기준 : clientX:'+e.clientX + 'clientY:'+e.clientY);
+        })
+
+        eventBox.addEventListener('dblclick',(e)=>{
+            e.currentTarget.innerHTML = 'Double click event';
+        })
+
+        eventBox.addEventListener('mousemove',e=>e.currentTarget.innerHTML='Mouse Move');
+    </script>
+
+</body>
+</html>

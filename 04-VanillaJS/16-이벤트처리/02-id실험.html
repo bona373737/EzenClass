@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS는 중복ID에 대해서 문제 없이 처리 한다. */
+        #hello{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="hello">Hello World</h1>
+    <h1 id="hello">Hello World</h1>
+    <h1 id="hello">Hello World</h1>
+
+    <script>
+        //JS는 중복ID가 있는 경우 처리 불가하다->가장 첫번째 항목만 처리됨
+        document.querySelector('#hello').innerHTML = '헬로월드';
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        #container{
+            text-align: center;
+            font-size: 30px;
+        }
+        .box-xs{background-color: #f00;}
+        .box-sm{background-color: #0f0;}
+        .box-md{background-color: #00f;}
+        .box-lg{background-color: #ff0;}
+
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+        //브라우저의 넓이를 구간별 문자열로 반환하는 함수
+        function check_responsive(){
+            var w = window.innerWidth;
+            //기본사이즈는 xs로 설정
+            var responsive = 'xs';   
+
+            //브라우저의 구간판정
+            if(w>=1200){ responsive = 'lg';}
+            else if(w >=992){responsive ='md';}
+            else if(w>=768){responsive ='sm';}
+
+            return responsive;
+        }
+
+        //브라우저 크기에 따라 동작할 함수 정의
+        function set_responsive(){
+            const responsive = check_responsive();
+            const container = document.querySelector('#container');
+            switch(responsive){
+                case 'xs':
+                    container.innerHTML = '<div class="box-xs"></div>'
+                    break;
+                case 'sm':
+                    container.innerHTML = '<div class="box-sm"></div>'
+                    break;
+                case 'md':
+                    container.innerHTML = '<div class="box-md"></div>'
+                    break;
+                default :
+                    container.innerHTML = '<div class="box-lg"></div>'
+                    break;
+            }
+        }
+
+        //창사이즈가 변경될때마다 감지하여 함수 실행 
+        window.addEventListener('resize', set_responsive);
+
+        //페이지가 열리자마자 자동으로 1회 실행
+        set_responsive();
+    </script>
+</body>
+</html>
