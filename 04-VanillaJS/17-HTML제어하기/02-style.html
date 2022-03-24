@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1{
+            margin: 10px auto;
+            border: 5px solid #ccc;
+            padding: 30px;
+            text-align: center;
+        }
+        .box2{
+            margin: 10px auto;
+            border: 10px solid #ff00ff;
+            background-color: #ff0;
+            padding: 25px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box" class="box1">
+        <h1>텍스트 영역 입니다.</h1>
+    </div>
+    <input type="button" id="btn1" value="(폰트)red">
+    <input type="button" id="btn2" value="(폰트)red">
+    <input type="button" id="btn3" value="(폰트)red">
+    <input type="button" id="btn4" value="(배경)red">
+    <input type="button" id="btn5" value="(배경)red">
+    <input type="button" id="btn6" value="(배경)red">
+    <input type="button" id="btn7" value="width=50%">
+    <input type="button" id="btn8" value="width=auto">
+    <input type="button" id="btn9" value="box1 클래스적용">
+    <input type="button" id="btn10"  value="box2 클래스적용">
+
+    <Script>
+        document.querySelector('#btn1').addEventListener('click', function(e){
+            const box = document.getElementById('box');
+            box.style.color = '#ff0000';
+        });
+        document.querySelector('#btn2').addEventListener('click', e=>document.getElementById('box').style.color = '#00ff00');
+        document.querySelector('#btn3').addEventListener('click', e=>document.getElementById('box').style.color = '#0000ff');
+        document.querySelector('#btn4').addEventListener('click', e=>document.getElementById('box').style.backgroundColor = 'red');
+        document.querySelector('#btn5').addEventListener('click', e=>document.getElementById('box').style.backgroundColor = 'green');
+        document.querySelector('#btn6').addEventListener('click', e=>document.getElementById('box').style.backgroundColor = 'blue');
+        document.querySelector('#btn7').addEventListener('click', e=>document.getElementById('box').style.width = '50%');
+        document.querySelector('#btn8').addEventListener('click', e=>document.getElementById('box').style.width = 'auto');
+
+        document.querySelector('#btn9').addEventListener('click', e=>{
+            const box = document.getElementById('box');
+            box.classList.add('box1');
+            box.classList.remove('box2');
+        });
+
+        document.querySelector('#btn10').addEventListener('click', e=>{
+            const box = document.getElementById('box');
+            box.classList.add('box2');
+            box.classList.remove('box1');
+        });
+    </Script>
+</body>
+</html>
