@@ -1,0 +1,33 @@
+<!-- 
+## 문제3
+3장의 이미지가 3초마다 한번씩 자동으로 변경되는 웹 페이지를 작성하시오.   
+세 번째 이미지가 표시된 후 3초 후에는 다시 첫 번째 이미지가 표시되어야 합니다.   
+이미지 파일은 각자 임의의 이미지를 선정하여 사용하고, 이미지 파일 이름도 각자 임의로 구성합니다.
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+ </head>
+ <body>
+     <img src="./assets/img/img1.png" alt="" id="myImg">
+
+     <script>
+         const myImg = document.getElementById('myImg');
+         
+         let i =1; 
+         setInterval(() => {
+            if(i<4){
+                // myImg.src = `./assets/img/img${i}.png`
+                myImg.setAttribute('src',`./assets/img/img${i}.png`)
+                i++;
+            }else{
+                i=1;
+            }
+         }, 3000);
+     </script>
+ </body>
+ </html>

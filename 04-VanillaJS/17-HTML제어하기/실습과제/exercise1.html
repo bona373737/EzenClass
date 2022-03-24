@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시계</title>
+</head>
+<body>
+    <h1></h1>
+
+    <script>
+        function currentTime(){
+            const date = new Date();
+            const year = date.getFullYear();
+            let month = (date.getMonth()).toString();
+            let day = (date.getDate()).toString();
+            let hh=(date.getHours()).toString();
+            let mm = (date.getMinutes()).toString();
+            let ss = (date.getSeconds()).toString();
+            
+            if(month.length == 1){
+                month = 0+month;
+            }
+            if(day.length ==1){
+                day = 0+day;
+            }
+            if(hh.length ==1){
+                hh = 0+hh;
+            }
+            if(mm.length == 1){
+                mm = 0+mm;
+            }
+            if(ss.length == 1){
+                ss = 0+ss;
+            }
+
+            const h1 = document.querySelector('h1');
+            h1.innerHTML = year+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss;
+            
+        }
+        currentTime();
+        setInterval('currentTime()',1000);
+
+    </script>
+</body>
+</html>

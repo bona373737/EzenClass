@@ -1,0 +1,56 @@
+<!-- 
+문제4.
+버튼에 따라 과거의 n일 전부터 오늘까지의 범위를 표시하는 웹 페이지를 작성하시오
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="term">
+        <span id="startDay"></span>
+        <span id="nowDay"></span>
+    </h1>
+    <button value="1">1일</button>
+    <button value="7">7일</button>
+    <button value="15">15일</button>
+    <button value="30">30일</button>
+    <button value="60">60일</button>
+
+    <script>
+        function setStartDay(e){
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            const day = date.getDate();
+            document.getElementById('nowDay').innerHTML ='~'+year+'-'+ month +'-'+ day;
+
+            const dayTerm = Number(e.target.value);
+            const startDay = new Date();
+            startDay.setDate(startDay.getDate()-dayTerm);
+            document.getElementById('startDay').innerHTML= startDay.getFullYear()+'-'+startDay.getMonth()+'-'+startDay.getDate();
+
+        }
+        document.querySelector('button:nth-child(2)').addEventListener('click',e=>{
+            setStartDay(e);
+        })
+        document.querySelector('button:nth-child(3)').addEventListener('click',e=>{
+            setStartDay(e);
+        })
+        document.querySelector('button:nth-child(4)').addEventListener('click',e=>{
+            setStartDay(e);
+        })
+        document.querySelector('button:nth-child(5)').addEventListener('click',e=>{
+            setStartDay(e);
+        })
+        document.querySelector('button:nth-child(6)').addEventListener('click',e=>{
+            setStartDay(e);
+        })
+    </script>
+</body>
+</html>

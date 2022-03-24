@@ -1,0 +1,38 @@
+<!-- ## 문제2
+off 상태의 버튼이 누를때마다 on/off 의 상태가 변경되도록 CSS를 적용할 수 있는 코드를 작성하세요.
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>버튼 on,off</title>
+    <style>
+        button{
+            padding: 10px;
+            background: gray;
+            color: blue;
+        }
+        .btn-on{
+            background: yellow;
+            color: red;
+        }
+    </style>
+</head>
+
+ <body>
+     <button id="btn">푸시알림 수신</button>
+
+     <script>
+         const btn = document.getElementById('btn');
+
+        btn.addEventListener('click',e=>{
+            btn.classList.toggle('btn-on');
+        });
+
+     </script>
+
+ </body>
+ </html>
