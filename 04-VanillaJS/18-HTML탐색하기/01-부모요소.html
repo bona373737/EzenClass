@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="#" class="find-parent" data-color="#ff6600">parent</a>
+            <a href="#" class="find-parents" data-color="#ff6600">parents</a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" class="find-parent" data-color="0066ff">parent</a>
+            <a href="#" class="find-parents" data-color="0066ff">parents</a>
+        </li>
+        <li class="list-group-item">
+            <a href="#" class="find-parent" data-color="#00aa00">parent</a>
+            <a href="#" class="find-parents" data-color="#00aa00">parents</a>
+        </li>
+    </ul>
+
+    <script>
+        // 부모요소 찾기
+        document.querySelectorAll('.find-parent').forEach((v,i)=>{
+            v.addEventListener('click',e=>{
+                //a태그의 기본동작인 페이지이동을 해제하기
+                e.preventDefault();
+                //다수의 리스트속 a링크 중 어떤게 클릭됬는지 이벤트가 발생한 객체를 가져오기
+                const current = e.currentTarget;
+                const color = current.dataset.color;
+                //클릭된 element객체의 부모요소를 탐색
+                const parent = current.parentElement;
+                console.log(parent);
+                //클릭된 element객체의 배경색과 동일한 색상으로 부모도 배경색 변경
+                parent.style.backgroundColor = color;
+            });
+        });
+
+        document.querySelectorAll('.find-parents').forEach((v,i)=>{
+            v.addEventListener('click', e=>{
+                e.preventDefault();
+                const current = e.currentTarget;
+                const color = current.dataset.color;
+                //DOM트리를 타고 올라가면서 List-group이라는 클래스를 찾아서, 해당 element를 객체로 반환해준다.
+                const parents = current.closest('.list-group');
+                console.log(parents);
+                parents.style.backgroundColor = color;
+            })
+        })
+    </script>
+
+</body>
+</html>

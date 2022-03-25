@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list">
+        <li id="one">One</li>
+        <li id="two" class="blue">Two
+            <ul>
+                <li id="a">A</li>
+                <li id="b" class="blue">B</li>
+                <li id="c" class="red">C</li>
+                <li id="d">D</li>
+            </ul>
+        </li>
+        <li id="three">Three</li>
+        <li id="four" class="blue">Four</li>
+    </ul>
+
+    <button type="button" id="btn1">상위 ul의 자식들</button>
+    <button type="button" id="btn2">Two의 하위 ul의 자식들</button>
+
+    <script>
+        document.querySelector('#btn1').addEventListener('click',e=>{
+            //선택한 요소의 텍스트와 하위element를 모두 조회
+            //줄바꿈을 위한 엔터키여역도 텍스트로 인식된다.-> 사용안하는게 좋을듯
+            console.log(document.querySelector('#list').childNodes);
+            //줄바꿈을 위한 텍스트들을 제외한 순수 자식element만을 추출해준다.
+            console.log(document.querySelector('#list').children);
+            
+
+            //children으로 반환받은 객체는 배열 형태이지만 배열은 아님.. 
+            //forEach사용 불가... 배열로 변환한 다음에 사용가능하다.
+            const children = document.querySelector('#list').children;
+            const childrenArr = Array.from(children);
+            childrenArr.forEach((v,i)=>{
+                v.style.backgroundColor = '#0066ff';
+            })
+        });
+
+        document.querySelector('#btn2').addEventListener('click',e=>{
+            const childrenArr = Array.from(document.querySelector('#two > ul').children);
+
+            childrenArr.forEach((v,i)=>{
+                v.style.backgroundColor = 'red';
+                v.style.fontWeight = '900';
+            });
+        });
+    </script>
+</body>
+</html>

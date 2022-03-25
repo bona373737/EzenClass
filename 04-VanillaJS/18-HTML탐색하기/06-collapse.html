@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .collapsible-title{
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            font-weight: normal;
+            margin: 0;
+            text-align: left;
+            /* border와 outline의 차이는?? */
+            outline: none;
+            font-size: 15px;
+        }
+        .active,
+        .collapsible-title:hover{
+            background-color: #555;
+        }
+
+        .content{
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h2>Animated Collapibles</h2>
+    <p>A Collapsible:</p>
+
+    <!-- 메뉴리스트 중 1개만 먼저 만들어놓고 테스트 후 여러개 추가하기. -->
+    <div class="collapse">
+        <h1 class="collapsible-title">Open Collapsible</h1>
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea hic fugiat quis, quia vel, ratione dolor veniam ullam accusantium modi porro! Ab architecto aut in culpa fuga suscipit qui officia.</p>
+        </div>
+    </div>
+    <div class="collapse">
+        <h1 class="collapsible-title">Open Collapsible</h1>
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea hic fugiat quis, quia vel, ratione dolor veniam ullam accusantium modi porro! Ab architecto aut in culpa fuga suscipit qui officia.</p>
+        </div>
+    </div>
+    <div class="collapse">
+        <h1 class="collapsible-title">Open Collapsible</h1>
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea hic fugiat quis, quia vel, ratione dolor veniam ullam accusantium modi porro! Ab architecto aut in culpa fuga suscipit qui officia.</p>
+        </div>
+    </div>
+    <div class="collapse">
+        <h1 class="collapsible-title">Open Collapsible</h1>
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea hic fugiat quis, quia vel, ratione dolor veniam ullam accusantium modi porro! Ab architecto aut in culpa fuga suscipit qui officia.</p>
+        </div>
+    </div>
+    <div class="collapse">
+        <h1 class="collapsible-title">Open Collapsible</h1>
+        <div class="content">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea hic fugiat quis, quia vel, ratione dolor veniam ullam accusantium modi porro! Ab architecto aut in culpa fuga suscipit qui officia.</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.collapsible-title').forEach((v,i)=>{
+            v.addEventListener('click', e=>{
+                const current = e.currentTarget;
+                current.classList.toggle('.active');
+
+                const parent = current.closest('.collapse');
+                const content = parent.querySelector('.content');
+                if(content.style.maxHeight){
+                    content.style.maxHeight = ull;
+                }else{
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
