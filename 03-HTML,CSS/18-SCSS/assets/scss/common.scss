@@ -1,0 +1,20 @@
+@mixin myMixnin($size){
+    $calc:100px;
+
+    // 파라미터 $size에 따른 조건분기
+    @if $size %2 == 0 {
+        $calc: $calc+50px;
+    }@else if($size % 3 == 0){
+        $calc: $calc +100px;
+    }@else{
+        $calc: $calc;
+    }
+
+    width:$calc;
+    height:32px *2;
+    transition: all 0.3s ease-in;
+
+    &:hover{
+        transform: scale(1.2, 1.2);
+    }
+}

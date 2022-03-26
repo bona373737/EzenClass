@@ -1,0 +1,27 @@
+@import './colors.scss';
+@import './common.scss';
+
+.my-scss{
+    margin: auto;
+    border: 5px dotted #d5d5d5;
+    padding: 5px;
+
+    &:after{
+        display: block;
+        content:'';
+        clear: both;
+        float: none;
+    }
+
+    .my-scss-box{
+        cursor: pointer;
+        float:left;
+
+        &.red{background-color: $red; @include myMixnin(1);}
+        &.green{background-color: $green; @include myMixnin(2);}
+        &.blue{background-color: $blue; @include myMixnin(3);}
+        &.orange{background-color: $orange; @include myMixnin(4);}
+        &.yello{background-color: $yellow; @include myMixnin(5);}
+        &.pink{background-color: $pink; @include myMixnin(6);}
+    }
+}
