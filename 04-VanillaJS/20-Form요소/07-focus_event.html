@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">
+        <h3>주민번호를 입력하세</h3>
+        <input type="text" name="jumin1" id="jumin1" class="jumin">
+        -
+        <input type="password" namd="jumin2" id="jumin2" class="jumin">
+    </form>
+
+    <script>
+        document.querySelectorAll('.jumin').forEach((v,i)=>{
+            //focus 됬을때의 동작
+            v.addEventListener('focus',e=>{
+                e.currentTarget.style.backgroundColor = '#06f';
+                e.currentTarget.style.color = '#fff';
+            });
+
+            //focus가 해제될때:blur
+            v.addEventListener('blur',e=>{
+                e.currentTarget.style.backgroundColor = '#fff';
+                e.currentTarget.style.color = '#000';
+            })
+        });
+
+
+        //첫번째 input에 대해서 별도의 이벤트 처리????
+        document.querySelector('#jumin1').addEventListener('keyup',e=>{
+            const value = e.currentTarget.value;
+
+            if(value.length >=6){
+                //스스로의 입력값을 6글자만 남겨놓고 제거
+                e.currentTarget.value = value.substring(0,6);
+                document.querySelector('#jumin2').focus();
+            }
+        });
+    </script>
+</body>
+</html>

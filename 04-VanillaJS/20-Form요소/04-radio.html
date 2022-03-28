@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="myform">
+        <label><input type="radio" name="subject" value="html">HTML</label>
+        <label><input type="radio" name="subject" value="css">CSS</label>
+        <label><input type="radio" name="subject" value="javascript">Javascript</label>
+        <button id="btn">입력값 확인</button>
+    </form>
+    <hr>
+    <p id="console"></p>
+    
+    <script>
+        //radio의 리턴타입:배열과 유사한 NodeLIst타입의 객체
+        //배열은 아니기 때문에 foreach()외의 탐색을 위한 메서드를 갖고 있지 않다. 
+        //some(),filter()등의 배열메서드를 사용하고자 하는 경우 Array.from()으로 배열로 변환해야 한다.
+        const radio = document.querySelectorAll('input[name="subject"]');
+
+        //radio선택값의 변화를 감지하는 이벤트처리
+        radio.forEach((v,i)=>{
+            v.addEventListener('change',e=>{
+                document.querySelector('#console').innerHTML = e.currentTarget.value;
+            })
+        });
+
+        //전송버튼이 클릭됬을때의 이벤트처리
+        document.querySelector('#btn').addEventListener('click',e=>{
+            e.preventDefault();
+            Array.from(radio).some((v,i)=>{
+                //해당 radio가 선택된 상태.. 즉 true라면
+                if(v.checked){
+                    document.querySelector('#console').innerHTML = i+'번째 항목'+v.value+'이(가) 선택됨';
+                    return true;
+                }
+            })
+        })
+
+
+    </script>
+</body>
+</html>

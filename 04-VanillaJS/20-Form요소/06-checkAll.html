@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>
+        전체선택<input type="checkbox" id="all_check1" data-checked=".hobby">
+    </label>
+    <label><input type="checkbox" class="hobby" value="soccor">축구</label>
+    <label><input type="checkbox" class="hobby" value="basketball">농구</label>
+    <label><input type="checkbox" class="hobby" value="baseball">야구</label>
+
+    <br>
+
+    <label>
+        전체선택<input type="checkbox" id="all_check2" data-checked=".food">
+    </label>
+    <label><input type="checkbox" class="food" value="a">a</label>
+    <label><input type="checkbox" class="food" value="b">b</label>
+    <label><input type="checkbox" class="food" value="c">c</label>
+    
+
+    <script>
+        //data-checked라는 이름으로 개발자가 임의로 정의한 속성을 부여하고 
+        //해당 속성을 갖고 있는 다수의 element에 대하여 공통 동작을 부여 할수 있다.
+        document.querySelectorAll('input[data-checked]').forEach((v1,i1)=>{
+            v1.addEventListener('change',e =>{
+                const current = e. currentTarget;
+                const targetSelector = current.dataset.checked;
+                console.log(targetSelector);
+                document.querySelectorAll(targetSelector).forEach((v2,i2)=>{
+                    v2.checked = current.checked;
+                })
+            })
+        });
+
+
+        //dataset속성을 사용하지 않는 경우.. 
+        //동일 코드를 각 checkbox마다 다 적용해주는 하드코딩을 하던가 
+        document.querySelector('#all_check1').addEventListener('change', e=>{
+            document.querySelectorAll('.hobby').forEach((v,i)=>{
+                v.checked = e.currentTarget.checked;
+            });
+        });
+        document.querySelector('#all_check2').addEventListener('change', e=>{
+            document.querySelectorAll('.food').forEach((v,i)=>{
+                v.checked = e.currentTarget.checked;
+            });
+        });
+
+        //코드를 함수화 해서 각 checkbox마다 해당 함수를 적용해 주는 방법이 있다.
+        //?????????????????????????????????????????
+        function checkAll(optionClass){
+            document.querySelectorAll(`'.${optionClass}'`).forEach((v,i)=>{
+                v.checked = e.currentTarget.checked;
+            });
+        };
+        document.querySelector('#all_check2').addEventListener('change',checkAll(food));
+    </script>
+
+</body>
+</html>

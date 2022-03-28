@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myform">
+        <div>
+            <label for="subject">과목</label>
+            <select name="subject" id="subject">
+                <option value="">-----선택하세요------</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="javascript">javascript</option>
+            </select>
+            <button>입력값 확인</button>
+        </div>
+        <hr>
+        <div id="result"></div>
+    </form>
+
+    <script>
+        document.querySelector('#myform').addEventListener('submit',e=>{
+            e.preventDefault();
+
+            //가져온 select element 객체의 자료구조는 배열!!
+            const dropdown = document.querySelector('#subject');
+            //인덱스 번호 활용가능
+            const choose = dropdown.selectedIndex;
+            //인덱스 0번 "---선택하세요----"
+            if(choose == 0){
+                alert('선택된 항목이 없습니다.');
+                return;
+            }
+            
+            const value = dropdown[choose].value;
+            document.querySelector('#result').innerHTML = value;
+        });
+    </script>
+</body>
+</html>

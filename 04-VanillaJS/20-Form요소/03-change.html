@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <select name="site" id="site">
+        <option value="">-----선택하세요------</option>
+        <option value="http://www.naver.com">네이버</option>
+        <option value="http://www.daum.net">다음</option>
+        <option value="http://www.google.com">구글</option>
+    </select>
+    <hr>
+    <input type="text" id="src">
+    <input type="text" id="dsc" readonly>
+    <hr>
+    <input type="text" id="keycheck">
+    <h5>input영역에서 포커스가 빠져나왔을때 값이 반영</h5>
+    <h5>입력중인 값을 실시간으로 반영</h5>
+    <p id="keycod"></p>
+
+    <script>
+        document.querySelector('#site').addEventListener('change', e=>{
+            const choose = e.currentTarget.selectedIndex;
+            const value = e.currentTarget[choose].value;
+            
+            //value에 값이 있다면 
+            if(value){
+                //파라미터로 전달된 URL을 새로운창으로 여는 함수
+                window.open(value);
+            }
+        });
+
+        //input요소에 change이벤트 등록하면 입력 후 input에서 포커스가 빠져 나왔을때 동작한다. 
+        //입력중인 값이 실시간으로 반영되는 형태가 아님.
+        document.querySelector('src').addEventListener('change', e=>{
+            document.querySelector('dsc').value = e.currentTarget.value;
+        });
+
+
+        //입력중인 값을 실시간으로 반영하고자 할 경우 keyup이벤트 사용 
+        document.querySelector('keycheck').addEventListener('keyup',e=>{
+            document.querySelector('keycopy').innerHTML = e.currentTarget.value;
+        });
+    </script>
+</body>
+</html>

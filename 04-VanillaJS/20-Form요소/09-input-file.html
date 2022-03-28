@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #file-input{
+            /* 라벨대신 다운로드jpg파일만 화면에 보여지게 */
+            display: none;
+        }
+        .image-upload img{
+            width: 100px;
+        }
+        .image-upload label{
+            cursor: pointer;
+        }
+        #console::after{
+            content: '';
+            clear: both;
+            display: block;
+            float: none;
+        }
+        div.preview{
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border: 1px solid #d5d5d5;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <!-- input type='file' 파일업로드 할때 파일 img 미리보기 기능 구현 -->
+    <div class="image-upload">
+        <label for="file-input">
+            <img src="./img/down.jpg" alt="업로드테스트">
+        </label>
+        <input type="file" id="file-input" multiple>
+    </div>
+    <hr>
+    <div id="preview-container"></div>
+
+    <script>
+        document.querySelector('#file-input').addEventListener('change',e=>{
+            const previewContainer = document.querySelector('#preview-container');
+            //미리보기 이미지가 보여질 영역 리셋시키키->>이건 왜 필요한거지???
+            previewContainer.innerHTML = '';
+            //등록된 파일의 목록 가져오기(반환받은 값의 자료형은 json)
+            const files = e.currentTarget.files;
+            console.log( files);
+            //반환받은 데이터를 배열로 변환 후 반목문 처리
+            Array.from(files).forEach((v,i)=>{
+                console.log(v);
+                const img = URL.createObjectURL(v);
+                //img에 접근할수 있는 binary주소를 얻을 수 잇다(내컴퓨터에 파일이 저장된 폴더,파일명이 그대로 나오는게 아님!)
+                console.log(img);
+
+                //img를 div태그의 backgroundImage로 추가하여 HTML문서에 추가
+                const div = document.createElement('div');
+                div.classList.add('preview');
+                div.style.backgroundImage = 'url(' + img + ')';
+                previewContainer.appendChild(div);
+            })
+        });
+    </script>
+</body>
+</html>
