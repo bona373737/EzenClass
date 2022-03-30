@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>로컬스토리지</h1>
+    <div>
+        <section id="key">
+            <option value="name">name</option>
+            <option value="age">age</option>
+        </section>
+        <input type="text" name="" id="value">
+        <button type='button' id="save">save</button>
+        <button type='button' id="read">read</button>
+        <button type='button' id="remove">remove</button>
+        <button type='button' id="clear">clear</button>
+    </div>
+
+
+    <script>
+        document.querySelector('#save').addEventListener('click',e=>{
+            //저장할 데이터의 key가져오기
+            const key = document.querySelector('#key');
+            const keyChoose = key[key.selectedIndex].value;
+
+            //저장할 데이터의 value가져오기 
+            const value = document.querySelector('#value');
+            const valueInput = value.value;
+
+            window.localStorage.setItem(keyChoose,valueInput);
+        });
+
+        document.querySelector('#read').addEventListener('click',e=>{
+            //데이터의 key가져오기
+            const key = document.querySelector('#key');
+            const keychoose = key[key.selectedIndex].value;
+            const savedDate = localStorage.getItem(keychoose);
+            alert(savedData);            
+        })
+        document.querySelector('#remove').addEventListener('click',e=>{
+            const key = document.querySelector('#key');
+            const keychoose = key[key.selectedIndex].value;
+            localStorage.removeItem(keychoose);
+        })
+        document.querySelector('#clear').addEventListener('click',e=>{
+            localStorage.clear();
+        })
+    </script>
+</body>
+</html>

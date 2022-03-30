@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>세션스토리지</h1>
+    <div>
+        <section id="key">
+            <option value="name">name</option>
+            <option value="age">age</option>
+        </section>
+        <input type="text" name="" id="value">
+        <button type='button' id="save">save</button>
+        <button type='button' id="read">read</button>
+        <button type='button' id="remove">remove</button>
+        <button type='button' id="clear">clear</button>
+    </div>
+
+    <script>
+        document.querySelector('#save').addEventListener('click',e=>{
+            const key = document.querySelector('#key');
+            const keyChoose = key[key.selectedIndex].value;
+
+            const value = document.querySelector('#value');
+            const valueInput = value.value;
+
+            window.sessionStorage.setItem(keyChoose, valueInput);
+        });
+
+        document.querySelector('#read').addEventListener('click',e=>{
+            const key = document.querySelector('#key');
+            const keyChoose = key[key.selectedIndex].value;
+            const savedDate = sessionStorage.getItem(keyChoose);
+            alert(savedDate);
+        })
+        document.querySelector('#remove').addEventListener('click',e=>{
+            const key = document.querySelector('#key');
+            const keyChoose = key[key.selectedIndex].value;
+            sessionStorage.removeItem(keyChoose);
+        })
+        document.querySelector('#clear').addEventListener('click',e=>{
+            sessionStorage.clear();
+        })
+    </script>
+</body>
+</html>
