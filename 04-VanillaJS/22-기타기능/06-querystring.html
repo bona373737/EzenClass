@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="console"></h1>
+    <a href="06-querystring.html?weekday=mon">링크1</a>
+    ㅣ
+    <a href="06-querystring.html?weekday=sun">링크2</a>
+    <hr>
+    <a href="07-history.html">7번예제로 이동</a>
+
+    <script>
+        //url에서 url조회문.. ?물음표를 포함한 전체를 string값으로 반환
+        console.log(location.search);
+        // console.log(typeof location.search);
+
+        //url조회문에서 앞에 물음표를 제거
+        const query = location.search.substring(1);
+        console.log(query);
+        //&기호를 구분자로하여 string을 분리하여 배열에 담아 반환
+        const params = query.split('&');
+        console.log(params);
+
+
+        const mydata = {};
+        params.map((v,i)=>{
+            //배열에 담긴 "이름=값"형태의 string값에서 부등호(=)를 구분자로 또 나누어서 배열에 닮기
+            //tem[0]은 이름, tem[1]은 값
+            const tmp = v.split('=');
+            //mydata[이름] = 값;
+            mydata[tmp[0]] = tmp[1];
+        });
+
+        console.log(mydata);
+
+        let msg = '';
+        switch(mydata.weekday){
+            case 'mon':
+                msg = '월요일입니다.';
+                break;
+            case 'sun':
+                msg = '일요일입니다.';
+                break;
+        }
+
+        document.querySelector('#console').innerHTML = msg;
+    </script>
+</body>
+</html>

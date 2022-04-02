@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="find-me" type="button">Show my location</button>
+    <br>
+    <p id="status"></p>
+    <p id="map-link" target="_blank"></p>
+
+    <script>
+        const status = document.querySelector('#status');
+        const mapLink = document.querySelector('#map-link');
+
+        document.querySelector('#find-me').addEventListener('click',e=>{
+            mapLink.setAttribute('href','#');
+            mapLink.innerHTML = '';
+
+            //navigator객체 안에 geolacation이라는 기능이 없다면? 
+            //데스크톱 사용자의 경우처럼..
+            if(!navigator.geolocation){
+                status.innerHTML ='현재 브라우저가 위치정보 기능을 제공하지 않습니다';
+            }else{
+                status.innerHTML = '검색중...';
+            }
+
+
+            //조회욥션(선택사항)
+            const options = {
+                //높은 정확도 사용 옵션 선택
+                enableHeighAccuracy :true;
+                //캐시에 저장한 위치정보를 대신 반활 할 수 있는 최대시간
+                //0으로 설정할 경우 캐시를 사용하지 않고 매번 GPS값을 새롭게 취득한다.
+                maximumAge : 0,
+                //제한시간_제한시간안에 조회가 성공하지 않으면 에러로 간주
+                timeout : 30000
+            };
+
+            //성공시 수행될 콜백
+            function success(position){
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                //geolocation 호출전 표시한 '검색중'메세지를 삭제
+                status.innerHTML = '';
+
+                //링크에 openstreetmap으로의 url을 href속성으로 지정함(18=확대비율)
+                mapLink.href = `https://www.openstreemap.org/#map=18/${latitude}/${longitude}`;
+                mapLink.innerHTML = `위도: ${latitude}도, 경도: ${longitude}도`;
+            };
+
+            //실패시 수행될 콜백
+            function error(e){
+                status.innerHTML = '위치 정보 획득에 실패 했습니다.';
+                console.error(e);
+            }
+
+            // navigator.geolocation.getCurrentPosition(success,erroer,options);
+            //현재 위치를 1회성으로 조회하는 메서드
+            //success:위치정보 조회 성공시 호출될 콜백함수 
+            //error:위치정보 조회 실패시 호출될 콜백함수
+            //options:조회옵셥(선택사항)
+
+
+            // navigator.geolocation.watchPosition.(success,error,options);
+            //현재 위치를 지속적으로 조회함(이동경로 추적 가능)
+        });
+    </script>
+</body>
+</html>
