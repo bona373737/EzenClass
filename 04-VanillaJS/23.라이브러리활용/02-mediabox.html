@@ -1,0 +1,44 @@
+<!-- 
+    mediaBox 라이브러리 
+    cdn방식을 제공하기 않기때문에 라이브러리파일을 다운받아 사용해야한다. 
+
+
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+ </head>
+ <body>
+     <h1>mediabox 라이트박스 플러인</h1>
+     <p>
+         <a href="https://pinceladasdaweb.github.io/mediabox/">https://pinceladasdaweb.github.io/mediabox/</a>
+     </p>
+     <hr>
+     <div class="translated-ltr">
+         <!--유튜브의 영상물 고유코드번호  v=cdX5JvL43oM-->
+         <a href="https://www.youtube.com/watch?v=cdX5JvL43oM" class="mediabox">
+             <img src="https://www.youtube.com/watch?v=cdX5JvL43oM/default.jpg" alt="">
+             <!--
+                동영상 배경 썸네일사용(480*360)
+                동영상 시작지점 썸네일사용(120*90)
+                동영상 중간지점 썸네일사용(120*90)
+                동영상 끝지점 썸네일사용(120*90)
+                고해상도 썸네일(1280*720)
+
+               -->
+
+
+         </a>
+     </div>
+
+     <script src="./libs/mediabox-1.1.3/dist/mediabox.min.js"></script>
+     <script>
+         MediaBox('.mediabox');
+     </script>
+ </body>
+ </html>

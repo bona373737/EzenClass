@@ -34,6 +34,13 @@
         const department = [];
         const studentCount =[0,0,0];
 
+        //강사님 풀이설명
+        //department[i]번째가 있으면 studentCount[i]의 값을 1씩 늘려줘야한다. 
+        //즉, department에 해당 값이 있는지 여부와 인덱스번호를 알수 있어야 한다. 
+        //incluedes()보다는 forEach((v,i)=>{})을 사용하는것이 좀더 효율적이다.
+
+        
+        //구본아 풀이1
         for(s of student){
             if(!department.includes(s.deptno)){
                  department.push(s.deptno);

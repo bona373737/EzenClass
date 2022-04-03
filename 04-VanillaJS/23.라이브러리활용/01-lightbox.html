@@ -1,0 +1,51 @@
+<!--
+    fslightbox 라이브러리
+    사용법이 간편하다. fslightbox이름의 dataset을 지정해 주면 끝
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lightbox Example</h1>
+    <p>
+        <a href="https://fslightbox.com/">https://fslightbox.com/</a>
+    </p>
+    <hr>
+
+    <h2>Single Gallery</h2>
+    <p>주의사항: 실행시 Live Server 환경으로 실행해야 함</p>
+    <p>date-fslightbox 속성의 값을 img마다 독립적으로 부여한다.</p>
+    <div>
+        <a href="./img/001.png" data-fslightbox="'img1">
+            <img src="./img/001.png" alt="" width="150">
+        </a>
+        <a href="./img/002.png" data-fslightbox="'img2">
+            <img src="./img/002.png" alt="" width="150">
+        </a>
+    </div>
+
+    <h2>Multi Gallery</h2>
+    <p>data-fslightbox 속성의 값을 동일하게 부여한 항목끼리는 하나의 갤러리로 묶인다.</p>
+    <div>
+        <a href="./img/003.png" data-fslightbox="'myphoto">
+            <img src="./img/003.png" alt="" width="150">
+        </a>
+        <a href="./img/004.png" data-fslightbox="'myphoto">
+            <img src="./img/004.png" alt="" width="150">
+        </a>
+        <a href="./img/005.png" data-fslightbox="'myphoto">
+            <img src="./img/005.png" alt="" width="150">
+        </a>
+    </div>
+
+
+    <!-- fslightbox라이브러리를 cdn방식으로 사용 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.min.js" integrity="sha512-EqNNJuepkw5P9vxCml8eBk7C4Ld+4kAnvzOD/jG21rkxWPILGoQa5EvD62UieiJF0u3xoQrcVnce4i83VnYj/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

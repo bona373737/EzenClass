@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chart.js</h1>
+    <p>
+        <a href="https://www.chartjs.org/">https://www.chartjs.org/</a>
+    </p>
+    <hr>
+
+    <div class="subplot">
+        <h2>linear 기본선그래프</h2>
+        <div class="subplot-item">
+            <canvas id="mychart1"></canvas>
+        </div>
+    </div>
+    <div class="subplot">
+        <h2>기본 막대그래프</h2>
+        <div class="subplot-item">
+            <canvas id="mychart2"></canvas>
+        </div>
+    </div>
+    <div class="subplot">
+        <h2>다중 막대 그래프</h2>
+        <div class="subplot-item">
+            <canvas id="mychart3"></canvas>
+        </div>
+    </div>
+    <div class="subplot">
+        <h2>파이그래프</h2>
+        <div class="subplot-item">
+            <canvas id="mychart4"></canvas>
+        </div>
+    </div>
+    <div class="subplot">
+        <h2>Polar Area Chart</h2>
+        <div class="subplot-item">
+            <canvas id="mychart5"></canvas>
+        </div>
+    </div>
+    <div class="subplot">
+        <h2> 도넛 그래프</h2>
+        <div class="subplot-item">
+            <canvas id="mychart6"></canvas>
+        </div>
+    </div>
+    <div class="subplot">
+        <h2> 산점도 그래프</h2>
+        <div class="subplot-item">
+            <canvas id="mychart7"></canvas>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script>
+        //데이터셋
+        const dataset = [
+            {이름:'철수',학년:1,성별:'남자',국어:98,영어:82,수학:88,과학:64},
+            {이름:'영희',학년:2,성별:'여자',국어:88,영어:90,수학:62,과학:72},
+            {이름:'민수',학년:1,성별:'남자',국어:92,영어:70,수학:71,과학:87},
+            {이름:'수현',학년:3,성별:'여자',국어:63,영어:60,수학:31,과학:70},
+            {이름:'호영',학년:4,성별:'남자',국어:120,영어:50,수학:84,과학:88}
+        ];
+
+        //각 항목을 분할하여 저장하기 위한 배열
+        const names=[];
+        const kor =[];
+        const eng =[];
+        const math = [];
+
+        //항목분할
+        for(let i=0; i<dataset.length; i++){
+            names[i]=dataset[i].이름;
+            kor[i]=dataset[i].국어;
+            eng[i]=dataset[i].영어; 
+            math[i]=dataset[i].수학;
+        }
+
+        //정제한 데이터 확인
+        console.log(names);
+        console.log(kor);
+        console.log(eng);
+        
+
+        //그래프가 표시될 캔버스 영역
+        const mychart1 = document.getElementById('mychart1');
+
+        //선그래프 그리기**********************************************************************************************
+        new Chart(mychart1, {
+            type: 'line',
+
+            data:{
+                labels: names,
+
+                datasets:[
+                    {
+                        label:'국어',
+                        data:kor,
+                        borderWidth:1,
+                        bortderColor:'#ff6600',
+                    },
+                    {
+                        label:'영어',
+                        data:eng,
+                        borderWidth:3,
+                        bortderColor:'#ff00ff',
+                    }
+                ],
+            },
+
+            options:{
+                maintainAspecRatio:false,
+            }
+        });
+    </script>
+</body>
+</html>
