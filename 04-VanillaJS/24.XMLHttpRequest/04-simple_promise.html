@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Simple Promise</h1>
+    <a href="#" id="btn">Load Hello.json</a>
+    <div id="console"></div>
+
+    <script>
+        function getDeptItem(){
+            return new Promise((resolve,reject)=>{
+                const xhr = new XMLHttpRequest();
+                const method = 'GET';
+                const url = 'backend/hello.json';
+                xhr.open(method,url);
+
+                xhr.onreadystatechange= e=>{
+                    const ajax = e.target;
+
+                    if(ajax.status ==200){
+                        const json = JSON.parse(ajax.responseText);
+                        resolve(json);
+                    }else{
+                        reject({status:ajax.status,
+                        text: ajax.statusText});
+                    }
+                }
+                xhr.send();
+            })
+        }; //function end
+
+        document.querySelector('#btn').addEventListener('click',e=>{
+            const promise = getDeptItem();
+            console.dir(promise);
+            
+            promise.then((v)=>{
+                const h1 = document.createElement('h1');
+                h1.classList.add('text-success');
+                h1.innerHTML = v.msg;
+                document.querySelector('#console').appendChild(h1);
+            })
+        })
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>영화진흥위원회 박스오피스 순위</h1>
+    <input type="date" name="" id="targetDt">
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>순위</th>
+                <th>영화제목</th>
+                <th>관객수</th>
+                <th>개봉일</th>
+            </tr>
+        </thead>
+        <tbody id="list-body">
+            
+        </tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const getMovieRank = async (targetDt)=>{
+            const listBody = document.querySelector('#list-body');
+            const old_item = listBody.getElementsByTagName('tr');
+
+            //조회 날짜가 변경될때 기존에 화면에 표시된 리스트 삭제
+            Array.from(old_item).map((v,i)=>{
+                listBody.removeChild(v);
+            });
+
+            //http통신_통신성공,실패를 try catch로 묶기
+            let json = null;
+            try {
+                json = await axios.get('http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json',{
+                    params:{
+                        key:'adf72d6240eadf55d0e80c5a88c3c9f0',
+                        targetDt:targetDt,
+                    }
+                })
+                console.log(json);
+            } catch (error) {
+                console.error(error);
+                alert('요청을 처리하는데 실패했습니다.');
+                return;
+            }
+
+            //http통신 성공하여 얻어진 데이터를 활용하는 후속동작
+            if(json != null){
+                const {data} = json;   //비구조문법
+                data.boxOfficeResult.dailyBoxOfficeList.map((v,i)=>{
+                    const tr = document.createElement('tr');
+                    const td1 = document.createElement('td');
+                    td1.innerHTML = v.rank;
+                    const td2 = document.createElement('td');
+                    td2.innerHTML = v.movieNm;
+                    const td3 = document.createElement('td');
+                    td3.innerHTML = v.audiCnt;
+                    const td4 = document.createElement('td');
+                    td4.innerHTML = v.openDt;
+
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+
+                    listBody.appendChild(tr);
+                })
+            }//if end
+        }// async funcion end
+
+
+        //조회하려는 날짜가 변경되는 것을 감지하여 이벤트 실행
+        document.querySelector('#targetDt').addEventListener('change',e=>{
+            const date = e.currentTarget.value.replaceAll('-','');
+            getMovieRank(date);
+        })
+
+
+        //페이지 열림과 동시에 금일 바로 전날짜의 데이터가 화면에 표시되도록 함수 1회 실행
+        const date = new Date();
+        const b = date.getDate()-1;
+        date.setDate(b);
+        let yy = date.getFullYear();
+        let mm = date.getMonth()+1;
+        let dd = date.getDate();
+
+        if(mm<10){
+            mm = '0'+mm;
+        }
+        if(dd<10){
+            dd = '0'+dd;
+        }
+
+        const sendDate = ''+yy+mm+dd;   //앞에 공백은 왜추가한거즤??
+        getMovieRank(sendDate);
+    </script>
+    
+</body>
+</html>
