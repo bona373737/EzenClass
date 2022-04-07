@@ -1,0 +1,82 @@
+<!--학과데이터 전체목록을 보여주는 index.html에서 학과이름링크 클릭시 연결될 페이지 -->
+<!-- 상세보기 페이지 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학과관리 :: MySchool</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <div class="container"></div>
+    <!-- header component-->
+    <div data-include="inc/header.html"></div>
+    <!-- body -->
+    <section>
+        <dl>
+            <dt>학과번호</dt>
+            <dd class="id"></dd>
+            <dt>학과명</dt>
+            <dd class="dname"></dd>
+            <dt>학과위치</dt>
+            <dd class="loc"></dd>
+        </dl>
+        <a href="index.html">목록보기</a>
+        <a href="#" class="btn-edit">수정하기</a>
+        <a href="#" class="btn-delete">삭제하기</a>
+    </section>
+    <!-- footer component -->
+    <div data-include="inc/footer.html"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/include.js"></script>
+    <script>
+        //페이지가 실행되면서 자동동작 해야 하므로 즉시실행 함수로 구현
+        //(async ()=>{})();
+        (async ()=>{
+
+            console.log(`search값 => ${window.location.search}`);
+            const params = new URLSearchParams(window.location.search);
+        console.log(params);
+        const id = params.get('id');
+        console.log(id);
+        
+        if(!id){
+            alert('학과번호가 없습니다.');
+            history.back();
+            return;
+        }
+        
+        let json = null;
+        try {
+            json = await axios.get(`http://localhost:3000/department/${id}`);
+        } catch (e) {
+            console.error(e);
+            alert('요청을 처리하는데 실패했습니다.');
+            return;
+        }
+
+        if(json != null){
+            const {data} = json;
+            console.log(data);
+            document.querySelector('.id').innerHTML=data.id;
+            document.querySelector('.dname').innerHTML=data.dname;
+            document.querySelector('.loc').innerHTML=data.loc;
+
+            //수정버튼 클릭시 현재데이터의 일련번호를 기준으로 수정할 데이터 식별
+            document.querySelector('btn-edit').setAttribute('href',`edit.html?id${data.id}`);
+
+            //삭제버튼 클릭시 현재데이터의 일련번호를 기준으로 삭제할 데이터 식별
+            const btnDelete = document.querySelector('.btn-delete');
+            btnDelete.dataset.id = data.id;
+            btnDelete.dataset.dname = data.dname;
+        }
+
+    })();//async function end
+    </script>
+
+</body>
+</html>
