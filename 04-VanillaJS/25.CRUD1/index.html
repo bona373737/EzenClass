@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학과관리 :: MySchool</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- header component -->
+        <div data-include="inc/header.html"></div>
+        <!-- body-->
+        <section>
+            <p>
+                <a href="add.html">새 학과 추가</a>
+            </p>
+            <table class="table">
+                <colgroup>
+                    <col width="25%">
+                    <col width="25%">
+                    <col width="25%">
+                    <col width="25%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-center">학과번호</th>
+                        <th class="text-center">학과이름</th>
+                        <th class="text-center">학과위치</th>
+                        <th class="text-center">-</th>
+                    </tr>
+                </thead>
+                <tbody id="listBody"></tbody>
+            </table>
+        </section>
+        <!-- footer component -->
+        <div data-include="inc/footer.html"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/include.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
