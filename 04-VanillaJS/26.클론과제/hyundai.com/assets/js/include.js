@@ -27,6 +27,13 @@ Array.from(document.querySelectorAll('*[data-include]')).map(async (v, i) => {
             const btn = document.querySelector('#sub-menu')
             btn.style.display = 'none';
         })
+        document.querySelector('#searchbtn').addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector('#search-submenu').style.display = 'block';
+        })
+        document.querySelector('#search-close').addEventListener('click', e => {
+            document.querySelector('#search-submenu').style.display = 'none';
+        })
     }
 
 })

@@ -1,4 +1,5 @@
 $font-color: #666666;
+$main-color: #0A3465;
 
 *a{
     text-decoration: none;
@@ -10,7 +11,6 @@ li{
 
 header{
     background-color: #F6F3F2;
-    border-bottom: 3px solid #E4DCD3;
     position: relative;
     
     nav{
@@ -19,9 +19,7 @@ header{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: auto;
-        
-        
+        margin: auto; 
         #logo{
             width: 10%;
             img{
@@ -35,7 +33,7 @@ header{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
+
             li{
                 line-height: 80px;
             }
@@ -44,6 +42,9 @@ header{
                 font-weight: bold;
                 color: $font-color;
             }
+        }
+        #menu a:hover{
+            color: $main-color;
         }
         #nav-option{
             width: 30%;
@@ -61,8 +62,8 @@ header{
                 background-color: #F6F3F2;
                 color: $font-color;
             }
-            #close-btn{
-                
+            select:hover{
+                color: $main-color;
             }
         }
         #sub-menu{
@@ -73,6 +74,7 @@ header{
             height: 80px;
             background-color: #F6F3F2;
             border-bottom: 3px solid #E4DCD3;
+            border-top: 3px solid #E4DCD3;
             display: none;
             // transform: translateY(20px);
             // transition: all 2s;
@@ -100,8 +102,65 @@ header{
             }
         }
     }//nav end
-}//header end
 
+    #search-submenu{
+        position: absolute;
+        width: 100vw;
+        height: 300px;
+        background-color: #F6F3F2;
+        display: none;
+
+        #search-close{
+            margin-top: 20px;
+            margin-left: 90%;
+            font-size: 30px;
+        }
+
+        #search-content-wrap{
+            width: 450px;
+            height: 200px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #search-input{
+            position: relative;
+            
+            input{
+                width: 400px;
+                height: 50px;
+                border: none;
+                margin-bottom: 30px;
+            }
+
+            input::placeholder{
+                color: $font-color;
+                text-indent: 10px;
+                font-size: 20px;
+            }
+
+            i{
+                position: absolute;
+                top:18px;
+                left:358px;
+                font-size: 20px;
+              }
+        }
+
+        h1{
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        span{
+            padding-right: 5px;
+        }
+    }
+
+
+}//header end
 
 
 footer{
@@ -152,23 +211,34 @@ footer{
             }
         }
     }
-}
+}//footer end
 
 main{
     section{
-        width: 70%;
-        margin: auto;
+        width: 80%;
+        margin: 80px auto;
     }
     .img{
         display: flex;
         justify-content: space-between;
     }
-    #tag-menu{
+    h3{
+        font-size: 30px;
+        font-weight: bold;
+        color: $main-color;
+    }
+    h1{
+        font-size: 50px;
+        font-weight: bold;
+        margin: 20px 0px;
+    }
+
+    section#tag-menu{
         display: flex;
         justify-content: space-between;
-        padding: 80px 0px;
+        padding: 50px 0px;
         font-size: 20px;
-
+        font-weight: bold;
         span{
             border-right: 1px solid black;
             padding:0px 30px;
@@ -177,5 +247,126 @@ main{
             padding: 0;
             border: none;
         }
+        span a{
+            color: $font-color;
+        }
+        span a:hover{
+            color: aqua;
+        }
     }
+
+
+    section#img-content-wrap{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        
+        .img-content{
+            width: min-content;
+    
+            .text{
+                margin: 20px 0px;
+                h6{
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: $main-color;
+                    margin-bottom: 10px;
+                }
+                h4{
+                    font-size: 25px;
+                    font-weight: bold;
+                    color: $main-color;
+                }
+            }
+        }
+    }
+
+
+    section#site{
+        width: 100%;
+        background-color: $main-color;
+        padding: 200px 0;
+
+        #site-wrap{
+            display: flex;
+            justify-content: center;
+            
+        }
+        #site-text{
+            width: 400px;
+            color: white;
+            font-weight: bold;
+            margin: 0px 50px;
+
+            h1{
+                font-size: 50px;
+                line-height: 90px;
+            }
+            h2{
+                font-size: 20px;
+                line-height: 30px;
+            }
+            button{
+                padding: 10px 40px;
+                font-size: 20px;
+                font-weight: bold;
+                margin-top: 30px;
+                background-color: $font-color;
+                color: white;
+                border: none;
+            }
+        }
+    }
+
+
+    section#sns-wrap{
+
+        #sns-content{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .image-wrap{
+            position: relative;
+
+        }
+        .hidden-text{
+            position: absolute;
+            z-index: 99999;
+            top: 25px;
+            left: 25px;
+            padding: 50px;
+            box-sizing: border-box;
+            width: 400px;
+            height: 400px;
+            background-color: $main-color;
+            color: white;
+            font-size: 25px;
+            line-height: 35px;
+            visibility: hidden;
+
+            i{
+                display: block;
+                box-sizing: border-box;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                padding: 0px 9px;
+                border-radius: 50%;
+                background-color: white;
+                margin-top: 50px;
+                color: $main-color;                
+            }
+        }
+        img{
+            margin-bottom: 60px;
+            width: 450px;
+            height: 450px;
+        }
+    }
+
+
+    
+    
 }
