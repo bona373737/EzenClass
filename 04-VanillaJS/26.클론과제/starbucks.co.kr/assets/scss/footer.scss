@@ -1,0 +1,32 @@
+@import './style.scss';
+
+footer{
+    width: 100%;
+    background-color: $navBackColor;
+
+    .footer-content-wrap,
+    .footer-award-wrap,
+    .footer-link-wrap{
+        width: 70%;
+        margin: auto;
+        display: flex;
+        color: white;
+    }
+
+    .footer-content-wrap{
+        ul{
+            font-size: $fontSizeSmall;
+            padding: 20px 20px;
+            
+            ii{
+                line-height: 20px;
+                &:nth-child(1){
+                    font-weight: bold;
+                    font-size: 15px;
+                }
+            }
+        }
+
+    }
+
+}

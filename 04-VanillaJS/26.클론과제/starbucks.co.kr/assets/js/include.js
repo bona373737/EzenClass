@@ -27,7 +27,39 @@ Array.from(document.querySelectorAll('*[data-include]')).forEach(async (v, i) =>
             inputBox.setAttribute('placeholder', '통합검색');
             inputBox.classList.add('inputStyle');
             searchInput.appendChild(inputBox);
+
+            //input 미입력상태로 검색버튼 클릭시 alert
+            document.querySelector('#search').addEventListener('click', e => {
+                console.log(inputBox.value);
+                if (inputBox.value == '') {
+                    alert('검색어를 입력하세요');
+                    inputBox.focus();
+                }
+            })
         };
+
     })
 
-})
+    //** header sub-menu 드롭다운 */
+    document.querySelectorAll('.nav2-item').forEach((v, i) => {
+        v.addEventListener('mouseover', e => {
+            const target = e.currentTarget.querySelector('.sub-menu');
+            console.log(target);
+            // console.dir(target);
+            // const itemDisplay = target.getAttribute('display');
+            // console.log(itemDisplay);
+            // if (itemDisplay == 'none') {
+            //     target.setAttribute('display', 'block');
+            // }
+            target.classList.add('active');
+        })
+
+        v.addEventListener('mouseout', e => {
+            const target = e.currentTarget.querySelector('.sub-menu');
+            target.classList.remove('active');
+        })
+    })
+
+
+
+}) //final end
