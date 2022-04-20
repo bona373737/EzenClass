@@ -28,32 +28,135 @@
             </div>
         </section>
         <section id="main-noticebar">
+            <div class="notice">
+            </div>
+            <div class="promotion">
 
+            </div>
         </section>
         <section id="main-reward">
-
+            <div class="reward-wrap">
+                <img src="assets/img/rewards-logo.png" alt="">
+                <ul>
+                    <li>
+                        스타벅스만의 특별한 혜택, 스타벅스 리워드
+                    </li>
+                    <li>
+                        <p>스타벅스 회원이세요? 로그인을 통해 나만의 리워드를 확인해 보세요<br>
+                            스타벅스 회원이 아니세요? 가입을 통해 리워드 혜택을 즐기세요
+                        </p>
+                        <div class="reward-btn-wrap">
+                            <button class="reward-btn">회원가입</button>
+                            <button class="reward-btn">로그인</button>                        
+                        </div>
+                    </li>
+                    <li>
+                        <p>회원가입 후 스타벅스 e-Gift Card를 "나에게 선물하기"로 구매하시고, 편리하게 등록하세요!<br>
+                            카드를 등록하여 스타벅스 리워드 회원이 되신 후, 첫구매를 하시면 무료 음료쿠폰을 드립니다!
+                        </p>
+                        <button class="reward-btn">e-Gift Card 선물하기</button>
+                    </li>
+                </ul>
+            </div>
         </section>
         <section id="main-bean">
-
+            <div class="main-bean-wrap">
+                <img src="assets/img/2022_Summer1_bean_bean.png" alt="">
+                <div class="bean-desc">
+                    <img src="./assets/img/2022_Summer1_bean_text.png" alt="">
+                    <button>자세히보기</button>
+                </div>
+            </div>
         </section>
         <section id="main-reserve">
-
+            <button>자세히보기</button>
         </section>
         <section id="main-menu">
-
+                <div class="menu-text">
+                    <img src="./assets/img/fav_prod_txt01.png" alt="">
+                    <p>다양한 메뉴를<br>스타벅스에서 즐겨보세요</p>
+                    <p>스타벅스만의 특별함을 경험할 수 있는 최상의 선택음료<br>
+                    스타벅스 커피와 완벽한 어울림을 자랑하는 푸드<br>
+                    다양한 시도와 디자인으로 가치를 더하는 상품<br>
+                소중한 사람에게 마음을 전하는 가장 좋은 방법 스타벅스 카드</p>
+                    <button>자세히보기</button>
+                </div>
+                <img src="./assets/img/fav_pick.png" alt="">
         </section>
         <section id="main-magazine">
-            
+            <button>자세히보기</button>
         </section>
         <section id="main-store">
-
+            <div class="main-store-wrap">
+                <img class="store-text01" src="./assets/img/store_txt01.png" >
+                <img class="store-text02" src="./assets/img/store_txt02.png" >
+                <button>자세히보기</button>
+            </div>
         </section>
     </main>
     <footer data-include="inc/footer.html"></footer>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fslightbox/3.3.1/index.min.js" integrity="sha512-EqNNJuepkw5P9vxCml8eBk7C4Ld+4kAnvzOD/jG21rkxWPILGoQa5EvD62UieiJF0u3xoQrcVnce4i83VnYj/Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./assets/js/include.js"></script>
     <script>
+        const mainStore = document.querySelector('#main-store');
+        const storeText01 = document.querySelector('.main-store-wrap>img:nth-child(1)');
+        const storeText02 = document.querySelector('.main-store-wrap>img:nth-child(2)');
+        const storeBtn = document.querySelector('.main-store-wrap>button');
+        
+        const mainBean = document.querySelector('#main-bean');
+        const beanImg = document.querySelector('.main-bean-wrap>img');
+        const beanDesc = document.querySelector('.bean-desc');
+
+        const mainMenu = document.querySelector('#main-menu');
+        const menuImg1 = document.querySelector('.menu-text>img');
+        const menuText1 = document.querySelector('.menu-text>p:nth-child(2)');
+        const menuText2 = document.querySelector('.menu-text>p:nth-child(3)');
+
+        window.addEventListener('scroll',e=>{
+            const scrollOnDocument = window.scrollY +window.screen.availHeight;
+            const elementHeight1 = window.pageYOffset + mainStore.getBoundingClientRect().top;
+            const elementHeight2 = window.pageYOffset + mainBean.getBoundingClientRect().top;
+            const elementHeight3 = window.pageYOffset + mainMenu.getBoundingClientRect().top;
+
+         //***main-store_ 스크롤이벤트 + 오른쪽에서 fade in
+            if(scrollOnDocument > elementHeight1){
+                storeText01.classList.add('fadein');
+                storeText02.classList.add('fadeinDeley2');
+                storeBtn.classList.add('fadeinDeley3');
+            }else{
+                storeText01.classList.remove('fadein');
+                storeText02.classList.remove('fadeinDeley2');
+                storeBtn.classList.remove('fadeinDeley3');
+            }
+
+
+         //***main-bean_ 스크롤이벤트 + 양쪽에서 fade in
+         if(scrollOnDocument > elementHeight2){
+            beanDesc.classList.add('fadein');
+            beanImg.classList.add('fadeInRight');
+        }else{
+            beanDesc.classList.remove('fadein');
+            beanImg.classList.remove('fadeInRight');
+        }
+
+        //***main-menu_ 스크롤이벤트 + 왼쪽에서 fadein
+        if(scrollOnDocument>elementHeight3){
+            menuImg1.classList.add('fadeInRight');
+            menuText1.classList.add('fadeInRight');
+            menuText2.classList.add('fadeInRight');
+        }else{
+            menuImg1.classList.remove('fadeInRight');
+            menuText1.classList.remove('fadeInRight');
+            menuText2.classList.remove('fadeInRight');
+        }
+
+
+
+
+        })
 
     </script>
 </body>
