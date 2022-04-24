@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <link rel="stylesheet" href="./assets/css/style.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="./assets/js/include.js"></script>
+    <script defer src="./assets/js/main.js"></script>
+</head>
+<body>
+    <div id="container">
+        <header data-include="inc/header.html"></header>
+        <main>
+            <div>
+                <a href='add.html' id="student-add">학생 추가 등록</a>
+            </div>
+            <table id="student-table">
+                <colgroup>
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="30%">
+                </colgroup>
+                <thead id="tabld-head">
+                    <tr>
+                        <th>학생번호</th>
+                        <th>이름</th>
+                        <th>아이디</th>
+                        <th>학년</th>
+                        <th>-</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- <tr>
+                        <td>123</td>
+                        <td>홍길동</td>
+                        <td>qbodh123</td>
+                        <td>3</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </main>
+        <footer data-include="inc/footer.html"></footer>
+    </div>
+    <script>
+        const tableBody = document.querySelector('#table-body');
+        //**** 학생 전체 데이터 조회 */
+        (async () => {
+            let json = null;
+            try {
+                json = await axios.get('http://localhost:3000/student');
+            } catch (e) {
+                console.error(e);
+            }
+
+            if (json != null) {
+                const {
+                    data
+                } = json;
+                data.forEach((v, i) => {
+                    const tr = document.createElement('tr');
+                    const td1 = document.createElement('td');
+                    const td2 = document.createElement('td');
+                    const td3 = document.createElement('td');
+                    const td4 = document.createElement('td');
+                    const td5 = document.createElement('td');
+                    const a0 = document.createElement('a');
+                    const a1 = document.createElement('a');
+                    const a2 = document.createElement('a');
+
+                    td1.innerHTML = v.id;
+                    td2.innerHTML = v.name;
+                    td3.innerHTML = v.userid;
+                    td4.innerHTML = v.grade;
+                    a0.innerHTML = '상세보기';
+                    a1.innerHTML = '수정';
+                    a2.innerHTML = '삭제';
+                    a0.setAttribute('href', `detailView.html?id=${v.id}`);
+                    a1.setAttribute('href', `edit.html?id=${v.id}`);
+                    tr.appendChild(td1);
+                    tr.appendChild(td2);
+                    tr.appendChild(td3);
+                    tr.appendChild(td4);
+                    td5.appendChild(a0);
+                    td5.appendChild(a1);
+                    td5.appendChild(a2);
+                    tr.appendChild(td5);
+
+                    tableBody.appendChild(tr);
+                    
+                    //삭제버튼 클릭이벤트
+                    a2.addEventListener('click',e=>{
+                        e.preventDefault();
+                        
+                    })
+                })
+            }
+        })();
+
+    </script>
+</body>
+</html>

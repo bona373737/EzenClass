@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Add</title>
+    <link rel="stylesheet" href="./assets/css/style.min.css">
+
+</head>
+<body>
+    <div id="container">
+        <header data-include="inc/header.html"></header>
+        <main>
+            <!-- 학생번호, 이름, 아이디, 학년 입력 -->
+            <!-- 학생번호는 백엔드에서 자체적으로 생성됨 -->
+            <form id='student-add-form'>
+                <div id="input-name">
+                    <label for="username">이름</label>
+                    <input type="text" id="username">
+                </div>
+                <div id="input-userid">
+                    <label for="userid">아이디</label>
+                    <input type="text" id="userid">
+                </div>
+                <div id="input-grade">
+                    <label for="grade">학년</label>
+                    <input type="number" id="grade">
+                </div>
+                <div id="input-rrn">
+                    <label for="rrn">주민번호</label>
+                    <input type="text" id="rrn">
+                </div>
+                <div id="input-birthdate">
+                    <label for="birthdate">생년월일</label>
+                    <input type="datetime" id="birthdate">
+                </div>
+                <div id="input-tel">
+                    <label for="tel">전화번호</label>
+                    <input type="text" id="tel">
+                </div>
+                <div id="input-height">
+                    <label for="height">키</label>
+                    <input type="number" id="height">
+                </div>
+                <div id="input-weight">
+                    <label for="weight">몸무게</label>
+                    <input type="number" id="weight">
+                </div>
+                <div id="input-deptno">
+                    <label for="deptno">학과번호</label>
+                    <input type="number" id="deptno">
+                </div>
+                <button>추가</button>
+            </form>
+        </main>
+        <footer data-include="inc/footer.html"></footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/include.js"></script>
+    <script>
+        //학생 데이터 추가g
+        document.querySelector('#student-add-form').addEventListener('submit', async (e)=>{
+            e.preventDefault();
+         
+            const username = document.querySelector('#username').value;
+            const userid = document.querySelector('#userid').value;
+            const grade = document.querySelector('#grade').value;
+            const rrn = document.querySelector('#rrn').value;
+            const birthdate = document.querySelector('#birthdate').value;
+            const tel = document.querySelector('#tel').value;
+            const height = document.querySelector('#height').value;
+            const weight = document.querySelector('#weight').value;
+            const deptno = document.querySelector('#deptno').value;
+
+            let json=null;
+            try {
+                json = await axios.post('http://localhost:3000/student',{
+                    name : username,
+                    userid : userid,
+                    grade : grade,
+                    idnum:rrn,
+                    birthdate:birthdate,
+                    tel: tel,
+                    height:height,
+                    weight:weight,
+                    deptno:deptno,
+                });
+            } catch (e) {
+                console.error(e);
+                return;
+            }
+
+            if(json != null){
+                const {data} = json;
+                console.log(data);
+                window.location ='datailView.html?id='+data.id;
+            }
+        });
+
+
+    </script>
+</body>
+</html>
