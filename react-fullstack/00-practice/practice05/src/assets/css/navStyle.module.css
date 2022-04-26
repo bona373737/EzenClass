@@ -1,0 +1,15 @@
+.linkBtn {
+  text-decoration: none;
+  color: black;
+  padding: 0 20px;
+}
+
+.linkBtn:hover {
+  color: green;
+  font-weight: bold;
+}
+
+.navBack {
+  background-color: yellowgreen;
+  padding: 10px 0px;
+}
