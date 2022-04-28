@@ -6,6 +6,7 @@ import CssModule from "./pages/CssModule";
 import Scss from "./pages/Scss";
 import ScssModule from "./pages/ScssModule";
 import StyledComponent from "./pages/StyledComponent";
+import News from "./pages/News";
 
 import "./assets/css/menu.css";
 
@@ -40,6 +41,9 @@ function App() {
         <NavLink className="normalLink" to="/styled_component">
           StyledComponent
         </NavLink>
+        <NavLink className="normalLink" to="/news">
+          News(Demo)
+        </NavLink>
       </nav>
       <hr />
 
@@ -50,6 +54,8 @@ function App() {
         <Route path="/scss" element={<Scss />} />
         <Route path="/scss_module" element={<ScssModule />} />
         <Route path="/styled_component" element={<StyledComponent />} />
+        {/* sub Route페이지가 있는 경우 경로 뒤에 * 명시하기 */}
+        <Route path="/news/*" element={<News />} />
       </Routes>
     </div>
   );
