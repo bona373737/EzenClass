@@ -80,7 +80,7 @@ async function get_search() {
         const {
             data
         } = json;
-        isEnd = data.meta.is_end;;
+        isEnd = data.meta.is_end;
 
         data.documents.map((v, i) => {
             const li = document.createElement('li');

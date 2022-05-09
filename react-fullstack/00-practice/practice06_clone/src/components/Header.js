@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink, Routes } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import headTopImg from "../assets/img/hamburger.jpg";
+import GlobalStyles from "../GlobalStyles";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -9,10 +10,11 @@ const HeaderContainer = styled.div`
 
   .navbar {
     width: 100%;
-    height: 60px;
+    height: 80px;
     background-color: white;
+    box-shadow: 0 1px 8px var(--color-gray-dark);
     padding: 0 10px;
-    font-size: 18px;
+    font-size: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,26 +25,46 @@ const HeaderContainer = styled.div`
     .navlink {
       text-decoration: none;
       letter-spacing: 5px;
-      padding: 0 10px;
+      padding: 0 20px;
+      color: black;
+      display: block;
+      height: 60px;
+      line-height: 60px;
+
+      &:hover {
+        background-color: var(--color-gray-dark);
+      }
+    }
+
+    nav {
+      display: flex;
+      margin-right: 20px;
     }
   }
 
   .head-img-wrap {
     position: relative;
-    min-width: 800px;
+    margin: auto;
 
     .head-img {
       display: block;
       margin: auto;
-      max-width: 100%;
+      width: 100%;
+      max-width: 2300px;
     }
     span {
       position: absolute;
       left: 20px;
       bottom: 20px;
-      font-size: 30px;
+      font-size: var(--font-size-large);
       letter-spacing: 5px;
       opacity: 0.5;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .navbar nav {
+      display: none;
     }
   }
 `;
@@ -51,7 +73,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <div className="navbar">
-        <NavLink className="navlink" to="/">
+        <NavLink className="navlink" to="#">
           Gourmet au Catering
         </NavLink>
         <nav>

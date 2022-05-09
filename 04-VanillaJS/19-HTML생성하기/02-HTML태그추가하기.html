@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        li{
+            padding: 5px 10px;
+            cursor: pointer;
+            border-bottom: 1px dotted #d5d5d5;
+        }
+        li:first-child{
+            border-top: 1px dotted #d5d5d5;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" name="" id="comment">
+    <!-- 시작태그의 앞에 형제태그로 추가 -->
+    <button id="beforebegin">beforebegin</button> 
+    <!-- 종료태그의 뒤에 형제태그로 추가 -->
+    <button id="afterend">afterend</button>
+    <!-- 시작태그의 뒤... 즉 자식태로 추가 -->
+    <button id="afterbegin">afterbegin</button>
+    <!-- 종료태그의 전... 즉 자식태그로 추가 -->
+    <button id="beforeend">beforeend</button>
+    <hr>
+
+    <!-- afterbegin 위치에 추가 -->
+    <ul id="list">
+        <!-- afterbegin 위치에 추가 -->
+
+
+        <!-- beforeend 위치에 추가 -->
+    </ul>
+    <!-- afterend위치에 추가 -->
+
+    <script>
+        function remove(target){
+            target.remove();
+        }
+        const list = document.querySelector('#list');
+        const comment = document.querySelector('#comment');
+
+        document.querySelector('#beforebegin').addEventListener('click', e=>{
+            // insertAbjacentHTML('삽입위치','삽입하려는 HTML코드')
+            list.insertAdjacentHTML('beforebegin',"<p class='item beforebegin' onclick='remove(this)'>" + comment.value + '</p>');
+        });
+        document.querySelector('#afterend').addEventListener('click', e=>{
+            // insertAbjacentHTML('삽입위치','삽입하려는 HTML코드')
+            list.insertAdjacentHTML('afterend',"<p class='item beforebegin' onclick='remove(this)'>" + comment.value + '</p>');
+        });
+        document.querySelector('#afterbegin').addEventListener('click', e=>{
+            // insertAbjacentHTML('삽입위치','삽입하려는 HTML코드')
+            list.insertAdjacentHTML('afterbegin',"<p class='item beforebegin' onclick='remove(this)'>" + comment.value + '</p>');
+        });
+        document.querySelector('#beforeend').addEventListener('click', e=>{
+            // insertAbjacentHTML('삽입위치','삽입하려는 HTML코드')
+            list.insertAdjacentHTML('beforeend',"<p class='item beforebegin' onclick='remove(this)'>" + comment.value + '</p>');
+        });
+    </script>
+</body>
+</html>

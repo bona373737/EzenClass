@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="comment">
+    <button id="appendChild">apeendchild</button>
+    <button id="insertBefore1">insertBefore1</button>
+    <button id="insertBefore2">insertBefore2</button>
+    <hr>
+    <ul id="list">
+        <!-- 통적으로 JS가 생성한 element가 추가될 위치 -->
+    </ul>
+
+    <script>
+        const list = document.querySelector('#list');
+        const comment = document.querySelector('#comment');
+
+        //동적으로 li태그 element object를 생성하하여 리턴하는 함수
+        const getItem = (clsName)=>{
+            //ul태그안에 li태그를 생성한후 클래스추가 item='clsName'
+            const li = document.createElement('li');
+            li.classList.add('item',clsName);
+            //li태그 안에는 사용자입력값을 text로 넣어줌
+            li.innerHTML = comment.value;
+
+            //생성한 list를 클릭하면 삭제되도록 이벤트처리
+            li.addEventListener('click', e=>{
+                e.currentTarget.remove();
+            })
+            //생성한 li태그 element object를 반환
+            return li;
+        };
+
+        document.querySelector('#appendChild').addEventListener('click',e=>{
+            const li = getItem('blue');
+            list.appendChild(li);
+        });
+        document.querySelector('#insertBefore1').addEventListener('click',e=>{
+            list.insertBefore(getItem('orange'),null);
+            //추가위치의 기준점이 null인 경우 appendchild와 동일하게 동작한다.
+        });
+        document.querySelector('#insertBefore2').addEventListener('click',e=>{
+            list.insertBefore(getItem('pink'), document.querySelector('li:first-child'));
+        });
+    </script>
+</body>
+</html>

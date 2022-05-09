@@ -85,12 +85,13 @@ class RegexHelper {
      * @param {string} msg        검사에 실패할 경우 표시할 메시지
      */
     check(selector, msg) {
-        const content = document.querySelector(selector);
+        const content = document.querySelectorAll(selector);
         const checkedItem = Array.from(content).filter((v, i) => {
-            v.checked
+            return v.checked;
         });
-
-
+        if (checkedItem.length == 0) {
+            throw new BadRequestException(msg, selector);
+        }
     };
 
     /**

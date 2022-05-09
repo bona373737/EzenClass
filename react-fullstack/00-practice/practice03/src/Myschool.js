@@ -7,11 +7,6 @@ const Myschool = () => {
   console.debug(params);
   console.debug(typeof params.search);
   const { search } = params;
-  //   const schoolData = { Data }[search];
-  //   console.log({ Data });
-  const [...rest] = Data[search];
-  const school = { ...rest };
-  console.log(school);
 
   let colname;
   if (search === "department") {
@@ -42,17 +37,26 @@ const Myschool = () => {
     ];
   }
 
+  const [...schoolData] = Data[search];
+  let list;
+  for (let i = 0; i < schoolData.length; i++) {
+    list = [];
+    // list.push(<tr>);
+    for (let j = 0; j < schoolData[0].length; j++) {
+      list.push(<td key={j}>{schoolData[i][j]}</td>);
+    }
+    {
+      /* list.push(</tr>);  */
+    }
+
+    return list;
+  }
+
   return (
     <div>
       <table border="1">
-        <thead>
-          <tr>
-            {colname.map((item, index) => {
-              return <td key={index}>{item}</td>;
-            })}
-          </tr>
-        </thead>
-        <tr></tr>
+        <thead></thead>
+        {list}
         <tbody></tbody>
       </table>
     </div>

@@ -130,8 +130,11 @@
   10. css효과_transition,transform
   11. 반응형웹_media query
 
-
-
+## vanillaJS
+  1. html element에 접근, element객체 가져오기
+  2. 가져온 element에 이벤트등록
+  3. html 제어하기
+  4. html 탐색하기
 
 
 
