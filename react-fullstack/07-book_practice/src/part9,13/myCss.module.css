@@ -1,0 +1,11 @@
+.wrapper {
+  background-color: black;
+  padding: 1rem;
+  color: white;
+  font-size: 2rem;
+}
+
+:global .globalFont {
+  font-weight: 800;
+  color: aqua;
+}
