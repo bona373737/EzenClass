@@ -1,0 +1,53 @@
+$red: #fa5252;
+$orange: #fd7e14;
+$yellow: #fcc419;
+$green: #40c057;
+$blue: #339af0;
+$indigo: #5c7cfa;
+$violet: #7950f2;
+
+@mixin squre($size) {
+  $calculated: 32px * $size;
+  width: $calculated;
+  height: $calculated;
+}
+
+.SassComponent {
+  display: flex;
+  .box {
+    background-color: red;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    &.red {
+      background-color: $red;
+      @include squre(1);
+    }
+    &.orange {
+      background-color: $orange;
+      @include squre(2);
+    }
+    &.yellow {
+      background-color: $yellow;
+      @include squre(3);
+    }
+    &.green {
+      background-color: $green;
+      @include squre(4);
+    }
+    &.blue {
+      background-color: $blue;
+      @include squre(5);
+    }
+    &.indigo {
+      background-color: $indigo;
+      @include squre(6);
+    }
+    &.violet {
+      background-color: $violet;
+      @include squre(7);
+    }
+    &:hover {
+      background: black;
+    }
+  }
+}
