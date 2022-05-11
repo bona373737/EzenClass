@@ -1,23 +1,29 @@
 import React from "react";
-import IterationSample from "./part5,6,8/IterationSample";
-import ScrollBox from "./part5,6,8/ScrollBox";
+import { NavLink, Routes, Route } from "react-router-dom";
+import Profiles from "./part9,13/Profiles";
+import Home from "./part9,13/Home";
 
 function App() {
-  const scrollBoxRef = React.useRef();
+  const active = {
+    background: "black",
+    color: "red",
+  };
 
   return (
     <div>
-      <ScrollBox ref={scrollBoxRef} />
-      <button
-        onClick={() => {
-          //컴포넌트에 ref달고 내부의 속성값을 부모컴포넌트에서 사용할수 있다.
-          const { scrollHeight, clientHeight } = scrollBoxRef.current;
-          scrollBoxRef.current.scrollTop = scrollHeight + clientHeight;
-        }}
-      >
-        맨 밑으로
-      </button>
-      <IterationSample />
+      <NavLink to="/">하하</NavLink>
+      <NavLink to="/nana">스타일</NavLink>
+
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        {/* <Route path="/nana" element={<Profiles />} /> */}
+        <Route
+          path="/nana"
+          render={() => {
+            <div>사용자를 선택해주세요</div>;
+          }}
+        />
+      </Routes>
     </div>
   );
 }
