@@ -35,7 +35,8 @@ const News = () => {
 
       //ajax 연동결과가 있다면 그 결과를 상태값에 적용함
       if (json != null) {
-        setNewsList(json);
+        //컴포넌트 성능향상을 위한 함수형 업데이트 적용
+        setNewsList((newsList) => json);
       }
     })();
   }, []);
