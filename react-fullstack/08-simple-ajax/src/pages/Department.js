@@ -150,10 +150,9 @@ const Department = () => {
       } finally {
         setLoading(false);
       }
-    })();
-
-    if (json !== null) {
-      //함수형 업데이트
+      
+      if (json !== null) {
+        //함수형 업데이트
       console.log(json);
 
       setDepartment((department) => {
@@ -164,9 +163,10 @@ const Department = () => {
         //수정된 원본 배열을 리턴한다.
         return department;
       });
-      // 상태변수를 되돌린다.
-      setUpdateId(-1);
     }
+  })();
+    // 상태변수를 되돌린다.
+    setUpdateId(-1);
   }, []);
 
   return (
@@ -227,11 +227,7 @@ const Department = () => {
                           {item.id}
                         </td>
                         <td>
-                          <input
-                            type="text"
-                            name="dname"
-                            defaultValue={item.dname}
-                          />{" "}
+                          <input type="text" name="dname" defaultValue={item.dname}/>
                         </td>
                         <td>
                           <input

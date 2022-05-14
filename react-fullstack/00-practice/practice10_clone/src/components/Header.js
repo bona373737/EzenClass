@@ -2,6 +2,7 @@ import React, { useTransition } from 'react';
 import styled from 'styled-components';
 import {Link, Routes, Route} from 'react-router-dom';
 import SearchMenu from './SearchMenu';
+import SubMenu from './SubMenu';
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -53,19 +54,23 @@ const HeaderContainer = styled.div`
 
 const Header = () => {
   const [ searchToggle, setSearchToggle]=React.useState(false);
-  
+  const [ navHover, setNavHover] = React.useState(false);
   
   
   
   const onClickSearch =()=> {
-    setSearchToggle(searchActive=>true);
+    setSearchToggle(searchToggle=>true);
   }
   React.useEffect(()=>{
-    
+
   },[searchToggle])
 
 
+  const onMouseNav=()=>{
+    setNavHover(navHover=>true);
 
+
+  }
 
 
   return (
@@ -90,7 +95,7 @@ const Header = () => {
         </div>
         </div>
       </section>
-      <nav>
+      <nav onMouseOver={onMouseNav}>
         <div className="content-wrap">
         <ul className='member'>
           <li><Link to=''>LOGIN</Link></li>
@@ -105,6 +110,7 @@ const Header = () => {
           <li><Link to=''>ABOUT</Link></li>
         </ul>
         </div>
+        <SubMenu/>
       </nav>
     </HeaderContainer>
     <SearchMenu/>
