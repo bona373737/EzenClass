@@ -8,7 +8,7 @@ const MenuContainer = styled.div`
 
 `;
 
-const Menu = () => {
+const BrMenu = () => {
   return (
     <MenuContainer>
       <h1></h1>
@@ -16,4 +16,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default BrMenu;

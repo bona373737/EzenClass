@@ -16,6 +16,7 @@
  
  // import required modules
  import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import axios from "axios";
  
   const SwiperContainer = styled.div`
     width: 100%;
@@ -56,6 +57,21 @@
   `;
 
  const MySwiper=()=>{
+   const [ swiper, setSwiper] = React.useState([]);
+
+   React.useEffect(()=>{
+     (async()=>{
+      try {
+        const response = await axios.get(' http://localhost:3001/sliderImg');
+        setSwiper(swiper=> response.data);
+        console.log(swiper);
+      } catch (e) {
+        console.error(e);
+        alert('ajax 통신 실패');
+      }
+    })();
+  },[])
+
    return (
      <SwiperContainer>
        <Swiper
@@ -67,15 +83,13 @@
          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
          className="MySwiper"
        >
-         <SwiperSlide>Slide 1</SwiperSlide>
-         <SwiperSlide>Slide 2</SwiperSlide>
-         <SwiperSlide>Slide 3</SwiperSlide>
-         <SwiperSlide>Slide 4</SwiperSlide>
-         <SwiperSlide>Slide 5</SwiperSlide>
-         <SwiperSlide>Slide 6</SwiperSlide>
-         <SwiperSlide>Slide 7</SwiperSlide>
-         <SwiperSlide>Slide 8</SwiperSlide>
-         <SwiperSlide>Slide 9</SwiperSlide>
+         {
+             swiper.map((v,i)=>{
+               return(
+                 <SwiperSlide key={i}><img src={`${process.env.PUBLIC_URL}/img/${v[i]}`} alt="" /></SwiperSlide>
+                 )
+             })
+         }
        </Swiper>
      </SwiperContainer>
    );

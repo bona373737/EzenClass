@@ -17,10 +17,15 @@ const GlobalStyles = createGlobalStyle`
   }
   button{
     border: none;
-    background-color: #fff;
+    background-color:#fff;
+    cursor: pointer;
     &:hover{
       border: none;
     }
+  }
+
+  Link{
+    cursor: pointer;
   }
 `;
 

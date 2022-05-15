@@ -8,8 +8,8 @@ import React from 'react';
 import MySwiper from './components/MySwiper';
 import Header from './components/Header';
 import TopImg from './components/TopImg';
-import Event from './components/Event';
-import Menu from './components/Menu';
+import BrEvent from './components/BrEvent';
+import BrMenu from './components/BrMenu';
 import Footer from './components/Footer';
 
 function App() {
@@ -18,8 +18,8 @@ function App() {
       <Header/>
       <TopImg/>
       <MySwiper/>
-      <Event/>
-      <Menu/>
+      <BrEvent/>
+      <BrMenu/>
       <Footer/>
     </>
 

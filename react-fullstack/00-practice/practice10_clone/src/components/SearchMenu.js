@@ -3,7 +3,10 @@ import styled from 'styled-components';
 
 const SearchMenuContainer=styled.div`
   width: 100%;
-  height: 300px;
+  height: 400px;
+  position: absolute;
+  background-color: white;
+  z-index: 9999;
 
   table{
     width: 1200px;

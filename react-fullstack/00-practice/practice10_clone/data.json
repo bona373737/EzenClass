@@ -1,0 +1,85 @@
+{
+  "sliderImg":[
+    "slider1.jpg","slider2.png","slider3.png","slider4.png","slider5.png","slider6.png","slider7.png","slider8.png","slider9.png","slider10.png","slider11.png"
+  ],
+ "brEvent":[
+   {
+     "img":"banner_delivery.png",
+     "category":"stit_store.gif",
+     "desc":"해피오더 딜리버리로 간편하게 주문하세요!",
+     "period":"상시진행"
+   },
+   {
+     "img":"banner_delivery_bm.png",
+     "category":"stit_store.gif",
+     "desc":"배달의 민족에서 빠르게 주문하세요!",
+     "period":"상시진행"
+   },
+   {
+     "img":"banner_delivery_ygy.png",
+     "category":"stit_store.gif",
+     "desc":"요기요에서 손쉽게 주문하세요!",
+     "period":"상시진행"
+   },
+   {
+     "img":"banner_delivery_kakao.png",
+     "category":"stit_store.gif",
+     "desc":"카카오톡 주문하기에서 편리하게 주문하세요!",
+     "period":"상시진행"
+   },
+   {
+     "img":"1670146074.png",
+     "category":"stit_online.gif",
+     "desc":"기아 멤버스 최대 50%제휴 혜택!",
+     "period":"상시진행"
+   },
+   {
+     "img":"1667538956.png",
+     "category":"stit_online.gif",
+     "desc":"2022 베스킨라빈스 특별한 제휴혜택!",
+     "period":"상시진행"
+   },
+   {
+     "img":"1659436130.png",
+     "category":"stit_store.gif",
+     "desc":"고소한 오트밀크와 깔끔한 콜드브루의 만남, 콜드브루 오트라떼 출시!",
+     "period":"상시진행"
+   },
+   {
+     "img":"1643869329.png",
+     "category":"stit_store.gif",
+     "desc":"KT멤버십 고객이라면 누구나 파인트30% 할인!",
+     "period":"상시진행"
+   },
+   {
+     "img":"1667382917.png",
+     "category":"stit_store.gif",
+     "desc":"현대카드 M포인트 50% 사용",
+     "period":"상시진행"
+   },
+   {
+     "img":"1639297260.png",
+     "category":"stit_store.gif",
+     "desc":"제휴 할인카드 혜택 안내",
+     "period":"상시진행"
+   },
+   {
+     "img":"1570702843.png",
+     "category":"stit_online.gif",
+     "desc":"2018한글날 기념 무료 글꼴 공개! 베스킨라빈스체",
+     "period":"상시진행"
+   },
+   {
+     "img":"1578277305.png",
+     "category":"stit_store.gif",
+     "desc":"1회용 컵 사용 줄이기 안내",
+     "period":"상시진행"
+   },
+   {
+     "img":"banner_praise_2022-1.png",
+     "category":"stit_store.gif",
+     "desc":"2022년 1분기 고객 Best칭찬점포 안내",
+     "period":"상시진행"
+   }
+ ]
+}
