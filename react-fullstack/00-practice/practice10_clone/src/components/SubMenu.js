@@ -7,6 +7,7 @@ const SubMenuContainer = styled.div`
   height: 300px;
   background-color: white;
   position: absolute;
+  left: 0;
   z-index: 9999;
   display: flex;
   flex-direction: row;
@@ -23,6 +24,18 @@ const SubMenuContainer = styled.div`
     .menu-list{
       display: flex;
       justify-content: space-between;
+
+      li{
+        line-height: 40px;
+        text-align: center;
+
+        a{
+          color: #CABCAA;
+        &:hover{
+          color: #FF7C98;
+        }
+        }
+      }
     }
   }
 

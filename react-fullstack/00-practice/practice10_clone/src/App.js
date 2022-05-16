@@ -3,23 +3,16 @@
  * 
  */
 
-
 import React from 'react';
-import MySwiper from './components/MySwiper';
 import Header from './components/Header';
-import TopImg from './components/TopImg';
-import BrEvent from './components/BrEvent';
-import BrMenu from './components/BrMenu';
+import Main from './pages/Main';
 import Footer from './components/Footer';
 
 function App() {
   return (
     <>
       <Header/>
-      <TopImg/>
-      <MySwiper/>
-      <BrEvent/>
-      <BrMenu/>
+      <Main/>
       <Footer/>
     </>
 

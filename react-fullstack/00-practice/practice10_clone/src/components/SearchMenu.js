@@ -2,13 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SearchMenuContainer=styled.div`
+  background-color: #0003;
   width: 100%;
-  height: 400px;
+  height: 100%;
   position: absolute;
-  background-color: white;
+  /* top: 206px; */
   z-index: 9999;
+ 
+ .content-wrap{
+   width: 100%;
+    height: 400px;
+    background-color: white;
 
-  table{
+    
+    table{
     width: 1200px;
     margin: auto;
 
@@ -19,15 +26,34 @@ const SearchMenuContainer=styled.div`
     td{
       width: 600px;
       vertical-align: top;
-
+    }
+    .favtag span{
+      color: #FF7C98;
+    }
+    input{
+      background-color: #EFEFEF;
+      border: none;
+    }
+    select{
+      border: 1px solid #EFEFEF;
+    }
+    button{
+      width: 150px;
+      height: 40px;
+      color: white;
+      background-color: #FF7C98;
+      border-radius: 20px;
+      margin: auto;
     }
   }
-
+}
+  
 `;
 
 const SearchMenu = () => {
   return (
     <SearchMenuContainer>
+      <div className="content-wrap">
       <table>
         <tbody>
         <tr>
@@ -79,7 +105,9 @@ const SearchMenu = () => {
           </td>
         </tr>
         </tbody>
+      <button> 검색 </button>
       </table>
+      </div>
     </SearchMenuContainer>
   );
 };
