@@ -1,15 +1,37 @@
 {
   "member": [
-    "qhsqhs123","qhdqhd456"
+    {
+      "userid": "honghong123",
+      "password": "hongpw123",
+      "username": "홍길동",
+      "birthdate": "1999-1-1",
+      "sex": "male",
+      "tel": "",
+      "id": 1
+    }
   ],
-  "nation":[
-    {"korea":"대한민국 +82"},
-    {"nepal":"네팔 +977"},
-    {"newzealand":"뉴질랜드 +64"},
-    {"denmark":"덴마크 +45"},
-    {"greece":"그리스 +30"},
-    {"norway":"노르웨이 +47"},
-    {"gana":"가나 +233"} 
+  "nation": [
+    {
+      "korea": "대한민국 +82"
+    },
+    {
+      "nepal": "네팔 +977"
+    },
+    {
+      "newzealand": "뉴질랜드 +64"
+    },
+    {
+      "denmark": "덴마크 +45"
+    },
+    {
+      "greece": "그리스 +30"
+    },
+    {
+      "norway": "노르웨이 +47"
+    },
+    {
+      "gana": "가나 +233"
+    }
   ],
   "department": [
     {

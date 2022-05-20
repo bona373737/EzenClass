@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 import useAxios from 'axios-hooks';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock} from '@fortawesome/free-solid-svg-icons';
 import RegexHelper from "./regex/RegexHelper";
 
 const StyledInput = styled.input`
@@ -45,6 +47,13 @@ const AppContainer = styled.div`
   height: 100%;
   background-color: #F5F6F7;
 
+.color-red{
+  color: red;
+}
+.color-green{
+  color: green;
+}
+
 .content-wrap{
   width: 600px;
   margin: auto;
@@ -63,6 +72,32 @@ const AppContainer = styled.div`
       flex-direction: column;
       margin: 18px 0;
       font-size: 25px;
+
+      .icon-position{
+        position: relative;
+        input{
+          position: relative;
+          width: 600px;
+        }
+        svg{
+          position: absolute;
+          right: 10px;
+          top: 25px;
+        }
+      }
+
+      #userid{
+        &::placeholder{
+          text-align: right;
+          padding-right: 15px;
+          font-size: 20px;
+          opacity: 0.5;
+        }
+        &:focus::-webkit-input-placeholder {
+          text-align: right;
+        }
+      }
+      
       
       label{
         margin: 5px 0;
@@ -132,131 +167,166 @@ const AppContainer = styled.div`
 
 function App() {
   const signup_form = React.useRef();
-  
-  /**
-   * 각 input태그에서 blur될때마다 유효성 검사진행
-   */
-  const onBlurInput= React.useCallback((e)=>{
-    let userid = null;
-    let password = null;
-    let year = null;
-    let month = null;
-    let day = null;
+  const passwordErrorMsg = React.useRef();
+  const passwordcheckErrorMsg = React.useRef();
+  const [pwIsValid, setPwIsValid] = React.useState('');
+  const [pwcheckIsValid, setPwcheckIsValid] = React.useState('');
+  const [formData, setFormData] = React.useState({
+    userid:'',
+    password:'',
+    passwordcheck:'',
+    username:'',
+    birthdate:'',
+    birthyear:'',
+    birthmonth: '',
+    birthday: '',
+    sex:'',
+    tel:''
+  });
 
+  const [{loading},refetch] = useAxios({
+    url:'http://localhost:3001/member',
+    method:'POST'
+  },{manual:true});
+
+  /*************************** 이코드가 있을때  Too many render 오류가 발생했다.  */
+  // const {birthyear, birthmonth, birthday} = formData;
+  // const birthdate = [birthyear,birthmonth,birthday].join('-');
+  // setFormData(formData => ({...formData, [birthdate]:birthdate}));
+  // console.log({formData});
+  
+  //onBlur된 input값 유효성검사 진행
+  const onBlurInput= React.useCallback((e)=>{
     const current = e.target;
     try {
-      
       switch(current.name){
         case 'userid':
           RegexHelper.value(current, '필수 정보입니다.');
           RegexHelper.checkId(current, '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
-          userid = current.value;
+          setFormData(formData => ({...formData, [current.name]:current.value}));
+          // setFormData({...formData, [current.name]:current.value});
+          // userid = current.value;
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
           break;
         case 'password':
           RegexHelper.value(current, '필수 정보입니다.');
-          RegexHelper.checkPw(current, '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.')
-          password=current.value;
+          RegexHelper.checkPw(current, '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.');
+          setFormData(formData => ({...formData, [current.name]:current.value}));
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
           break;
         case 'passwordcheck':
           RegexHelper.value(current, '필수 정보입니다.');
           RegexHelper.compareTo(signup_form.current.password,current, '비밀번호가 일치하지 않습니다.');
+          setFormData(formData => ({...formData, [current.name]:current.value}));
+          setPwIsValid(true);
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
           break;
         case 'username':
           RegexHelper.value(current, '필수 정보입니다.');
+          setFormData(formData => ({...formData, [current.name]:current.value}));
+          setPwcheckIsValid(true);
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
           break;
         case 'sex':
           RegexHelper.value(current, '필수 정보입니다.');
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
+          setFormData(formData => ({...formData, [current.name]:current.value}));
           break;
         case 'birthyear':
           RegexHelper.value(current, '태어난 년도 4자리를 정확하게 입력하세요.');
           RegexHelper.birthYearNum(current,'태어난 년도 4자리를 정확하게 입력하세요.');
-          year= current.value;
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
+          setFormData(formData => ({...formData, [current.name]:current.value}));
           break;
         case 'birthmonth':
-          if(current.value === ''){
           RegexHelper.value(current, '태어난 월을 입력하세요.');
-          }else{
-            month= current.value;
-            document.querySelector(`p[data-${current.name}]`).innerHTML = '';
-          }
+          document.querySelector(`p[data-${current.name}]`).innerHTML = '';
+          setFormData(formData => ({...formData, [current.name]:current.value}));
           break;
         case 'birthday':
           RegexHelper.value(current, '태어난 일(날짜) 2자리를 정확하게 입력하세요.');
-
+          document.querySelector(`p[data-${current.name}]`).innerHTML = '';
+          setFormData(formData => ({...formData, [current.name]:current.value}));
           break;
         default:
-      }      
-    } catch (e) {
-      document.querySelector(`p[data-${current.name}]`).innerHTML = e.message;
-      return e.message;
-    }
-
-
-
-  //유효성검사가 정상적으로 완료된 아이디 값을 가져와서 ajax통신으로 받아온 member데이터로 중복아이디 검사
-    (async()=>{
-      let json = null;
-      try {
-        const response = await axios.get('http://localhost:3001/member');
-        json = response.data;
+        }      
       } catch (error) {
-        console.error(error);
+        // e.target.nextElementSibling.innerHTML=e.message;
+        document.querySelector(`p[data-${current.name}]`).innerHTML = e.message;
+        if(e.target.name === 'password'){setPwIsValid(false)};
+        if(e.target.name === 'passwordcheck'){setPwcheckIsValid(false)};
+        return;
       }
-      //동일한 아이디가 있는 경우 ---> " 이미 사용중이거나 탈퇴한 아이디입니다." 출력 
-      //중복아이디 없는경우 ---->" 멋진 아이디네요!" 출력
-      if(json.includes(userid)){
-        document.querySelector('p[data-userid]').innerHTML = '이미 사용중이거나 탈퇴한 아이디';
-      }else{
-        document.querySelector('p[data-userid]').innerHTML = '멋진 아이디네요!';
-      }
-    })();
-
-    //비밀번호 값에 대하여 유효성 검사 통과한 경우_"빨간색 사용불가" -> "초록색 안전"
-    if(password !== null){
-
-    }
-
-    //비민번호 재확인값에 대하여 유효성 검사 통과한 경우 색상변경_ 빨강아이콘->> 초록아이콘
-
-
-
   },[]); //onBlurInput이벤트 end
 
 
+//유효성검사가 정상적으로 완료되어 상태값으로 저장된 아이디 값을  ajax통신으로 받아온 member데이터로 아이디 중복여부 검사
+React.useEffect(()=>{
+  if(formData.userid){
+    (async()=>{
+    let json = null;
+    try {
+      const response = await axios.get('http://localhost:3001/member');
+      json = response.data;
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    }
+    //동일한 아이디가 있는 경우 ---> " 이미 사용중이거나 탈퇴한 아이디입니다." 출력 
+    //중복아이디 없는경우 ---->" 멋진 아이디네요!" 출력
+    if(json.some((item)=> item.userid === formData.userid)){
+      document.querySelector('p[data-userid]').innerHTML = '이미 사용중이거나 탈퇴한 아이디 입니다.';
+    }else{
+      document.querySelector('p[data-userid]').innerHTML = '멋진 아이디네요!';
+    }
+  })();
+}
+},[formData.userid]);
 
 
+//인증번호 받기 button 클릭이벤트
+  const onClickBtn=(e)=>{
+    try {
+      RegexHelper.value(signup_form.current.tel, '형식에 맞지않는 번호입니다.');
+      RegexHelper.cellphone(signup_form.current.tel, '형식에 맞지않는 번호입니다.');
+      document.querySelector('p[data-authorize').innerHTML = '인증번호를 발송했습니다.(유효시간 30분)<br/>인증번호가 오지 않으면 입력하신 정보가 정확한지 확인하여 주세요.<br/>이미 가입된 번호이거나, 가상전화번호는 인증번호를 받을 수 없습니다.';
+    } catch (e) {
+      document.querySelector('p[data-authorize').innerHTML = e.message;
+      return;
+    }
+  };
 
 
   /**
-   * submit버튼 클릭됬을때 form전체 데이터의 유효성검사 재실행
+   * axios post전송
    */
-  const onSubmitForm=React.useCallback((e)=>{
+  const onSubmitForm=(e)=>{
     e.preventDefault();
     
-    //form태그 자체를 target으로 가져온다....하위에 포함된 input값에 name속성의 이름으로 구별하여 접근가능
-    const current = e.target;
-
-    try {
-      RegexHelper.value(current.userid, '필수 정보입니다.');
-      RegexHelper.checkId(current.userid, '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
-    } catch (error) {
-      document.querySelector ('p[data-userid]').innerHTML = error.message;
-    }
-
-    try {
-      RegexHelper.value(current.password, '필수 정보입니다.');
-      RegexHelper.checkPw(current.password, '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.');
-    } catch (error) {
-      document.querySelector ('p[data-password]').innerHTML = error.message;
-    }
-  },[]);
-
+    let json=null;
+    (async ()=>{
+      try {
+        const response = await refetch({
+          data:{
+            userid: formData.userid,
+            password: formData.password,
+            username:formData.username,
+            birthdate: [formData.birthyear, formData.birthmonth, formData.birthday].join('-'),
+            sex:formData.sex,
+            tel: formData.tel
+          }
+        })
+        json=response.data;
+      } catch (e) {
+        console.log(e);
+        window.alert(e.message); 
+      } 
+      
+      if(json !== null){
+        window.alert('가입을 환영합니다.');
+      }
+  })();
+};
 
   return (
     <AppContainer>
@@ -267,18 +337,28 @@ function App() {
       <form ref={signup_form} onSubmit={onSubmitForm}>
         <div className="input-box">
           <label htmlFor="">아이디</label>
-          <StyledInput type="text" name="userid" id="userid"  onBlur={onBlurInput}/>
+          <StyledInput type="text" name="userid" id="userid"  onBlur={onBlurInput} placeholder='@naver.com' />
           <p data-userid='errorMessage'></p>
         </div>
         <div className="input-box">
           <label htmlFor="">비밀번호</label>
+          <div className="icon-position">
           <StyledInput type="password" name="password" id="password" onBlur={onBlurInput} />
-          <p data-password='errorMessage'></p>
+          {
+            pwIsValid === true? (<FontAwesomeIcon icon={faLock} color="green"/>):(<FontAwesomeIcon icon={faLock} color='red'/>)
+          }
+          </div>
+          <p data-password='errorMessage' ref={passwordErrorMsg}></p>
         </div>
         <div className="input-box">
           <label htmlFor="">비밀번호 재확인</label>
+          <div className="icon-position">
           <StyledInput type="password" name="passwordcheck" id="passwordCheck"  onBlur={onBlurInput} />
-          <p data-passwordcheck='errorMessage'></p>
+          {
+            pwcheckIsValid === true? (<FontAwesomeIcon icon={faLock} color="green"/>):(<FontAwesomeIcon icon={faLock} color='red'/>)
+          }
+          </div>
+          <p data-passwordcheck='errorMessage'  ref={passwordcheckErrorMsg}></p>
         </div>
         <div className="input-box">
           <label htmlFor="">이름</label>
@@ -288,8 +368,8 @@ function App() {
         <div className="input-box">
           <label htmlFor="birthyear">생년월일</label>
           <div className="birthdate-box">
-            <StyledInput type="text" name="birthyear" id="birthyear" placeholder="년(4자)" onBlur={onBlurInput} maxLength={4}/>
-            <StyledSelect name="birthmonth" onBlur={onBlurInput}>
+            <StyledInput type="text" className="birthdate" name="birthyear" id="birthyear" placeholder="년(4자)" onBlur={onBlurInput} maxLength={4}/>
+            <StyledSelect className="birthdate" name="birthmonth" onBlur={onBlurInput}>
               <option value="">월</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -304,12 +384,9 @@ function App() {
               <option value="11">11</option>
               <option value="12">12</option>
             </StyledSelect>
-            <StyledInput type="text" name="birthday" placeholder="일" onBlur={onBlurInput} maxLength={2}/>
+            <StyledInput type="text" className="birthdate" name="birthday" placeholder="일" onBlur={onBlurInput} maxLength={3}/>
           </div>
-            <p data-birthyear='errorMessage'></p>
-            <p data-birthmonth='errorMessage'></p>
-            <p data-birthday='errorMessage'></p>
-          <p data-birthdate='errorMessage'></p>
+            <p data-birthyear='errorMessage' data-birthmonth='errorMessage' data-birthday='errorMessage'></p>
         </div>
         <div className="input-box">
           <label htmlFor="sex">성별</label>
@@ -325,22 +402,21 @@ function App() {
           <label htmlFor="">
             본인 확인 이메일<span>(선택)</span>
           </label>
-          <StyledInput type="text" name="" id="" />
+          <StyledInput type="text" name="" id="" placeholder="선택입력"/>
         </div>
         <div className="input-box">
           <label htmlFor="tel">휴대전화</label>
           <StyledSelect name="nation" >
             <option value="korea" >
-              대한민구 +82
+              대한민국 +82
             </option>
           </StyledSelect>
-          <div className="authorize-box">
-            <StyledInput type="text" name="tel" id="tel"  onBlur={onBlurInput}/>
-            <StyledButton>인증번호 받기</StyledButton>
+          <div className="authorize-box">            
+            <StyledInput type="text" name="tel" id="tel"  onBlur={onBlurInput} placeholder='전화번호 입력'/>
+            <StyledButton type='button' onClick={onClickBtn}>인증번호 받기</StyledButton>
           </div>
-          <StyledInput type='text' name='authorizationNum' placeholder="인증번호를 입력하세요" disabled onBlur={onBlurInput}></StyledInput>
-          <p data-tel='errorMessage'></p>
-          <p data-authorizationnum='errorMessage'></p>
+          <StyledInput type='text' name='authorizationnum' placeholder="인증번호를 입력하세요" disabled onBlur={onBlurInput}></StyledInput>
+          <p data-authorize='errorMessage'></p>
         </div>
         <StyledButton type="submit">가입하기</StyledButton>
       </form>
