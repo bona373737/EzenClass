@@ -8,6 +8,15 @@
       "sex": "male",
       "tel": "",
       "id": 1
+    },
+    {
+      "userid": "nana789",
+      "password": "nanapw789",
+      "username": "나나나",
+      "birthdate": "1990-1-1",
+      "sex": "female",
+      "tel": "",
+      "id": 2
     }
   ],
   "nation": [

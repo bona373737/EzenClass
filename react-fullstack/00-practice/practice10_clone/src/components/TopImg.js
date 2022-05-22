@@ -6,6 +6,10 @@ const TopImgContainer=styled.div`
   background-color: #FFD925;
   text-align: center;
   margin-bottom: 5px;
+
+  img{
+    width: 1200px;
+  }
 `;
 
 const TopImg = () => {

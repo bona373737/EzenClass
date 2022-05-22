@@ -30,7 +30,12 @@ const StyledBrEvent=styled.div`
           }
         }
         .event-desc{
-          padding-top: 20px;
+          padding-top: 5px;
+          font-size: 12px;
+
+          p:nth-child(3){
+            color: #C9C3BB;
+          }
         }
       }
     }
@@ -56,7 +61,6 @@ const StyledBrEvent=styled.div`
 const BrEvent = () => {
   const [brEventContent, setBrEventContent] = React.useState([]);
   const [brEventPage, setBrEventPage] = React.useState([]);
-  const [pageBtnAcive, setPageBtnActive] = React.useState('');
   const [brEventIndex, setBrEventIndex] = React.useState(0);
 
 //마운트되는 시점에 event 데이터를 ajax통신으로 가져오고 그중 4개 데이터만 화면에 그려준다.
@@ -89,9 +93,6 @@ const BrEvent = () => {
     const {page} = e.target.dataset;
     setBrEventIndex(brEventIndex=>page);
     // console.log(page);
-
-    // e.target.classList.add('active')
-
   });
 
 //페이지번호 클릭할때 brEventIndex값이 변경될때마다 원본데이터에서 특정 index범위의 데이터 4개만 화면에 다시 그려주기

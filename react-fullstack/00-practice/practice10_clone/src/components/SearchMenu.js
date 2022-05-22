@@ -6,7 +6,6 @@ const SearchMenuContainer=styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  /* top: 206px; */
   z-index: 9999;
  
  .content-wrap{
@@ -73,7 +72,7 @@ const SearchMenu = () => {
             <input type="text" />
             </form>
           </td>
-          <td>
+          <td className='hashtag'>
             <h6>해시태그</h6>
             <div>
             <input type="text" />

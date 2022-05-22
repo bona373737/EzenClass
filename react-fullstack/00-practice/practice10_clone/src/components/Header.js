@@ -34,7 +34,7 @@ const HeaderContainer = styled.div`
     } //header-top
     nav {
       border-top: 1px solid black;
-      border-bottom: 3px solid black;
+      border-bottom: 2px solid black;
       .content-wrap{
         width: 1200px;
         display: flex;
@@ -72,7 +72,8 @@ const Header = () => {
   
 
   const onClickSearch =()=> {
-    searchToggle===false? setSearchToggle(searchToggle=>true) : setSearchToggle(searchToggle=>false)
+    // searchToggle===false? setSearchToggle(searchToggle=>true) : setSearchToggle(searchToggle=>false)
+    setSearchToggle(searchToggle=>!searchToggle);
   }
 
   const onMouseNav=()=>{
@@ -169,12 +170,14 @@ const Header = () => {
                   <Link to="">ABOUT</Link>
                 </li>
               </ul>
-              {navHover === true ? <SubMenu /> : ""}
+              {/* {navHover === true ? <SubMenu /> : ""} */}
+              {navHover && <SubMenu /> }
             </div>
           </div>
         </nav>
       </HeaderContainer>
-      {searchToggle === true ? <SearchMenu /> : ""}
+      {/* {searchToggle === true ? <SearchMenu /> : ""} */}
+      {searchToggle && <SearchMenu />}
     </>
   );
 };

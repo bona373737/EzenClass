@@ -14,6 +14,10 @@ const FooterContainer= styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      li:nth-child(5) a{
+        color: #FF7C98;
+      }
     }
   }
 
@@ -24,14 +28,17 @@ const FooterContainer= styled.div`
       width: 1200px;
       margin: auto;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
-  
-  
-      ul{
+       ul{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        width: 400px;
+
+        &:nth-child(2){
+          width: 150px;
+        }
   
         .img1{
           height: 30px;
@@ -39,9 +46,14 @@ const FooterContainer= styled.div`
       }
       .family-site{
         height: 40px;
-        width: 100px;
+        width: 150px;
+        border-radius: 10px;
       }
     }
+  }
+  .address-wrap{
+    text-align: center;
+    margin: 40px 0;
   }
 `;
 
@@ -60,7 +72,6 @@ const Footer = () => {
         </ul>
       </div>
       <div className="site-wrap">
-
         <div className="site">
         <ul>
           <li><Link to=''><img src={`${process.env.PUBLIC_URL}/img/btn_happypoint.png`} alt="" /></Link></li>
@@ -73,6 +84,7 @@ const Footer = () => {
           <li><Link to=''><img src={`${process.env.PUBLIC_URL}/img/btn_ksa.png`} alt="" /></Link></li>
           </ul>
           <select className="family-site">
+            <option value=""> Family site </option>
             <option value="">배스킨스쿨</option>
             <option value="">SPC그룹사이트</option>
             <option value="">SPC MAGAZINE</option>
@@ -85,8 +97,7 @@ const Footer = () => {
           </select>
         </div>
       </div>
-      <div className="content-wrap">
-
+      <div className="address-wrap">
           <img src={`${process.env.PUBLIC_URL}/img/footer_logo.png`} alt="" />
         <div className="address">
           <div>
@@ -101,8 +112,6 @@ const Footer = () => {
           <p>Copyright ⓒ 2016 BRKOREA Company. All Rights Reserved.</p>
         </div>
       </div>
-
-      
     </FooterContainer>
   );
 };

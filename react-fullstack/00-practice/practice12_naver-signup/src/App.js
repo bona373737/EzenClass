@@ -47,13 +47,6 @@ const AppContainer = styled.div`
   height: 100%;
   background-color: #F5F6F7;
 
-.color-red{
-  color: red;
-}
-.color-green{
-  color: green;
-}
-
 .content-wrap{
   width: 600px;
   margin: auto;
@@ -83,6 +76,7 @@ const AppContainer = styled.div`
           position: absolute;
           right: 10px;
           top: 25px;
+          color: gray;
         }
       }
 
@@ -167,10 +161,7 @@ const AppContainer = styled.div`
 
 function App() {
   const signup_form = React.useRef();
-  const passwordErrorMsg = React.useRef();
-  const passwordcheckErrorMsg = React.useRef();
-  const [pwIsValid, setPwIsValid] = React.useState('');
-  const [pwcheckIsValid, setPwcheckIsValid] = React.useState('');
+  const authorizationnum = React.useRef();
   const [formData, setFormData] = React.useState({
     userid:'',
     password:'',
@@ -204,8 +195,6 @@ function App() {
           RegexHelper.value(current, '필수 정보입니다.');
           RegexHelper.checkId(current, '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
           setFormData(formData => ({...formData, [current.name]:current.value}));
-          // setFormData({...formData, [current.name]:current.value});
-          // userid = current.value;
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
           break;
         case 'password':
@@ -213,18 +202,19 @@ function App() {
           RegexHelper.checkPw(current, '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.');
           setFormData(formData => ({...formData, [current.name]:current.value}));
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
+          document.querySelector('.pwicon').style.color = '#02C75A';
+          
           break;
         case 'passwordcheck':
           RegexHelper.value(current, '필수 정보입니다.');
           RegexHelper.compareTo(signup_form.current.password,current, '비밀번호가 일치하지 않습니다.');
           setFormData(formData => ({...formData, [current.name]:current.value}));
-          setPwIsValid(true);
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
+          document.querySelector('.pwcheckicon').style.color= '#02C75A';
           break;
         case 'username':
           RegexHelper.value(current, '필수 정보입니다.');
           setFormData(formData => ({...formData, [current.name]:current.value}));
-          setPwcheckIsValid(true);
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
           break;
         case 'sex':
@@ -248,20 +238,24 @@ function App() {
           document.querySelector(`p[data-${current.name}]`).innerHTML = '';
           setFormData(formData => ({...formData, [current.name]:current.value}));
           break;
+        case 'tel':
+          RegexHelper.value(signup_form.current.tel, '필수정보입니다.');
+          break;
         default:
         }      
       } catch (error) {
-        // e.target.nextElementSibling.innerHTML=e.message;
-        document.querySelector(`p[data-${current.name}]`).innerHTML = e.message;
-        if(e.target.name === 'password'){setPwIsValid(false)};
-        if(e.target.name === 'passwordcheck'){setPwcheckIsValid(false)};
+        // console.dir(error);
+        document.querySelector(`p[data-${current.name}]`).innerHTML = error.message;
+        document.querySelector(`p[data-${current.name}]`).style.color='red';
+        if(current.name === 'password') {document.querySelector('.pwicon').style.color='red'};
+        if(current.name ==='passwordcheck') {document.querySelector('.pwcheckicon').style.color = 'red'};
         return;
       }
   },[]); //onBlurInput이벤트 end
 
 
 //유효성검사가 정상적으로 완료되어 상태값으로 저장된 아이디 값을  ajax통신으로 받아온 member데이터로 아이디 중복여부 검사
-React.useEffect(()=>{
+const useridCheck =()=>{
   if(formData.userid){
     (async()=>{
     let json = null;
@@ -278,9 +272,35 @@ React.useEffect(()=>{
       document.querySelector('p[data-userid]').innerHTML = '이미 사용중이거나 탈퇴한 아이디 입니다.';
     }else{
       document.querySelector('p[data-userid]').innerHTML = '멋진 아이디네요!';
+      document.querySelector('p[data-userid]').style.color='#02C75A';
     }
   })();
+} 
 }
+
+
+React.useEffect(()=>{
+  useridCheck();
+//   if(formData.userid){
+//     (async()=>{
+//     let json = null;
+//     try {
+//       const response = await axios.get('http://localhost:3001/member');
+//       json = response.data;
+//       console.log(json);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//     //동일한 아이디가 있는 경우 ---> " 이미 사용중이거나 탈퇴한 아이디입니다." 출력 
+//     //중복아이디 없는경우 ---->" 멋진 아이디네요!" 출력
+//     if(json.some((item)=> item.userid === formData.userid)){
+//       document.querySelector('p[data-userid]').innerHTML = '이미 사용중이거나 탈퇴한 아이디 입니다.';
+//     }else{
+//       document.querySelector('p[data-userid]').innerHTML = '멋진 아이디네요!';
+//       document.querySelector('p[data-userid]').style.color='#02C75A';
+//     }
+//   })();
+// }
 },[formData.userid]);
 
 
@@ -290,19 +310,26 @@ React.useEffect(()=>{
       RegexHelper.value(signup_form.current.tel, '형식에 맞지않는 번호입니다.');
       RegexHelper.cellphone(signup_form.current.tel, '형식에 맞지않는 번호입니다.');
       document.querySelector('p[data-authorize').innerHTML = '인증번호를 발송했습니다.(유효시간 30분)<br/>인증번호가 오지 않으면 입력하신 정보가 정확한지 확인하여 주세요.<br/>이미 가입된 번호이거나, 가상전화번호는 인증번호를 받을 수 없습니다.';
+      // console.log(authorizationnum.current)
+      authorizationnum.current.disabled=false;
+      document.querySelector('p[data-authorize').style.color='#02C75A';
     } catch (e) {
       document.querySelector('p[data-authorize').innerHTML = e.message;
+      document.querySelector('p[data-authorize').style.color='red';
+
       return;
     }
   };
-
+  
 
   /**
    * axios post전송
    */
   const onSubmitForm=(e)=>{
     e.preventDefault();
-    
+
+
+
     let json=null;
     (async ()=>{
       try {
@@ -344,21 +371,17 @@ React.useEffect(()=>{
           <label htmlFor="">비밀번호</label>
           <div className="icon-position">
           <StyledInput type="password" name="password" id="password" onBlur={onBlurInput} />
-          {
-            pwIsValid === true? (<FontAwesomeIcon icon={faLock} color="green"/>):(<FontAwesomeIcon icon={faLock} color='red'/>)
-          }
+          <FontAwesomeIcon icon={faLock} className='pwicon' />
           </div>
-          <p data-password='errorMessage' ref={passwordErrorMsg}></p>
+          <p data-password='errorMessage'></p>
         </div>
         <div className="input-box">
           <label htmlFor="">비밀번호 재확인</label>
           <div className="icon-position">
           <StyledInput type="password" name="passwordcheck" id="passwordCheck"  onBlur={onBlurInput} />
-          {
-            pwcheckIsValid === true? (<FontAwesomeIcon icon={faLock} color="green"/>):(<FontAwesomeIcon icon={faLock} color='red'/>)
-          }
+          <FontAwesomeIcon icon={faLock} className='pwcheckicon'/>
           </div>
-          <p data-passwordcheck='errorMessage'  ref={passwordcheckErrorMsg}></p>
+          <p data-passwordcheck='errorMessage' ></p>
         </div>
         <div className="input-box">
           <label htmlFor="">이름</label>
@@ -415,8 +438,8 @@ React.useEffect(()=>{
             <StyledInput type="text" name="tel" id="tel"  onBlur={onBlurInput} placeholder='전화번호 입력'/>
             <StyledButton type='button' onClick={onClickBtn}>인증번호 받기</StyledButton>
           </div>
-          <StyledInput type='text' name='authorizationnum' placeholder="인증번호를 입력하세요" disabled onBlur={onBlurInput}></StyledInput>
-          <p data-authorize='errorMessage'></p>
+          <StyledInput type='text' name='authorizationnum' ref={authorizationnum} placeholder="인증번호를 입력하세요" disabled onBlur={onBlurInput}></StyledInput>
+          <p data-authorize='errorMessage' data-tel='errorMessage'></p>
         </div>
         <StyledButton type="submit">가입하기</StyledButton>
       </form>
