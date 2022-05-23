@@ -3,6 +3,7 @@ import {Routes, Route}  from 'react-router-dom';
 
 import MenuLink from "./components/MenuLink";
 import Counter from "./Pages/Counter";
+import Department from './Pages/Department';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <hr />
       <Routes>
         <Route path="/counter" element={<Counter/>}/>
+        <Route path="/department" element={<Department/>}/>
       </Routes>
     </div>
 
