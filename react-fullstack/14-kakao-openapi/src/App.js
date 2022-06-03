@@ -8,7 +8,7 @@ const App = memo(() => {
     <div>
       <Top/>
     <Routes>
-      <Route path='/:api' element={<KakaoSearch/>} />
+      <Route path='/kakao/:api' exact element={<KakaoSearch/>} />
     </Routes>
     </div>
   );

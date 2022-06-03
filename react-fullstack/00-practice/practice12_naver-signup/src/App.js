@@ -50,16 +50,13 @@ const AppContainer = styled.div`
 .content-wrap{
   width: 600px;
   margin: auto;
-
   .logo{
     text-align: center;
     padding: 50px 0;
   }
-  
   form{
     display: flex;
     flex-direction: column;
-    
     .input-box{
       display: flex;
       flex-direction: column;
@@ -79,7 +76,6 @@ const AppContainer = styled.div`
           color: gray;
         }
       }
-
       #userid{
         &::placeholder{
           text-align: right;
@@ -91,8 +87,6 @@ const AppContainer = styled.div`
           text-align: right;
         }
       }
-      
-      
       label{
         margin: 5px 0;
       }
@@ -249,58 +243,41 @@ function App() {
         document.querySelector(`p[data-${current.name}]`).style.color='red';
         if(current.name === 'password') {document.querySelector('.pwicon').style.color='red'};
         if(current.name ==='passwordcheck') {document.querySelector('.pwcheckicon').style.color = 'red'};
+        setFormData(formData => ({...formData, [current.name]:''}));
         return;
       }
   },[]); //onBlurInput이벤트 end
 
 
 //유효성검사가 정상적으로 완료되어 상태값으로 저장된 아이디 값을  ajax통신으로 받아온 member데이터로 아이디 중복여부 검사
-const useridCheck =()=>{
-  if(formData.userid){
-    (async()=>{
-    let json = null;
-    try {
-      const response = await axios.get('http://localhost:3001/member');
-      json = response.data;
-      console.log(json);
-    } catch (error) {
-      console.error(error);
-    }
-    //동일한 아이디가 있는 경우 ---> " 이미 사용중이거나 탈퇴한 아이디입니다." 출력 
-    //중복아이디 없는경우 ---->" 멋진 아이디네요!" 출력
-    if(json.some((item)=> item.userid === formData.userid)){
-      document.querySelector('p[data-userid]').innerHTML = '이미 사용중이거나 탈퇴한 아이디 입니다.';
-    }else{
-      document.querySelector('p[data-userid]').innerHTML = '멋진 아이디네요!';
-      document.querySelector('p[data-userid]').style.color='#02C75A';
-    }
-  })();
-} 
-}
-
+const useridCheck = () => {
+    (async () => {
+        let json = null;
+        try {
+            const response = await axios.get("http://localhost:3001/member");
+            json = response.data;
+            console.log(json);
+        } catch (error) {
+            console.error(error);
+        }
+        //동일한 아이디가 있는 경우 ---> " 이미 사용중이거나 탈퇴한 아이디입니다." 출력
+        //중복아이디 없는경우 ---->" 멋진 아이디네요!" 출력
+        if (json.some((item) => item.userid === formData.userid)) {
+            document.querySelector("p[data-userid]").innerHTML =
+                "이미 사용중이거나 탈퇴한 아이디 입니다.";
+            document.querySelector("p[data-userid]").style.color = "red";
+        } else {
+            document.querySelector("p[data-userid]").innerHTML =
+                "멋진 아이디네요!";
+            document.querySelector("p[data-userid]").style.color = "#02C75A";
+        }
+    })();
+};
 
 React.useEffect(()=>{
-  useridCheck();
-//   if(formData.userid){
-//     (async()=>{
-//     let json = null;
-//     try {
-//       const response = await axios.get('http://localhost:3001/member');
-//       json = response.data;
-//       console.log(json);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//     //동일한 아이디가 있는 경우 ---> " 이미 사용중이거나 탈퇴한 아이디입니다." 출력 
-//     //중복아이디 없는경우 ---->" 멋진 아이디네요!" 출력
-//     if(json.some((item)=> item.userid === formData.userid)){
-//       document.querySelector('p[data-userid]').innerHTML = '이미 사용중이거나 탈퇴한 아이디 입니다.';
-//     }else{
-//       document.querySelector('p[data-userid]').innerHTML = '멋진 아이디네요!';
-//       document.querySelector('p[data-userid]').style.color='#02C75A';
-//     }
-//   })();
-// }
+  if(formData.userid){
+    useridCheck();
+  }
 },[formData.userid]);
 
 
@@ -321,14 +298,16 @@ React.useEffect(()=>{
     }
   };
   
-
-  /**
-   * axios post전송
-   */
+//axios post 전송
   const onSubmitForm=(e)=>{
     e.preventDefault();
 
-
+    if(formData.userid){
+      useridCheck();
+    }else{
+      window.alert('회원가입을 위한 정보가 미입력되었습니다.');
+      return;
+    }
 
     let json=null;
     (async ()=>{

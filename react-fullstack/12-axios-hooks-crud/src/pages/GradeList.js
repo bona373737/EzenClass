@@ -43,6 +43,9 @@ const GradeList = () => {
 
   //백엔드에 삭제요청 전송
   //자체 캐시기능 방지, 삭제버튼 이벤트에 의해 호출되어야 하므로 메뉴얼 실행모드 
+  //데이터를 추가,삭제 한 뒤에 목록페이지로 갔을때 변경된 데이터가 적용된 
+  //새롭게 axios통신을 해서 받아온 데이터로 목록이 출력되야 하는데,
+  //통신 url이 동일하므로 기존에 caching되어있는 데이터가 있는 경우 새롭게 axios통신을 진행하지 않는다.
   const [{loading2},sendDelete] = useAxios({method: 'DELETE'},{useCache:false,manual:true});
 
   //삭제버튼클릭시 호출 될 이벤트 헨들러

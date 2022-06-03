@@ -7,6 +7,7 @@ import {useSelector, useDispatch} from 'react-redux';
 //Slice에 정의된 액션함수들 참조
 import { getList } from "../slices/DepartmentSlice";
 
+
 const Department=()=>{
     //컴포넌트가 마운트 될때 콘솔의 모든 내용 삭제함(출력결과가 복잡해 지는 것을 방지)
     React.useEffect(()=>{console.clear()},[]);

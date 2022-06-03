@@ -17,7 +17,7 @@ const LineChartView = ({data,api}) => {
         return d;
     })
 
-    return( 
+    return(
       <>
         <Line
         data={{

@@ -32,23 +32,30 @@ const KakaoSearch = memo(()=>{
     const [page, setPage] = React.useState(1);
     //무한스클롤 관련
     const [ref, inView] = useInView();
+
     const getContent = React.useCallback((p=1)=>{
         console.log(`api=${api}, page=${p}`)
-        setPage(p)
+        setPage(p);
         dispatch(getKakaoSearch({
-            api:api
-        }))
-    })
+            api:api,
+            query:query,
+            page:p,
+            size:api === "image"? 80:50,
+        }));
+    },[api,query,dispatch])
 
     //검색어가 전달되었을 경우의 hook
     useEffect(()=>{
-        dispatch(getKakaoSearch({
-            api: api,
-            query: query,
-            page: 1,
-            size:20
-        }))
-    },[dispatch,api, query]);
+        window.scrollTo(0,0);
+        getContent(1);
+    },[getContent,api,query]);
+
+    //사용자가 마지막 요소를 보고 있고, 로딩중이 아니라면
+    React.useEffect(()=>{
+        if(inView && !loading){
+            getContent(page+1);
+        }
+    },[getContent,inView,loading,page]);
 
     return(
         <div>

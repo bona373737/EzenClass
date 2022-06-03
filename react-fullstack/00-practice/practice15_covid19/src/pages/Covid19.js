@@ -14,6 +14,7 @@ const Covid19 = memo(() => {
     const query = useQueryString();
     const query_gte =query[Object.keys(query)[0]];
     const query_lte =query[Object.keys(query)[1]];
+    // console.log(query);
 
     const dispatch = useDispatch();
     const { data, loading, error} = useSelector((state)=>state.covid19);

@@ -14,7 +14,7 @@ const API_URL = {
     book: 'https://dapi.kakao.com/v3/search/book',
     image: 'https://dapi.kakao.com/v2/search/image'
 }
-const API_KEY = '1ec49be112f4786c2d52d4c0b706c6f4';
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const getKakaoSearch = createAsyncThunk('KakaoSlice/getKakaoSearch', async(payload, {rejectWithValue})=>{
     let result = null;
@@ -22,7 +22,7 @@ export const getKakaoSearch = createAsyncThunk('KakaoSlice/getKakaoSearch', asyn
                                //기본 API URL은 web검색으로 설정
         result= await axios.get(API_URL[payload.api? payload.api:'web'], {
             params:{
-                query: payload.query    ,
+                query: payload.query,
                 sort: payload.sort? payload.sort : null,
                 page: payload.page? payload.page: 1,
                 size: payload.size? payload.size : 20
