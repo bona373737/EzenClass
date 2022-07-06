@@ -1,0 +1,11 @@
+{
+  "name": "13-MySQL",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "mysql2": "^2.3.3"
+  }
+}
