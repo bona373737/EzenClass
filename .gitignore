@@ -1,0 +1,8 @@
+02-JavascriptExam/
+
+
+**/node_modules
+**/_files
+**/.*-audit.json
+
+config.env
