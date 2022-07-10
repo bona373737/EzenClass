@@ -6,7 +6,7 @@
 
     <!-- 단일행 조회를 위한 select문 -->
     <select id="selectItem">
-        SELECT deptno, dname, loc FROM department WHERE deptno=#{deptno};
+        SELECT deptno, dname, loc FROM department WHERE deptno=#{deptno}
     </select>
 
     <!-- 다중행 조회를 위한 select문 -->
@@ -14,10 +14,10 @@
         SELECT deptno, dname, loc FROM department 
 
         <where>
-            <if test="dname != null and dname != '' ">
+            <if test="dname != null and dname != ''">
                 dname LIKE concat('%', #{dname}, '%')
             </if>
-            <if test="loc != null and loc !='' ">
+            <if test="loc != null and loc !=''">
                 OR loc LIKE concat('%', #{loc}, '%')
             </if>
         </where>
@@ -35,7 +35,7 @@
     </insert>
 
     <!-- 데이터 삭제를 위한 DELETE문 -->
-    <delete id="">
+    <delete id="deleteItem">
         DELETE FROM department WHERE deptno=#{deptno};
     </delete>
 
@@ -52,7 +52,7 @@
             <if test="dname != null and dname != '' ">
                 dname LIKE concat('%', #{dname}, '%')
             </if>
-            <if>
+            <if test="loc != null and loc !=''">
                 OR loc LIKE concat('%', #{loc}, '%')
             </if>
         </where>

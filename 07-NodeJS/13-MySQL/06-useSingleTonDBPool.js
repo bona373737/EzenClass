@@ -1,11 +1,13 @@
 import DBPool from "./helper/DBPool.js";
 
 (async()=>{
+
+    console.log(DBPool.nana);
     //커넥션을 임대하는 메서드가 async이므로 이 메서드를 호출할때도 비동기가 적용되야 한다.
     const dbcon = await DBPool.getConnection();
 
     //임의의 SQL문 수행함
-    const sql = 'SELECT * FROM student';
+    const sql = "SELECT * FROM student";
     const [result1] = await dbcon.query(sql);
     console.log(result1);
 

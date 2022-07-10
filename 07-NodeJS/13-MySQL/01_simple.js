@@ -5,7 +5,8 @@ import mysql from 'mysql2';
 
 //설정파일 내용 가져오기
 dotenv.config({path: join(resolve(), "../config.env")});
-//console.log(resolve());  ->> C:\Workspace\Ezen\EzenClass\07-NodeJS\13-MySQL
+//resolve()는 명령창에서 node를 실행시킨 위치를 의미하는듯..
+// console.log(resolve());  ->> C:\Workspace\Ezen\EzenClass\07-NodeJS\13-MySQL
 // console.log(join(resolve(),"../config.env"));  ->>  C:\Workspace\Ezen\EzenClass\07-NodeJS\config.env
 
 

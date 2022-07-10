@@ -25,16 +25,16 @@ const pool = mysql2.createPool(connectionInfo);
 
 /**3) pool 객체가 지원하는 이벤트 정의 */
 pool.on('connection', (connection)=>{
-    console.debug('>> DATABASE 접속됨 [threadId=$d]', connection.threadId);
+    console.debug('>> DATABASE 접속됨 [threadId=%d]', connection.threadId);
 });
 pool.on('acquire', (connection)=>{
-    console.debug('>> DATABASE 임대됨 [threadId=$d]', connection.threadId);
+    console.debug('>> DATABASE 임대됨 [threadId=%d]', connection.threadId);
 });
 pool.on('enqeue', ()=>{
     console.debug('>> 접속이 진행중이거나 모두 임대되어 반납을 기다리는 중....');
 });
 pool.on('release', (connection)=>{
-    console.debug('>> DATABASE 반납됨 [threadId=$d]', connection.threadId);
+    console.debug('>> DATABASE 반납됨 [threadId=%d]', connection.threadId);
 });
 
 (async()=>{
@@ -62,7 +62,12 @@ pool.on('release', (connection)=>{
     const input_data = ['101'];
 
     try {
-        
+        const [result] = await dbcon.query(sql, input_data);
+
+        result.map((v,i)=>{
+            console.log("%s %s\t 급여: %d만원\t 입사일 %s", v.name, v.position, v.sal, v.hirdate);
+        })
+
     } catch (error) {
         console.error('SQL문 수행에 실패했습니다.');
         console.error(err);

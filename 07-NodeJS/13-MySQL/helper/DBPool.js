@@ -19,14 +19,36 @@ class DBPool {
         database: process.env.DATABASE_SCHEMA,     //사용하고자하는 데이터베이스 이름
         connectionLimit : process.env.DATABASE_CONNECTION_LIMIT,       //최대 커넥션수
         connectTimeout : process.env.DATABASE_CONNECT_TIMEOUT,              //커넥션 타임아웃
-        waitForConnections : process.env.DATABASE_WAIT_FOR_CONNECTIONS, // 커넥션 풀이 다 찬 경우 처리
-        socketPath: process.env.DATABASE_SOCKET_PATH
-    };
+        waitForConnections : process.env.DATABASE_WAIT_FOR_CONNECTIONS // 커넥션 풀이 다 찬 경우 처리
+        // socketPath: process.env.DATABASE_SOCKET_PATH
+        /**
+         socketPath 주석처리 하니 정상작동됨... 이유확인이 안됨.. 
+
+         22/07/10 04:06:02 982 [error]: undefined
+            node:internal/process/promises:279
+            triggerUncaughtException(err, true /* fromPromise );
+            ^
+
+            Error: connect ENOENT /Applications/MAMP/tmp/mysql/mysql.sock
+                at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1187:16) {
+                    errno: -4058,
+                    code: 'ENOENT',
+                    syscall: 'connect',
+                    address: '/Applications/MAMP/tmp/mysql/mysql.sock',
+                    fatal: true,
+                    level: 'error',
+                    timestamp: '22/07/10 04:06:02 982',
+                    [Symbol(level)]: 'error',
+                    [Symbol(message)]: '22/07/10 04:06:02 982 [error]: connect ENOENT /Applications/MAMP/tmp/mysql/mysql.sock'
+            }
+         */
+    }
+
 
     //싱글톤 객체를 생성하여 리턴하는 메서드 정의
     static getInstance(){
         if(DBPool.current == null){
-            DBPool.current = new DBPool;
+            DBPool.current = new DBPool();
         }
         return DBPool.current;
     };
@@ -48,12 +70,12 @@ class DBPool {
 
             //가로챈 객체의 기능을 로그기록 후 SQL을 수행하도록 재정의
             connection.query = function(...args){
-                const queryCmd = oldQuery.apply(connection.org);
+                const queryCmd = oldQuery.apply(connection,args);
                 
                 //로그기록의 가독성을 위하여
                 //sql문에 포함된 모든 줄바꿈문자를 띄어쓰기로 변환
                 //sql문 포한된 2회 연속 공백 문자를 하나의 공백으로 변환
-                logger.debug(queryCmd.sql.trim().replace(/\n/g, "").replace(/ +(?=)/g, ""));
+                logger.debug(queryCmd.sql.trim().replace(/\n/g, " ").replace(/ +(?= )/g, " "));
                 return queryCmd;
             };
         });
@@ -73,11 +95,11 @@ class DBPool {
 
         try {
             dbcon = await this.pool.getConnection();
-        } catch (error) {   
+        } catch (err) {   
             //임대한 자원이 있다면 반드시 반납해야 함
             if(dbcon){dbcon.release();}
-            logger.error(error);
-            throw error;
+            logger.error(err);
+            throw err;
         }
         return dbcon;
     };
