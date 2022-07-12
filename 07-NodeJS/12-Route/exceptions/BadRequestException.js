@@ -18,4 +18,4 @@ class BadRequestException extends Error {
 }
 
 //(for node.js)
-//module.exports = BadRequestException;
+export default BadRequestException;

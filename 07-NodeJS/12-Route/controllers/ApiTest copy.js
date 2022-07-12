@@ -1,9 +1,8 @@
-/**13-MySQL 수업진도에서 수정적용된 ApiTest.js 파일 내용 */
+/**12-Route수업진도 과정에서 사용한 ApiTest.js파일 내용 */
 
 import express from 'express';
 import regexHelper from '../helper/RegexHelper.js';
 import BadRequestException from '../exceptions/BadRequestException.js';
-import mysql2 from 'mysql2/promise';
 
 export default () => {
     const router = express.Router();
@@ -41,40 +40,5 @@ export default () => {
         res.sendResult({ params1: num1, params2: num2, result: num1 + num2 });
     });
 
-
-    router.get('/department', async (req,res,next)=>{
-        //DB접속정보 설정
-        const connectionInfo = {
-            host : process.env.DATABASE_HOST,         //mysql 서버주소(다른 pc인 경우 IT주소)
-            port : process.env.DATABASE_PORT,         //mysql 포트번호
-            user : process.env.DATABASE_USERNAME,     //mysql의 로그인 할 수 있는 계정이름
-            password : process.env.DATABASE_PASSWORD, //비밀번호
-            database: process.env.DATABASE_SCHEMA,     //사용하고자하는 데이터베이스 이름
-        };
-        
-        let dbcon = null;
-
-        try {
-            dbcon = await mysql2.createConnection(connectionInfo);
-            await dbcon.connect()
-            
-            const sql = "SELECT name, position, sal, date_format(hiredate, '%Y-%m-%d') As hiredate FROM professor "
-            const [result1] = await dbcon.query(sql);
-
-            res.sendResult(result1);
-            console.log(result1);
-
-        } catch (error) {
-            return next(error)
-        } finally{
-            if(dbcon){
-                dbcon.end();
-            }
-        }
-
-
-    });
-
     return router;
-
 };
