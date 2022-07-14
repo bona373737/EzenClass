@@ -1,4 +1,7 @@
-/**13-MySQL 수업진도에서 수정적용된 ApiTest.js 파일 내용 */
+/**
+ * @description
+ * 13-MySQL 수업진도에서 수정적용된 ApiTest.js 파일 내용 
+ * */
 
 import express from 'express';
 import regexHelper from '../helper/RegexHelper.js';
@@ -14,9 +17,11 @@ export default () => {
     router.get('/api_test/custom_error', (req, res, next) => {
         const e = new BadRequestException('개발자가 직접 생성한 에러가 발생하였습니다.');
 
-        // app.js에 명시되어 있는 다음번 app.use()를 호출한다.
-        // 단, app.use()는 에러객체를 파라미터로 받는 콜백이 연결되어 있어야 한다.
         return next(e);
+        // app.js에 명시되어 있는 다음순서의 미들웨어인 app.use(~~)를 호출한다.
+        // 다음순서의 app.use()에서 여기에서 전달한 에러객체를 받아서 처리한다. 
+        // app.use(err,req,res,next)
+        // 단, app.use()는 에러객체를 파라미터로 받는 콜백이 연결되어 있어야 한다.
     });
 
     /**

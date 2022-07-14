@@ -30,12 +30,12 @@ console.info(connectionInfo);
         const [result1] = await dbcon.query(sql);
         //console.log(result1);
 
+        // 실제 restfull api를 구현할 경우에는 json을 응답결과로 전달하면 되므로
+        // sql조회 결과에 대해서 별도의 반복문을 처리하지는 않고 리턴받은 result1을 통째로 응답결과로 사용하면 된다.
         result1.map((v,i)=>{
             console.log("%s%s\t 급여:%d만원\t 입사일:%s",v.name, v.position, v.sal, v.hiredate);
         })
 
-        // 실제 restfull api를 구현할 경우에는 json을 응답결과로 전달하면 되므로
-        // sql조회 결과에 대해서 별도의 반복문을 처리하지는 않고 리턴받은 result1을 통째로 응답결과로 사용하면 된다.
     } catch (error) {
         console.log(error);
         return;

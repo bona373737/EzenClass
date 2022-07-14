@@ -44,7 +44,6 @@ class DBPool {
          */
     }
 
-
     //싱글톤 객체를 생성하여 리턴하는 메서드 정의
     static getInstance(){
         if(DBPool.current == null){
@@ -63,6 +62,7 @@ class DBPool {
 
         //데이터베이스에 접속됬을때 발생할 이벤트
         this.pool.on('connection', (connection)=>{
+            logger.info('-------------------------------------------------------------------')
             logger.info(`>> DATABASE 접속됨 [threaId=${connection.threadId}]`);
 
             //이 객체로 전달되는 SQL수행 함수 기능을 가로챔
@@ -75,17 +75,18 @@ class DBPool {
                 //로그기록의 가독성을 위하여
                 //sql문에 포함된 모든 줄바꿈문자를 띄어쓰기로 변환
                 //sql문 포한된 2회 연속 공백 문자를 하나의 공백으로 변환
-                logger.debug(queryCmd.sql.trim().replace(/\n/g, " ").replace(/ +(?= )/g, " "));
+                logger.debug(queryCmd.sql.trim().replace(/\n/g, " ").replace(/ +(?= )/g, " ").replace(/\s+/g,' '));
                 return queryCmd;
             };
         });
 
-        this.pool.on('qcquire', (connection)=>{
+        this.pool.on('acquire', (connection)=>{
             logger.info(`>> Connection 임대됨 [threaId=${connection.threadId}]`);
         })
 
         this.pool.on('release', (connection)=>{
             logger.info(`>> Connection 반납됨 [threaId=${connection.threadId}]`);
+            logger.info('-------------------------------------------------------------------')
         })
     };
 

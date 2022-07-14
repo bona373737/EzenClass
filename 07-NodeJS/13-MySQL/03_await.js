@@ -41,9 +41,10 @@ console.info(connectionInfo);
         //insert의 결과로 반환되는 객체는 원소가 1개인 배열이다.
         let input_data = ['Node학과', '공학관'];
         const result1 = await dbcon.query(sql, input_data);
-        // console.dir({result1});
-        console.log(result1[0].affectedRows);
-        console.log(result1[0].insertId);
+        console.group('INSERT 처리 결과');
+        console.log('저장된 데이터의 수:'+result1[0].affectedRows);
+        console.log('생성되 PK값 :' +result1[0].insertId);
+        console.groupEnd();
         const firstId = result1[0].insertId;
 
         /** sql문 실행 2_ insert문*/
@@ -59,7 +60,6 @@ console.info(connectionInfo);
         //비구조 문법을 중첩해서 적용할 수도 있다.
         input_data = ['백엔드학과', '공학관'];
         const [{affectedRows,insertId}] = await dbcon.query(sql, input_data);
-        console.group('INSERT 처리 결과');
         console.log("저장된 데이터의 수" + result2.affectedRows);
         console.log("생성된 pk값: "+ result2.insertId);
         console.groupEnd();

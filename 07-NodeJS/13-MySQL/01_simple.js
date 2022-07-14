@@ -25,6 +25,8 @@ console.info(connectionInfo);
 const dbcon = mysql.createConnection(connectionInfo);
 
 /**3) 데이터베이스 접속 */
+//mysql의 모든 동작은 비동기적으로 동작한다.
+//Db접속이 된 후에 동작시킬 코드들을 콜백함수로 정의하여 실행흐름을 만든다.
 dbcon.connect((error)=>{
 
     if(error){

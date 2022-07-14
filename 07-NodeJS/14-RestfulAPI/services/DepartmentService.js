@@ -14,23 +14,23 @@ class DepartmentService{
         ]);
     }
     
-    test(){
-        console.log(DBPool.name);
-    }
 
     /**목록 데이터 조회함수 정의 -> Controller에서 이 함수를 호출해서 사용 */
     async getList(params){
         let dbcon = null;
         let data = null;
 
+        console.log(params)
+
         try {
             dbcon = await DBPool.getConnection();
-            let sql = mybatisMapper.getStatement('DeparmentMapper','selsectList')
+            let sql = mybatisMapper.getStatement('DepartmentMapper','selectList',params)
             let [result] = await dbcon.query(sql);
 
             if(result.length === 0){
                 throw new RuntimeException('조회된 데이터가 없습니다.')
             }
+            data=result;
         } catch (error) {
             throw error;
         }finally{
@@ -47,7 +47,7 @@ class DepartmentService{
 
         try {
             dbcon = await DBPool.getConnection();
-            let sql = mybatisMapper.getStatement('DeparmentMapper','selsectItem',params)
+            let sql = mybatisMapper.getStatement('DepartmentMapper','selectItem',params)
             let [result] = await dbcon.query(sql);
 
             if(result.length === 0){
@@ -75,7 +75,7 @@ class DepartmentService{
             dbcon = await DBPool.getConnection();
 
             //데이터 추가
-            let sql = mybatisMapper.getStatement('DeparmentMapper','insertItem',params)
+            let sql = mybatisMapper.getStatement('DepartmentMapper','insertItem',params)
             let [{insertId, affectedRows}] = await dbcon.query(sql);
 
             if(affectedRows === 0){
@@ -83,8 +83,9 @@ class DepartmentService{
             }
 
             //추가된 데이터 조회
-            sql = mybatisMapper.getStatement('DeparmentMapper','selectItem',{deptno:insertId})
-            [result] = await dbcon.query(sql);
+            sql = mybatisMapper.getStatement('DepartmentMapper','selectItem',{deptno:insertId})
+            let [result] = await dbcon.query(sql);
+
 
             if(result.length === 0){
                 throw new RuntimeException('저장된 데이터를 조회할 수 없습니다.')
@@ -111,7 +112,7 @@ class DepartmentService{
             dbcon = await DBPool.getConnection();
 
             //데이터 수정
-            let sql = mybatisMapper.getStatement('DeparmentMapper','updateItem',params)
+            let sql = mybatisMapper.getStatement('DepartmentMapper','updateItem',params)
             let [{affectedRows}] = await dbcon.query(sql);
 
             if(affectedRows === 0){
@@ -119,8 +120,8 @@ class DepartmentService{
             }
 
             //수정된 데이터의 PK값을 활용하여 조회
-            sql = mybatisMapper.getStatement('DeparmentMapper','selectItem',{deptno:params.deptno})
-            [result] = await dbcon.query(sql);
+            sql = mybatisMapper.getStatement('DepartmentMapper','selectItem',{deptno:params.deptno})
+            let [result] = await dbcon.query(sql);
 
             if(result.length === 0){
                 throw new RuntimeException('수정된 데이터를 조회할 수 없습니다.')
@@ -151,14 +152,20 @@ class DepartmentService{
             try {
                 dbcon = await DBPool.getConnection();
     
-                let sql = mybatisMapper.getStatement('StudentMapper','updateItemByDeptno',params)
+                let sql = mybatisMapper.getStatement('StudentMapper','deleteItemByDeptno',params)
                 let [{affectedRows}] = await dbcon.query(sql);
+                console.log('Student 데이터삭제 수 : '+affectedRows);
     
-                sql = mybatisMapper.getStatement('ProfessorMapper','updateItemByDeptno',params)
+                sql = mybatisMapper.getStatement('ProfessorMapper','deleteItemByDeptno',params);
+                // console.log(sql);
                 [{affectedRows}] = await dbcon.query(sql);
+                console.log('professor 데이터 삭제 수 : '+ affectedRows);
 
-                sql = mybatisMapper.getStatement('DepartmentMapper','deleteItem',params)
+                sql =  mybatisMapper.getStatement('DepartmentMapper','deleteItem',params);
+                // console.log(sql);
                 [{affectedRows}] = await dbcon.query(sql);
+                console.log('department 데이터 삭제 수 : '+ affectedRows);
+
     
                 if(affectedRows === 0){
                     throw new RuntimeException('삭제된 데이터가 없습니다.')
@@ -169,9 +176,30 @@ class DepartmentService{
             }finally{
                 if(dbcon){dbcon.release()};
             }
-    
-            return data;
         }
+
+            /** 전체 데이터 수 조회 */
+    async getCount(params) {
+        let dbcon = null;
+        let cnt = 0;
+
+        try {
+            dbcon = await DBPool.getConnection();
+
+            let sql = mybatisMapper.getStatement('DepartmentMapper', 'selectCountAll', params);
+            let [result] = await dbcon.query(sql);
+
+            if (result.length > 0) {
+                cnt = result[0].cnt;
+            }
+        } catch (err) {
+            throw err;
+        } finally {
+            if (dbcon) { dbcon.release(); }
+        }
+
+        return cnt;
+    }
 }
 
 export default new DepartmentService();

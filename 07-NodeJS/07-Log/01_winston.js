@@ -2,8 +2,6 @@ import {mkdirs} from './helper/FileHelper.js';
 import {join, resolve} from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
-import { mkdir } from 'fs/promises';
-import { info } from 'console';
 
 /**1)프로젝트 폴더 위치 조회 */
 const __dirname = resolve();

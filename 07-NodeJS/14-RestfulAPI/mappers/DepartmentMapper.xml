@@ -23,6 +23,7 @@
 
         ORDER BY deptno DESC
 
+        <!-- 페이지번호별로 보여줄 데이터 범위설정 -->
         <if test="listCount > 0" >
             LIMIT ${offset}, ${listCount}
         </if>
@@ -34,7 +35,7 @@
     </insert>
 
     <!-- 데이터 삭제를 위한 DELETE문 -->
-    <delete id="">
+    <delete id="deleteItem">
         DELETE FROM department WHERE deptno=#{deptno};
     </delete>
 
@@ -51,10 +52,16 @@
             <if test="dname != null and dname != '' ">
                 dname LIKE concat('%', #{dname}, '%')
             </if>
-            <if>
+            <if test="loc != null and loc !='' ">
                 OR loc LIKE concat('%', #{loc}, '%')
             </if>
         </where>
     </select>
+
+    <!--전체 학과번호 조회하기 -->
+    <select id="selectDeptnoList">
+        SELECT deptno FROM department;
+    </select>
+
 
 </mapper>

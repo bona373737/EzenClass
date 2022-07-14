@@ -38,7 +38,7 @@
                  }
              }
  
-             logger.debug('[HTTP %s Params] %s=%s', method, key, value);
+             logger.debug(`[HTTP ${method} Params] ${key}=${value}`);
              return value;
          };
  
@@ -62,6 +62,7 @@
              return this._getParam('DELETE', key, def);
          };
  
+
          /** 프론트엔드에게 JSON 결과를 출력하는 기능 */
          res._sendResult = (statusCode, message, data=null) => {
              /**

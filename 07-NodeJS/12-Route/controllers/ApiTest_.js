@@ -1,4 +1,7 @@
-/**12-Route수업진도 과정에서 사용한 ApiTest.js파일 내용 */
+/**
+ * @description
+ *12-Route수업진도 과정에서 사용한 ApiTest.js파일 내용 
+ */
 
 import express from 'express';
 import regexHelper from '../helper/RegexHelper.js';

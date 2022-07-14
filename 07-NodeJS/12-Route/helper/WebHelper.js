@@ -14,17 +14,17 @@ const WebHelper = () => {
 
         /** GET, URL, POST, PUT, DELETE 파라미터를 수신하여 값을 리턴하는 함수 */
         req._getParam = (method, key, def = null) => {
-            // 파라미터를 HTTP 전송방식에 따라 받는다.
             let value = null;
-
-            // 1) undefined인 경우 def 값으로 대체
-            // --> 파라미터를 받지만 빈 문자열이거나 공백으로만 구성된 경우는 걸러내지 못한다.
+            
+            // 파라미터를 HTTP 전송방식에 따라 받는다.
             if (method.toUpperCase() === 'GET') {
                 value = req.query[key] || req.params[key] || def;
             } else {
                 value = req.body[key] || def;
             }
-
+            
+            // 1) undefined인 경우 def 값으로 대체
+            // --> 파라미터를 받지만 빈 문자열이거나 공백으로만 구성된 경우는 걸러내지 못한다.
             if (value === undefined) {
                 value = def;
             }

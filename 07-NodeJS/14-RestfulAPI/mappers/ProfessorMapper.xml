@@ -3,6 +3,89 @@
 
 <mapper namespace="ProfessorMapper">
 
+    <select id="selectList">
+        <!-- SELECT * FROM professor; -->
+        SELECT profno, name, userid, position, sal, hiredate, comm, deptno FROM professor;
+        <where>
+            <if test= "name != null and name !=''">
+                name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test= "userid != null and userid !=''">
+                userid LIKE concat('%', #{userid}, '%')
+            </if>
+            <if test= "position != null and position !=''">
+                position LIKE concat('%', #{position}, '%')
+            </if>
+            <!-- <if test= "sal != null and sal !=''">
+            </if> -->
+            <!-- <if test= "hiredate != null and hiredate !=''">
+            </if> -->
+            <!-- <if test= "comm != null and comm !=''">
+            </if> -->
+            <if test= "deptno != null and deptno !=''">
+                deptno = #{deptno}
+            </if>
+        </where>
+        ORDER BY profno DESC
+
+        <!-- 페이지번호별로 보여줄 데이터 범위설정 -->
+        <if test="listCount > 0" >
+            LIMIT ${offset}, ${listCount}
+        </if>
+    </select>
+
+    <select id="selectItem">
+        SELECT profno, name, userid, position, sal, hiredate, comm, deptno FROM professor WHERE profno=#{profno};
+    </select>
+
+    <insert id="insertItem">
+        INSERT INTO professor  (name, userid, position, sal, hiredate, comm, deptno)
+        VALUES(#{name}, #{userid}, #{position}, #{sal}, #{hiredate}, #{comm}, #{deptno});
+        <!-- INSERT INTO professor SET 
+            name = #{name},
+            userid = #{userid},
+            position = #{position},
+            sal = #{sal},
+            hiredate = #{hiredate},
+            comm = #{comm},
+            deptno = #{deptno}; -->
+    </insert>
+
+    <update id="updateItem">
+        UPDATE professor SET name=#{name}, userid=#{userid}, position=#{position}, sal=#{sal}, hiredate=#{hiredate}, comm=#{comm}, deptno=#{deptno}
+        WHERE profno=#{profno}
+    </update>
+
+    <delete id="deleteItem">
+        DELETE FROM professor WHERE profno=#{profno};
+    </delete>
+
+    <!-- 페이지번호구현을 위한 총데이터 개수 조회하기 -->
+    <select id="selectCountAll">
+        SELECT COUNT(*) AS cnt FROM professor
+        <where>
+            <if test= "name != null and name !=''">
+                name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test= "userid != null and userid !=''">
+                userid LIKE concat('%', #{userid}, '%')
+            </if>
+            <if test= "position != null and position !=''">
+                position LIKE concat('%', #{position}, '%')
+            </if>
+            <!-- <if test= "sal != null and sal !=''">
+            </if> -->
+            <!-- <if test= "hiredate != null and hiredate !=''">
+            </if> -->
+            <!-- <if test= "comm != null and comm !=''">
+            </if> -->
+            <if test= "deptno != null and deptno !=''">
+                deptno = #{deptno}
+            </if>
+        </where>
+    </select>
+
+
     <!-- 특정 학과에 속한 교수 일괄 삭제 -->
     <delete id="deleteItemByDeptno">
         DELETE FROM professor WHERE deptno=#{deptno};

@@ -31,25 +31,26 @@ mybatisMapper.createMapper([
     [result] =await dbcon.query(query);
     console.log(`affectedRows = ${result.affectedRows},insertId = ${result.insertId}`);
 
+    const testInsertId = result.insertId
     //SQL문 실행4
-    //학과번호 300번인 학과데이터를 삭제하시오
-    params = {deptno:300};
+    //위에 sql 3번문장에서 추가한 학과의 이름과 위치를 수정하시오.
+    params = {deptno:testInsertId, dname:'수정된 학과', loc:'수정된 위치'};
+    query = mybatisMapper.getStatement('DepartmentMapper', 'updateItem', params);
+    [result] =await dbcon.query(query);
+    console.log(`affectedRows=${result.affectedRows}`);
+    
+    //SQL문 실행5
+    //위에 sql 4번문장에서 수정적용한 학과의 데이터를 삭제하시오
+    params = {deptno:testInsertId};
     query = mybatisMapper.getStatement('DepartmentMapper', 'deleteItem', params);
     [result] =await dbcon.query(query);
     console.log(`affectedRows = ${result.affectedRows}`);
 
-    //SQL문 실행5
-    //학과테이블에서 학과번호가 300번인 학과의 이름과 위치를 수정하시오
-    params = {deptno:300, dname:'수정된 학과', loc:'수정된 위치'};
-    query = mybatisMapper.getStatement('DepartmentMapper', 'updateItem', params);
-    [result] =await dbcon.query(query);
-    console.log(`affectedRows=${result.affectedRows}`);
-
     //SQL문 실행6
     //전체 학과수를 구하시오
     query = mybatisMapper.getStatement('DepartmentMapper', 'selectCountAll');
-    [result] =await dbcon.query(query);
-    console.log(`cnt=result[0].cnt`);
+    [result] =await dbcon.query(query);  
+    console.log(`cnt=${result[0].cnt}`);
 
     //SQL문 실행7
     //교수정보와 학과정보를 함께 조회하시오

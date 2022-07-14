@@ -8,7 +8,7 @@ dotenv.config({path: join(resolve(), "../config.env")});
 /**DATABASE Connection Pool을 관리하기 위한 SingleTon 클래스 */
 class DBPool {
     //싱글톤 객체를 담을 비어있는 정적(static)변수 정의
-    static current =null;
+    static current = null;
 
     //DB접속정보 설정
     static connectionInfo = {
@@ -19,15 +19,12 @@ class DBPool {
         database: process.env.DATABASE_SCHEMA,     //사용하고자하는 데이터베이스 이름
         connectionLimit : process.env.DATABASE_CONNECTION_LIMIT,       //최대 커넥션수
         connectTimeout : process.env.DATABASE_CONNECT_TIMEOUT,              //커넥션 타임아웃
-        waitForConnections : process.env.DATABASE_WAIT_FOR_CONNECTIONS, // 커넥션 풀이 다 찬 경우 처리
-        socketPath: process.env.DATABASE_SOCKET_PATH
-    };
-
-    static name = process.env.LOG_PATH;
+        waitForConnections : process.env.DATABASE_WAIT_FOR_CONNECTIONS // 커넥션 풀이 다 찬 경우 처리
+    }
 
     //싱글톤 객체를 생성하여 리턴하는 메서드 정의
     static getInstance(){
-        if(DBPool.current === null){
+        if(DBPool.current == null){
             DBPool.current = new DBPool();
         }
         return DBPool.current;
@@ -43,29 +40,32 @@ class DBPool {
 
         //데이터베이스에 접속됬을때 발생할 이벤트
         this.pool.on('connection', (connection)=>{
+            logger.info('---------------------------------------------------')
             logger.info(`>> DATABASE 접속됨 [threaId=${connection.threadId}]`);
 
             //이 객체로 전달되는 SQL수행 함수 기능을 가로챔
             const oldQuery = connection.query;
 
-            //가로챈 객체의 기능을 로그기록 후 SQL을 수행하도록 재정의
+            //가로챈 객체의 기능을 로그기록 후 SQL을 수행하도록 함수재정의
             connection.query = function(...args){
-                const queryCmd = oldQuery.apply(connection.orgs);
+                const queryCmd = oldQuery.apply(connection,args);
                 
                 //로그기록의 가독성을 위하여
                 //sql문에 포함된 모든 줄바꿈문자를 띄어쓰기로 변환
                 //sql문 포한된 2회 연속 공백 문자를 하나의 공백으로 변환
-                logger.debug(queryCmd.sql.trim().replace(/\n/g, " ").replace(/ +(?=)/g, " "));
+                //trim메서드가 안되면 정규식으로,, 이것도 안되면 다른 정규식.... 다 적용될 수 있도록...
+                logger.debug(queryCmd.sql.trim().replace(/\n/g, " ").replace(/ +(?= )/g, " ").replace(/\s+/g,' '));
                 return queryCmd;
             };
         });
 
-        this.pool.on('qcquire', (connection)=>{
+        this.pool.on('acquire', (connection)=>{
             logger.info(`>> Connection 임대됨 [threaId=${connection.threadId}]`);
         })
 
         this.pool.on('release', (connection)=>{
             logger.info(`>> Connection 반납됨 [threaId=${connection.threadId}]`);
+            logger.info('---------------------------------------------------')
         })
     };
 
@@ -74,12 +74,13 @@ class DBPool {
         let dbcon = null;
 
         try {
+                        //정의한 메서드 이름만 동일한거
             dbcon = await this.pool.getConnection();
-        } catch (error) {   
+        } catch (err) {   
             //임대한 자원이 있다면 반드시 반납해야 함
             if(dbcon){dbcon.release();}
-            logger.error(error);
-            throw error;
+            logger.error(err);
+            throw err;
         }
         return dbcon;
     };
@@ -90,5 +91,5 @@ class DBPool {
     }
 }
 
-//싱글톤 객체를 모듈로 내보냄
+//싱글톤 인스턴스를 모듈로 내보냄
 export default DBPool.getInstance();

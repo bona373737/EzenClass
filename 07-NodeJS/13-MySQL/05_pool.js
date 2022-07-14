@@ -58,15 +58,19 @@ pool.on('release', (connection)=>{
     }
 
     /**5) 정상접속이 되었다면 sql문 실행하기 */
-    const sql = 'SELECT * FROM professor WHERE deptno=?';
-    const input_data = ['101'];
+    // const sql = 'SELECT * FROM professor WHERE deptno=?';
+    // const input_data = ['105'];
+   
+    const sql = 'SELECT * FROM professor';
 
     try {
-        const [result] = await dbcon.query(sql, input_data);
+        // const [result] = await dbcon.query(sql, input_data);
+        const [result] = await dbcon.query(sql);
+        console.log(result);
 
-        result.map((v,i)=>{
-            console.log("%s %s\t 급여: %d만원\t 입사일 %s", v.name, v.position, v.sal, v.hirdate);
-        })
+        // result.map((v,i)=>{
+        //     console.log("%s %s\t 급여: %d만원\t 입사일 %s", v.name, v.position, v.sal, v.hirdate);
+        // })
 
     } catch (error) {
         console.error('SQL문 수행에 실패했습니다.');
