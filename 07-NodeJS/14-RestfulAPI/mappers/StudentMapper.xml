@@ -4,9 +4,16 @@
 
 <mapper namespace="StudentMapper">
 
-    <!-- 특정 학과에 속한 교수 일괄 삭제 -->
+    <!-- 특정 학과에 속한 __ 일괄 삭제 -->
     <delete id="deleteItemByDeptno">
         DELETE FROM student WHERE deptno=#{deptno};
     </delete>
+
+    <!-- 특정 교수가 담당교수로 등록되어있는 학생테이서 삭제 -->
+    <update id="updateItemByProfno">
+        update student SET profno=null WHERE profno=#{profno};
+    </update>
+
+
 
 </mapper>

@@ -1,3 +1,9 @@
+/**
+ * @FileName ProfessorService.js
+ * @Author 구본아
+ * @description 교수데이터 수정,삭제,추가,조회 비즈니스로직
+ */
+
 import MybatisMapper from "mybatis-mapper";
 import DBPool from "../helper/DBPool.js";
 import RuntimeException from "../exceptions/RuntimeException.js";
@@ -16,10 +22,18 @@ class ProfessorServices{
         let dbcon = null;
         let data = null;
 
+        console.log(params);
+
         try {
             dbcon = await DBPool.getConnection();
+            let sql = MybatisMapper.getStatement('ProfessorMapper', 'selectList', params);
+            // console.log(sql);
+            let [result] = await dbcon.query(sql);
 
-   
+            if(result.length === 0){
+                throw new RuntimeException('조회된 데이터가 없습니다.');
+            }
+            data = result;
 
         } catch (error) {
             throw error;
@@ -101,7 +115,7 @@ class ProfessorServices{
     async editItem(params){
         let dbcon = null;
         let data = null;
-
+                
         try {
             dbcon = await DBPool.getConnection();
 
@@ -123,7 +137,7 @@ class ProfessorServices{
                     throw new RuntimeException('수정된 데이터가 없습니다.')
                 }
 
-                sql = MybatisMapper.getStatement('ProfessorMapper','updateItem',{profno:params.profno})
+                sql = MybatisMapper.getStatement('ProfessorMapper','selectItem',{profno:params.profno})
                 let [result] = await dbcon.query(sql);
 
                 if(result.length === 0){
@@ -140,6 +154,55 @@ class ProfessorServices{
         }
         return data;
     }//updateItem end
+
+    async deleteItem(params){
+        let dbcon = null;
+        //교수데이터와 참조관계인 학생데이터 먼저 삭제
+        try {
+            dbcon = await DBPool.getConnection();
+
+            let sql = MybatisMapper.getStatement('StudentMapper','updateItemByProfno',params)
+            let [{affectedRows}] = await dbcon.query(sql);
+            console.log('수정된 student데이터 개수 :'+ affectedRows);
+
+            sql = MybatisMapper.getStatement('ProfessorMapper', 'deleteItem',params);
+            [{affectedRows}] = await dbcon.query(sql);
+            console.log('삭제된 professor데이터 개수 :'+ affectedRows);
+
+            if(affectedRows === 0){
+                throw new RuntimeException('삭제된 데이터가 없습니다.')
+            }
+        
+        } catch (error) {
+            return error;
+        } finally{
+            if(dbcon){dbcon.release};
+        }
+
+    }//deleteItem end
+
+    //페이지번호 구현에 필요한 전체데이터수 조회
+    async getCount(params) {
+        let dbcon = null;
+        let cnt = 0;
+
+        try {
+            dbcon = await DBPool.getConnection();
+
+            let sql = MybatisMapper.getStatement('ProfessorMapper', 'selectCountAll', params);
+            let [result] = await dbcon.query(sql);
+
+            if (result.length > 0) {
+                cnt = result[0].cnt;
+            }
+        } catch (err) {
+            throw err;
+        } finally {
+            if (dbcon) { dbcon.release(); }
+        }
+
+        return cnt;
+    }
 
 
 

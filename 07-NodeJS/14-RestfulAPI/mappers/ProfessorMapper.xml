@@ -1,42 +1,51 @@
+<!-- 
+    @Filename ProfessorMapper.xml
+    @Author 구본아
+    @description 교수데이터 수정,삭제,추가,조회를 위한 sql mapper
+ -->
+
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN""http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProfessorMapper">
+    <select id="selectItem">
+        SELECT profno, name, userid, position, sal, hiredate, comm, deptno 
+        FROM professor 
+        WHERE profno=#{profno};
+    </select>
 
-    <select id="selectList">
-        <!-- SELECT * FROM professor; -->
-        SELECT profno, name, userid, position, sal, hiredate, comm, deptno FROM professor;
+    <select id="selectList" >
+        SELECT profno, name, userid, position, sal, hiredate, comm, deptno 
+        FROM professor
         <where>
-            <if test= "name != null and name !=''">
-                name LIKE concat('%', #{name}, '%')
+            <if test="name != null and name !=''">
+                name LIKE concat('%', #{name},'%')
             </if>
-            <if test= "userid != null and userid !=''">
-                userid LIKE concat('%', #{userid}, '%')
+             <if test="userid != null and userid !='' ">
+                OR userid LIKE concat('%', #{userid},'%')
             </if>
-            <if test= "position != null and position !=''">
-                position LIKE concat('%', #{position}, '%')
+            <if test="position != null and position != '' ">
+                OR position LIKE concat('%', #{position},'%')
             </if>
-            <!-- <if test= "sal != null and sal !=''">
-            </if> -->
-            <!-- <if test= "hiredate != null and hiredate !=''">
-            </if> -->
-            <!-- <if test= "comm != null and comm !=''">
-            </if> -->
-            <if test= "deptno != null and deptno !=''">
-                deptno = #{deptno}
+            <if test="sal != null and sal != '' ">
+                OR sal LIKE concat('%',#{sal},'%')
+            </if>
+            <if test="hiredate != null and hiredate != ''">
+                OR hiredate LIKE concat('%', #{hiredate}, '%')
+            </if>
+            <if test='comm != null and comm != "" '>
+                OR comm LIKE concat('%', #{comm}, '%')
+            </if>
+            <if test="deptno != null and deptno != '' ">
+                OR deptno = #{deptno}
             </if>
         </where>
         ORDER BY profno DESC
-
-        <!-- 페이지번호별로 보여줄 데이터 범위설정 -->
-        <if test="listCount > 0" >
+        <if test='listCount > 0'>
             LIMIT ${offset}, ${listCount}
         </if>
     </select>
 
-    <select id="selectItem">
-        SELECT profno, name, userid, position, sal, hiredate, comm, deptno FROM professor WHERE profno=#{profno};
-    </select>
 
     <insert id="insertItem">
         INSERT INTO professor  (name, userid, position, sal, hiredate, comm, deptno)
@@ -64,23 +73,26 @@
     <select id="selectCountAll">
         SELECT COUNT(*) AS cnt FROM professor
         <where>
-            <if test= "name != null and name !=''">
+            <if test='name != null and name !=""'>
                 name LIKE concat('%', #{name}, '%')
             </if>
-            <if test= "userid != null and userid !=''">
-                userid LIKE concat('%', #{userid}, '%')
+            <if test='userid != null and userid !=""'>
+                OR userid LIKE concat('%', #{userid}, '%')
             </if>
-            <if test= "position != null and position !=''">
-                position LIKE concat('%', #{position}, '%')
+            <if test='position != null and position !=""'>
+                OR position LIKE concat('%', #{position}, '%')
             </if>
-            <!-- <if test= "sal != null and sal !=''">
-            </if> -->
-            <!-- <if test= "hiredate != null and hiredate !=''">
-            </if> -->
-            <!-- <if test= "comm != null and comm !=''">
-            </if> -->
-            <if test= "deptno != null and deptno !=''">
-                deptno = #{deptno}
+            <if test='sal != null and sal !=""'>
+                OR sal LIKE concat('%', #{sal}, '%')
+            </if>
+            <if test='hiredate != null and hiredate !=""'>
+                OR hiredate LIKE concat('%', #{hiredate}, '%')
+            </if>
+            <if test='comm != null and comm !=""'>
+                OR comm LIKE concat('%', #{comm}, '%')
+            </if>
+            <if test='deptno != null and deptno !=""'>
+                OR deptno = #{deptno}
             </if>
         </where>
     </select>
@@ -90,5 +102,7 @@
     <delete id="deleteItemByDeptno">
         DELETE FROM professor WHERE deptno=#{deptno};
     </delete>
+
+
 
 </mapper>

@@ -17,7 +17,7 @@
              // 파라미터를 HTTP 전송방식에 따라 받는다.
              let value = null;
  
-             // 1) undefined인 경우 def 값으로 대체
+             // 1) undefined인 경우 기본값으로 대체
              // --> 파라미터를 받지만 빈 문자열이거나 공백으로만 구성된 경우는 걸러내지 못한다.
              if (method.toUpperCase() === 'GET') {
                  value = req.query[key] || req.params[key] || def;
@@ -29,7 +29,7 @@
                  value = def;
              }
  
-             // 2) 빈 문자열이거나 공백인 경우 걸러내기
+             // 2) 빈 문자열이거나 공백인 경우 기본값으로 대체하기
              if (value !== null && typeof value == 'string') {
                  value = value.trim();
  

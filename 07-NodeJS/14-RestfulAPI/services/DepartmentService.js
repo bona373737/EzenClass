@@ -151,22 +151,19 @@ class DepartmentService{
     
             try {
                 dbcon = await DBPool.getConnection();
-    
+                
                 let sql = mybatisMapper.getStatement('StudentMapper','deleteItemByDeptno',params)
                 let [{affectedRows}] = await dbcon.query(sql);
                 console.log('Student 데이터삭제 수 : '+affectedRows);
-    
+                
                 sql = mybatisMapper.getStatement('ProfessorMapper','deleteItemByDeptno',params);
-                // console.log(sql);
                 [{affectedRows}] = await dbcon.query(sql);
                 console.log('professor 데이터 삭제 수 : '+ affectedRows);
 
                 sql =  mybatisMapper.getStatement('DepartmentMapper','deleteItem',params);
-                // console.log(sql);
                 [{affectedRows}] = await dbcon.query(sql);
                 console.log('department 데이터 삭제 수 : '+ affectedRows);
 
-    
                 if(affectedRows === 0){
                     throw new RuntimeException('삭제된 데이터가 없습니다.')
                 }
