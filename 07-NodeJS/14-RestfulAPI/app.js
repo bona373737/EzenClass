@@ -20,6 +20,7 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override'; 
 import cookieParser from 'cookie-parser'; 
 import expressSession from 'express-session'; 
+import cors from 'cors';
 
 /** 예외처리 관련 클래스 */
 import PageNotFoundException from './exceptions/PageNotFoundException.js';
@@ -38,7 +39,8 @@ import ProfessorController from './controllers/ProfessorController.js';
 /*---------------------------------`-------------------------
  | 2) Express 객체 생성
  -----------------------------------------------------------*/
- dotenv.config({ path: path.join(resolve(), "../config.env") });
+ console.log(path.join(path.resolve(), "../config.env"));
+ dotenv.config({ path: path.join(path.resolve(), "../config.env") });
 
  const app = express();
 
@@ -77,6 +79,7 @@ app.use((req, res, next) => {
 /*----------------------------------------------------------
  | 4) Express 객체의 추가 설정(미들웨어등록)
  -----------------------------------------------------------*/
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text()); 
 app.use(bodyParser.json()); 

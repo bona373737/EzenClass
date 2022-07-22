@@ -175,7 +175,7 @@ class DepartmentService{
             }
         }
 
-            /** 전체 데이터 수 조회 */
+    /** 전체 데이터 수 조회 */
     async getCount(params) {
         let dbcon = null;
         let cnt = 0;
@@ -196,6 +196,29 @@ class DepartmentService{
         }
 
         return cnt;
+    }
+
+    /**학과번호 종류 */
+    async selectDeptnoList() {
+        let dbcon = null;
+        let data = [];
+
+        try {
+            dbcon = await DBPool.getConnection();
+
+            let sql = mybatisMapper.getStatement('DepartmentMapper', 'selectDeptnoList');
+            let [result] = await dbcon.query(sql);
+
+            console.log(result);
+            for(const item of result){
+                data.push(item.deptno)
+            };
+        } catch (err) {
+            throw err;
+        } finally {
+            if (dbcon) { dbcon.release(); }
+        }
+        return data;
     }
 }
 

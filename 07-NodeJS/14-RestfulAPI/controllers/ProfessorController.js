@@ -46,7 +46,7 @@ const ProfessorController = () => {
             return next(error);            
         }
 
-        res.sendResult({item:json});
+        res.sendResult({pagenation: pageInfo,item:json});
     })
 
     //교수데이터 단일행조회

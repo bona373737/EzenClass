@@ -7,6 +7,18 @@ const DepartmentController = () => {
     const url = "/department";
     const router = express.Router();
 
+    /** 학과번호 종류 조회*/
+    router.get(`${url}/deptnolist`, async (req, res, next) => {
+        let json = null;
+
+        try {
+            json = await departmentService.selectDeptnoList();
+        } catch (err) {
+            return next(err);
+        }
+        res.sendResult({item: json});
+    });
+
     /** 전체 목록 조회 --> Read(SELECT) */
     router.get(url, async (req, res, next) => {
         // 검색어 파라미터
