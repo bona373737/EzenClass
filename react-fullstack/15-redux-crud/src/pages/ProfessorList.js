@@ -7,10 +7,10 @@ import Spinner from '../components/Spinner';
 import ErrorView from '../components/ErrorView';
 import Table from '../components/Table';
 
+import dayjs from 'dayjs';
 import { useSelector, useDispatch } from 'react-redux';
-import { getList, deleteItem } from '../slices/DepartmentSlice';
+import { getList, deleteItem } from '../slices/ProfessorSlice';
 
-// 입력 컨트롤들을 포함하는 박스
 const ControlContainer = styled.form`
     position: sticky;
     top: 0;
@@ -43,7 +43,6 @@ const ControlContainer = styled.form`
     }
 `;
 
-// 페이지 번호
 const Pagenation = styled.ul`
     list-style: none;
     padding: 0;
@@ -76,10 +75,11 @@ const Pagenation = styled.ul`
     }
 `;
 
-const DepartmentList = memo(() => {
+const ProfessorList = memo(() => {
+
     /** 리덕스 관련 초기화 */
     const dispatch = useDispatch();
-    const { data, loading, error } = useSelector((state) => state.DepartmentSlice);
+    const { data, loading, error } = useSelector((state) => state.ProfessorSlice);
 
     /** 페이지 강제 이동을 처리하기 위한 navigate함수 생성 */
     const navigate = useNavigate();
@@ -122,23 +122,30 @@ const DepartmentList = memo(() => {
     const onEditClick = useCallback(e => {
         e.preventDefault();
         const current = e.target;
-        const deptno = current.dataset.deptno;
-        navigate(`/department_edit/${deptno}`);
+        const profno = current.dataset.profno;
+        navigate(`/professor_edit/${profno}`);
     }, [navigate]);
 
-    console.log(data)
+    // console.log(data)
+
     /** 삭제 버튼 클릭 이벤트 처리 --> 리덕스를 통해 삭제 처리 --> data값이 갱신되므로 화면에 자동 반영된다. */
     const onDeleteClick = useCallback(e => {
         e.preventDefault();
 
         const current = e.target;
 
-        if (window.confirm(`정말 ${current.dataset.dname}(을)를 삭제하시겠습니까?)`)) {
+        if (window.confirm(`정말 ${current.dataset.name}(을)를 삭제하시겠습니까?)`)) {
             dispatch(deleteItem({
-                deptno: current.dataset.deptno
+                profno: current.dataset.profno
             }));
         }
     }, [dispatch]);
+
+    /** 리스트 클릭시 상세페이지로 이동 */
+    const onMoveDetail = useCallback(e=>{
+        const profno = e.currentTarget.dataset.profno;
+        navigate(`/professor_detail/${profno}`)
+    },[navigate]);
 
     return (
         <div>
@@ -152,7 +159,7 @@ const DepartmentList = memo(() => {
                 </select>
                 <input type="text" className="controll" ref={refTextInput} />
                 <button type="submit" className="controll clickable">검색</button>
-                <NavLink to="department_add" className="controll clickable">학과정보 추가하기</NavLink>
+                <NavLink to="professor_add" className="controll clickable">교수정보 추가하기</NavLink>
             </ControlContainer>
 
             {error ? (
@@ -162,9 +169,14 @@ const DepartmentList = memo(() => {
                     <Table>
                         <thead>
                             <tr>
+                                <th>교수번호</th>
+                                <th>성명</th>
+                                <th>아이디</th>
+                                <th>직급</th>
+                                <th>급여</th>
+                                <th>입사일</th>
+                                <th>comm</th>
                                 <th>학과번호</th>
-                                <th>학과명</th>
-                                <th>학과위치</th>
                                 <th>수정</th>
                                 <th>삭제</th>
                             </tr>
@@ -173,18 +185,24 @@ const DepartmentList = memo(() => {
                             {data.item.length > 0 ? (
                                 data.item.map((item, index) => {
                                     return (
-                                        <tr key={item.deptno}>
+                                        <tr key={item.profno}>
                                             {/* 데이터를 텍스트로 출력 */}
+                                            <td onClick={onMoveDetail} data-profno={item.profno}>{item.profno}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.userid}</td>
+                                            <td>{item.position}</td>
+                                            <td>{item.sal}</td>
+                                            <td>{dayjs(item.hiredate).format('YYYY-MM-DD')}</td>
+                                            <td>{item.comm}</td>
                                             <td>{item.deptno}</td>
-                                            <td>{item.dname}</td>
-                                            <td>{item.loc}</td>
+                                    
                                             <td>
-                                                <button type='button' data-deptno={item.deptno} onClick={onEditClick}>
+                                                <button type='button' data-profno={item.profno} onClick={onEditClick}>
                                                     수정하기
                                                 </button>
                                             </td>
                                             <td>
-                                                <button type='button' data-deptno={item.deptno} data-dname={item.dname} onClick={onDeleteClick}>
+                                                <button type='button' data-profno={item.profno} data-name={item.name} onClick={onDeleteClick}>
                                                     삭제하기
                                                 </button>
                                             </td>
@@ -193,7 +211,7 @@ const DepartmentList = memo(() => {
                                 })
                             ) : (
                                 <tr>
-                                    <td colSpan='5' align='center'>
+                                    <td colSpan='9' align='center'>
                                         검색결과가 없습니다.
                                     </td>
                                 </tr>
@@ -238,7 +256,7 @@ const DepartmentList = memo(() => {
     );
 });
 
-export default DepartmentList;
+export default ProfessorList;
 
 
 // import React, { memo, useCallback, useEffect, useRef } from 'react';

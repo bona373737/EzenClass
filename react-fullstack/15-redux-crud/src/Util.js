@@ -3,16 +3,14 @@ const pending = (state, {payload})=>{
 }
 const fulfilled = (state, {payload})=>{
     return {
-        meta: payload?.data?.meta,
-        documents : payload?.data?.documents,
         loading: false,
+        data: payload?.data,
         error: null
     }
 }
 const rejected=(state, {payload})=>{
     return {
-        meta: null,
-        documents: null,
+        ...state,
         loading: false,
         error: {
             code: payload?.data?.rt? payload?.data?.rt : (payload?.status ? payload.status: 500),

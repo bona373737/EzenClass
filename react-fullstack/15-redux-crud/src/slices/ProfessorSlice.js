@@ -5,19 +5,8 @@ import {cloneDeep} from 'lodash';
 
 //브라우저 history 기능이 정상작동하게 하려면 URL의 끝부분이 "/"로 끝나야 한다.
 //axios가 URL을 인식했을때 슬래시로 끝나지 않은경우 완전한 URL로 인식하지 못한다.
-const API_URL="http://localhost:3001/department"
-const sliceName = "DepartmentSlice"
-
-/**학과번호 조회를 위한 비동기함수 */
-export const selectDeptnoList = createAsyncThunk(`${sliceName}/selectDeptnoList/`, async(payload, {rejectWithValue})=>{
-    let result = null;
-    try {
-        result= await axios.get(`${API_URL}/deptnolist`)
-    } catch (error) {
-        result = rejectWithValue(error.response);
-    }
-    return result;
-})
+const API_URL="http://localhost:3001/professor"
+const sliceName = "ProfessorSlice"
 
 /**다중행 데이터 조회를 위한 비동기 함수 */
 export const getList = createAsyncThunk(`${sliceName}/getList/`, async(payload, {rejectWithValue})=>{
@@ -40,7 +29,7 @@ export const getList = createAsyncThunk(`${sliceName}/getList/`, async(payload, 
 export const getItem = createAsyncThunk(`${sliceName}/getItem/`, async(payload, {rejectWithValue})=>{
     let result = null;
     try {
-        result= await axios.get(`${API_URL}/${payload?.deptno}`)
+        result= await axios.get(`${API_URL}/${payload?.profno}`)
     } catch (error) {
         result = rejectWithValue(error.response);
     }
@@ -52,8 +41,13 @@ export const postItem = createAsyncThunk(`${sliceName}/postItem/`, async(payload
     let result = null;
     try {
         result= await axios.post(API_URL,{
-            dname: payload.dname,
-            loc: payload.loc
+            name: payload.name,
+            userid: payload.userid,
+            position: payload.position,
+            sal: payload.sal,
+            hiredate: payload.hiredate,
+            comm: payload.comm,
+            deptno: payload.deptno
         })
     } catch (error) {
         result = rejectWithValue(error.response);
@@ -65,9 +59,14 @@ export const postItem = createAsyncThunk(`${sliceName}/postItem/`, async(payload
 export const putItem = createAsyncThunk(`${sliceName}/putItem/`, async(payload, {rejectWithValue})=>{
     let result = null;
     try {
-        result= await axios.put(`${API_URL}/${payload.deptno}`,{
-            dname: payload.dname,
-            loc: payload.loc
+        result= await axios.put(`${API_URL}/${payload.profno}`,{
+            name: payload.name,
+            userid: payload.userid,
+            position: payload.position,
+            sal: payload.sal,
+            hiredate: payload.hiredate,
+            comm: payload.comm,
+            deptno: payload.deptno
         })
     } catch (error) {
         result = rejectWithValue(error.response);
@@ -79,7 +78,7 @@ export const putItem = createAsyncThunk(`${sliceName}/putItem/`, async(payload, 
 export const deleteItem = createAsyncThunk(`${sliceName}/deleteItem/`, async(payload, {rejectWithValue})=>{
     let result = null;
     try {
-        result= await axios.delete(`${API_URL}/${payload.deptno}`)
+        result= await axios.delete(`${API_URL}/${payload.profno}`)
     } catch (error) {
         result = rejectWithValue(error.response);
     }
@@ -87,7 +86,7 @@ export const deleteItem = createAsyncThunk(`${sliceName}/deleteItem/`, async(pay
 })
 
 
-const DepartmentSlice = createSlice({
+const ProfessorSlice = createSlice({
     name: sliceName,
     initialState: {
         loading: false,
@@ -109,13 +108,10 @@ const DepartmentSlice = createSlice({
         [postItem.pending]:pending,
         [postItem.fulfilled]: (state, {meta,payload})=>{
             const data = cloneDeep(state.data);
-            console.log(data);
+            // console.log(data);
 
-            //추가된 데이터를 기존 상태값 data의 맨 앞에 추가한다.
             data.item.unshift(payload.data.item);
 
-            //한페이지에 보여지는 개수를 동일하게 유지시키기 위해 
-            //기존 상태값 배열에서 맨 마지막 항목은 삭제한다.
             data.item.pop();
 
             return{
@@ -128,12 +124,9 @@ const DepartmentSlice = createSlice({
 
         [putItem.pending]:pending,
         [putItem.fulfilled]: (state,{meta,payload})=>{
-            //기존의 상태값 복사
             const data = cloneDeep(state.data);
-            // console.log(data);
 
-            //기존 데이터에서 수정이 요청된 항목의 위치를 검색한다.
-            const index = data.item.findIndex(element=>element.deptno === parseInt(meta.arg.deptno));
+            const index = data.item.findIndex(element=>element.deptno === parseInt(meta.arg.profno));
 
             if(index !== undefined){
                 data.item.splice(index,1,payload.data.item);
@@ -151,19 +144,15 @@ const DepartmentSlice = createSlice({
         //원본데이터를 복사해놨다가 삭제한 데이터만 빼고 나머지 데이터를 돌려주는 처리추가
         //수정기능은 백엔드에서 수정적용된 데이터를 다시 select해서 전달해주는 것과 다르게 처리됨
         [deleteItem.fulfilled]: (state, {meta,payload})=>{
-            //기존의 상태값을 복사한다.(원본이 JSON이므로 깊은복사 진행)
             const data = cloneDeep(state.data);
-            console.log(data);
+            // console.log(data);
 
-            //기존의 데이터에서 삭제가 요청된 항목의 위치를 검색한다.
-            const index = data.item.findIndex(element => element.deptno === parseInt(meta.arg.deptno));
+            const index = data.item.findIndex(element => element.deptno === parseInt(meta.arg.profno));
             console.log('index = ' + index);
 
-            //검색이 되었다면 해당 항목을 삭제한다.
             if(index !== undefined){
                 data.item.splice(index,1);
             }
-            console.log(data);
 
             return{
                 data:data,
@@ -171,13 +160,8 @@ const DepartmentSlice = createSlice({
                 error: null
             }
         },
-        [deleteItem.rejected]:rejected,
-
-        [selectDeptnoList.pending]:pending,
-        [selectDeptnoList.fulfilled]:fulfilled,
-        [selectDeptnoList.rejected]:rejected,
-
+        [deleteItem.rejected]:rejected
     }
 })
 
-export default DepartmentSlice.reducer;
+export default ProfessorSlice.reducer;

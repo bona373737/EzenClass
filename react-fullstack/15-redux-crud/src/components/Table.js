@@ -33,5 +33,11 @@ const Table = styled.table`
       border-right: 0;
     }
   }
+  tr{
+    cursor: pointer;
+    &:hover {
+      background-color: #06f2;
+      }
+  }
 `;
 export default Table;
