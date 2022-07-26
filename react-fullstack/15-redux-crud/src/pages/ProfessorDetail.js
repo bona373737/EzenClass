@@ -23,7 +23,7 @@ const ProfessorDetail = memo(() => {
     });
 
     useEffect(() => {
-        const index = data.item.findIndex(e => e.profno === parseInt(profno));
+        const index = data.item.findIndex(element => element.profno === parseInt(profno));
 
         setOrigin({
             name: data.item[index].name,

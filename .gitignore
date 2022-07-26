@@ -2,7 +2,7 @@
 
 
 **/node_modules
-**/_files
+**/_files/
 **/.*-audit.json
 
 config.env
